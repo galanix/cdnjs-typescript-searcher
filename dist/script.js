@@ -7,6 +7,8 @@ myRequest.onload = function () {
     myData = JSON.parse(myRequest.responseText);
 };
 myRequest.send();
+// 	Manipulates the page depending on
+// input field value
 function renderHTML(filter) {
     var filteredData = [];
     for (var i = 0; i < myData.results.length; i++) {
@@ -26,11 +28,14 @@ function renderHTML(filter) {
         }
     }
 }
+// 	Filters the data
 function sendForFiltering() {
-    var elem = document.getElementById("input");
+    var elem = document.getElementById("text");
     var value = elem.value;
+    sessionStorage.setItem("filter", value);
     renderHTML(value);
 }
+// 	Shows filtered data on a page (index.html)
 function showFilteredData(data, ifShow, isEmptyString) {
     if (ifShow === void 0) { ifShow = true; }
     if (isEmptyString === void 0) { isEmptyString = false; }
@@ -41,7 +46,7 @@ function showFilteredData(data, ifShow, isEmptyString) {
         for (var i = 0; i < data.length; i++) {
             btnNum += 1;
             btnId = "btn" + btnNum;
-            placeForData.innerHTML += "\n\t\t\t\t<tr>\n\t\t\t\t\t<td><button id=\"" + btnId + "\" onclick=\"redirectToNewPage(this.id)\">" + data[i].name + "</button></td>\n\t\t\t\t\t<td>" + data[i].latest + "</td>\n\t\t\t\t</tr>\n\t\t\t";
+            placeForData.innerHTML += "\n\t\t\t\t<tr>\n\t\t\t\t\t<td><button class=\"btn waves-effect\" id=\"" + btnId + "\" onclick=\"redirectToNewPage(this.id)\">" + data[i].name + "</button></td>\n\t\t\t\t\t<td>" + data[i].latest + "</td>\n\t\t\t\t</tr>\n\t\t\t";
         }
     }
     else {
@@ -53,7 +58,9 @@ function showFilteredData(data, ifShow, isEmptyString) {
             placeForData.innerHTML = "Please, write MORE than just one letter";
         }
     }
+    sessionStorage.setItem("primaryData", JSON.stringify(data));
 }
+// 	Gets new-request data for newpage.html 
 function getDataFromNewRequest(param) {
     var newUrl = url + "/" + param;
     var newRequest = new XMLHttpRequest();
@@ -63,30 +70,94 @@ function getDataFromNewRequest(param) {
     };
     newRequest.send();
 }
+// 	Saves new-request data to the session storage
 function sendInfoToSessionStorage(param, data) {
     sessionStorage.setItem('parameter', param);
     sessionStorage.setItem('data', JSON.stringify(data));
-    console.log(param, data);
+    setPageContent();
 }
+// 	Redirects to newpage.html and desides
+// if it was opened by click or by link
 function redirectToNewPage(id) {
     var button = document.getElementById("" + id);
-    var param = button.innerText;
+    var param = button.innerText.toLowerCase();
+    sessionStorage.setItem("clicked", "true");
     var w = window.open("newpage.html#" + param);
 }
+// 	Starts the operations with newpage.html
 function workOnNewPage() {
     var myUrl = window.location.href;
     var urlArray = myUrl.split('#');
     var parameter = urlArray[1];
     getDataFromNewRequest(parameter);
-    fillNewPage();
 }
-function fillNewPage() {
-    setPageContent();
-}
+// 	Fills the newpage.html
 function setPageContent() {
     var data = JSON.parse(sessionStorage.getItem("data"));
+    var filter = sessionStorage.getItem("filter");
+    var button = document.getElementById("backBtn");
+    if (sessionStorage.getItem("clicked") === "true") {
+        button.innerText = "Back to " + filter + " search";
+        button.onclick = function () {
+            sessionStorage.setItem("ifToChange", "true");
+            location.replace("index.html");
+        };
+    }
+    else {
+        button.onclick = function () {
+            location.replace("index.html");
+        };
+    }
+    //verifications if there are such properties
+    if (data.author !== undefined) {
+        if (data.author.name === undefined) {
+            var author = data.author;
+        }
+        else {
+            var author = data.author.name;
+        }
+    }
+    else {
+        var author = "The author is not specified";
+    }
+    if (data.description !== undefined) {
+        var description = data.description;
+    }
+    else {
+        var description = "The description is not specified";
+    }
+    if (data.homepage !== undefined) {
+        var homepage = data.homepage;
+    }
+    else {
+        var homepage = "The homepage is not specified";
+    }
+    if (data.license !== undefined) {
+        var license = data.license;
+    }
+    else {
+        var license = "The license is not specified";
+    }
+    if (data.keywords !== undefined) {
+        var keywords = data.keywords;
+    }
+    else {
+        var keywords = "The keywords is not specified";
+    }
+    if (data.version !== undefined) {
+        var version = data.version;
+    }
+    else {
+        var version = "The version is not specified";
+    }
+    if (data.repository.url !== undefined) {
+        var repository = data.repository.url;
+    }
+    else {
+        var repository = "The repository is not specified";
+    }
     var placeForData = document.getElementById("newDataHolder");
-    placeForData.innerHTML = "\n\t\t<ul>\n\t\t\t<li><b>Name:</b> " + data.name + "</li>\n\t\t\t<li><b>Description:</b> " + data.description + "</li>\n\t\t\t<li><b>Author:</b> " + data.author.name + "</li>\n\t\t\t<li><b>Homepage:</b> " + data.homepage + "</li>\n\t\t\t<li><b>License:</b> " + data.license + "</li>\n\t\t\t<li><b>Keywords:</b> " + data.keywords + "</li>\n\t\t\t<li><b>Version:</b> " + data.version + "</li>\n\t\t\t<li><b>Repository:</b> " + data.repository.url + "</li>\n\t\t\t<li><b>Versions list:</b>\n\t\t\t\t<ul id=\"list\"></ul>\n\t\t\t</li>\n\t\t</ul>\n\t";
+    placeForData.innerHTML = "\n\t\t<ul class=\"collection with-header\">\n\t\t\t<li class=\"collection-header\"><h4>" + data.name + "</h4></li>\n\t\t\t<li class=\"collection-item\"><b>Name:</b> " + data.name + "</li>\n\t\t\t<li class=\"collection-item\"><b>Description:</b> " + description + "</li>\n\t\t\t<li class=\"collection-item\"><b>Author:</b> " + author + "</li>\n\t\t\t<li class=\"collection-item\"><b>Homepage:</b> " + homepage + "</li>\n\t\t\t<li class=\"collection-item\"><b>License:</b> " + license + "</li>\n\t\t\t<li class=\"collection-item\"><b>Keywords:</b> " + keywords + "</li>\n\t\t\t<li class=\"collection-item\"><b>Version:</b> " + version + "</li>\n\t\t\t<li class=\"collection-item\"><b>Repository:</b> " + repository + "</li>\n\t\t\t<li class=\"collection-item\"><b>Versions list:</b>\n\t\t\t\t<ul id=\"list\"></ul>\n\t\t\t</li>\n\t\t</ul>\n\t";
     var placeForAssets = document.getElementById("list");
     for (var i = 0; i < data.assets.length; i++) {
         if (i === data.assets.length - 1) {
@@ -96,4 +167,39 @@ function setPageContent() {
             placeForAssets.innerHTML += data.assets[i].version + ", ";
         }
     }
+    sessionStorage.setItem("clicked", "false");
 }
+// 	Activates MaterializeCSS input label
+function activate() {
+    var element = document.getElementById("activate");
+    element.classList.add("active");
+}
+// Deactivates MaterializeCSS input label
+function deactivate() {
+    var element = document.getElementById("activate");
+    element.classList.remove("active");
+}
+// 	Decides if to load content 
+// (after click on "BACK TO THE SEARCH" button)
+// to the main page or not to load
+function inputManipulation() {
+    var data = JSON.parse(sessionStorage.getItem("primaryData"));
+    var elem = document.getElementById("text");
+    if (sessionStorage.getItem("ifToChange") === "true") {
+        elem.value = sessionStorage.getItem("filter");
+        placeForData.innerHTML = "\n\t\t<tr>\n\t\t\t<th>Name</th>\n\t\t\t<th>Link</th>\n\t\t</tr>";
+        var btnNum = 0;
+        var btnId;
+        console.log(data);
+        for (var i = 0; i < data.length; i++) {
+            btnNum += 1;
+            btnId = "btn" + btnNum;
+            placeForData.innerHTML += "\n\t\t\t\t<tr>\n\t\t\t\t\t<td><button class=\"btn waves-effect\" id=\"" + btnId + "\" onclick=\"redirectToNewPage(this.id)\">" + data[i].name + "</button></td>\n\t\t\t\t\t<td>" + data[i].latest + "</td>\n\t\t\t\t</tr>\n\t\t\t";
+        }
+    }
+    else {
+        elem.value = "";
+    }
+    sessionStorage.setItem("ifToChange", "false");
+}
+;

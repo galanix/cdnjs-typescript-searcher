@@ -1,2 +1,34 @@
-.fatty {
-  width: 85.71429%; }
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  background-color: #F9F9F9; }
+
+nav {
+  background-color: #A6E4E7;
+  color: black; }
+  nav .nav-wrapper a {
+    color: black; }
+
+#main {
+  flex: 1 0 auto; }
+
+input[type="text"] + label {
+  pointer-events: none; }
+  input[type="text"] + label * {
+    pointer-events: all; }
+
+footer.page-footer {
+  background-color: #EBCBAE; }
+
+.explanation {
+  color: black; }
+
+.copyright {
+  width: 300px;
+  margin: auto;
+  text-align: center;
+  color: black; }
+
+.footer-brand {
+  color: black; }

@@ -3,9 +3,47 @@
 <head>
 	<meta charset="utf-8">
 	<title>CDNjs</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/styles.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body onload="workOnNewPage();">
-	<table id="newDataHolder"></table>
+	<nav>
+	    <div class="nav-wrapper">
+	    	<a href="index.html" class="brand-logo center"><i class="material-icons">developer_mode</i>CDNjs</a>
+	    	<ul class="right">
+		    	<li>
+		    		<button id="backBtn" class="btn right-align">Back to the search</button>
+		    	</li>
+	    	</ul>
+	    </div>
+	</nav>
+
+	<div class="container" id="main">
+		<div id="newDataHolder"></div>
+	</div>
+
+	<footer class="page-footer">
+        <div class="container">
+          	<div class="row">
+            	<div class="col l6 s12">
+              		<h5><a href="index.html" class="footer-brand"><i class="material-icons">developer_mode</i>CDNjs search app</a></h5>
+              		<p class="explanation">Just write the name (or part) of technology you want to find to the input field.</p>
+            	</div>
+           		<div class="col l4 offset-l2 s12">
+           		<br>
+              		<a class="grey-text text-lighten-3 gh-link" href="https://github.com/galanix/cdnjs-typescript-searcher" target="_blank">
+              			<img src="images/gh-icon.png" width="50" height="50">
+              		</a>
+            	</div>
+          	</div>
+        </div>
+        <div class="footer-copyright">
+          	<span class="copyright">© 2017 Vadym Hrynishyn</span>	
+        </div>
+    </footer>
+
 	<script src="../dist/script.js"></script>
 </body>
 </html>

@@ -1,3 +1,53 @@
-.fatty{
-	width: percentage(6/7);
+$navigationColor: #A6E4E7;
+$mainColor: #F9F9F9;
+$footerColor: #EBCBAE;
+
+
+body{
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    background-color: $mainColor;
+}
+
+nav {
+	background-color: $navigationColor;
+	color: black;
+	.nav-wrapper{
+		a{
+			color: black;
+		}
+	}
+}
+
+
+#main{
+    flex: 1 0 auto;
+}
+
+input[type="text"] + label {
+    pointer-events: none;
+
+    * {
+        pointer-events: all;
+    }
+}
+
+footer.page-footer{
+	background-color: $footerColor;
+}
+
+.explanation{
+	color: black;
+}
+
+.copyright{
+	width: 300px;
+	margin: auto;
+	text-align: center;
+	color: black;
+}
+
+.footer-brand{
+	color: black;
 }
