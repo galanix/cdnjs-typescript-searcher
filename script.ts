@@ -117,6 +117,7 @@ function setPageContent() {
 	var data: any = JSON.parse(sessionStorage.getItem("data"));
 	var filter = sessionStorage.getItem("filter");
 	var button = <HTMLInputElement>document.getElementById("backBtn");
+	var versionLinkPrimary = "https://cdnjs.cloudflare.com/ajax/libs/"
 
 	if (sessionStorage.getItem("clicked") === "true") {
 		button.innerText = `Back to ${filter}`;
@@ -190,7 +191,7 @@ function setPageContent() {
 			<li class="collection-item"><b>Keywords:</b> ${keywords}</li>
 			<li class="collection-item"><b>Version:</b> ${version}</li>
 			<li class="collection-item"><b>Repository:</b> ${repository}</li>
-			<li class="collection-item"><b>Versions list:</b>
+			<li class="collection-item"><b>Versions list:</b><span id="versionLink"></span>
 				<ul id="list"></ul>
 			</li>
 		</ul>
@@ -198,16 +199,20 @@ function setPageContent() {
 
 	var placeForAssets = <HTMLInputElement>document.getElementById("list");
 	for (var i = 0; i < data.assets.length; i++) {
-		if (i === data.assets.length - 1) {
-			placeForAssets.innerHTML += `${data.assets[i].version}`;
-		} else {
-			placeForAssets.innerHTML += `${data.assets[i].version}, `;
-		}
+		placeForAssets.innerHTML += `
+			<div class="chip" onclick="toggleVersionLink(' ${versionLinkPrimary}${data.name}/${data.assets[i].version}/${data.name}.js')">
+				${data.assets[i].version}
+			</div>
+		`;
 	}
 
 	sessionStorage.setItem("clicked", "false");
 }
 
+function toggleVersionLink(link: string){
+	var placeForLink = <HTMLInputElement>document.getElementById("versionLink");
+	placeForLink.innerHTML = link;
+}
 
 // 	Activates MaterializeCSS input label
 function activate() {

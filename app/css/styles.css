@@ -35,6 +35,12 @@ nav {
 ul li.collection-item {
   word-wrap: break-word; }
 
+.chip {
+  cursor: pointer; }
+
+#placeForLink {
+  margin-left: 5px; }
+
 input[type="text"] + label {
   pointer-events: none; }
   input[type="text"] + label * {
