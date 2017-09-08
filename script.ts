@@ -57,8 +57,8 @@ function showFilteredData(data: any, ifShow: boolean = true, isEmptyString: bool
 			btnId = `btn${btnNum}`
 			placeForData.innerHTML += `
 				<tr>
-					<td><button class="btn waves-effect" id="${btnId}" onclick="redirectToNewPage(this.id)">${data[i].name}</button></td>
-					<td>${data[i].latest}</td>
+					<td class="btnCol"><button class="btn waves-effect table-btn" id="${btnId}" onclick="redirectToNewPage(this.id)">${data[i].name}</button></td>
+					<td id="cont">${data[i].latest}</td>
 				</tr>
 			`
 		}
@@ -119,7 +119,7 @@ function setPageContent() {
 	var button = <HTMLInputElement>document.getElementById("backBtn");
 
 	if (sessionStorage.getItem("clicked") === "true") {
-		button.innerText = `Back to ${filter} search`;
+		button.innerText = `Back to ${filter}`;
 		button.onclick = function() {
 			sessionStorage.setItem("ifToChange", "true");
 			location.replace("index.html");
@@ -211,14 +211,19 @@ function setPageContent() {
 
 // 	Activates MaterializeCSS input label
 function activate() {
-	var element = <HTMLInputElement>document.getElementById("activate");
-	element.classList.add("active");
+	var label = <HTMLInputElement>document.getElementById("activate");
+	label.classList.add("active");
 }
 
 // Deactivates MaterializeCSS input label
 function deactivate() {
-	var element = <HTMLInputElement>document.getElementById("activate");
-	element.classList.remove("active");
+	var label = <HTMLInputElement>document.getElementById("activate");
+	var input = <HTMLInputElement>document.getElementById("text");
+
+	if (input.value.length > 0) {
+		return;
+	}
+	label.classList.remove("active");
 }
 
 // 	Decides if to load content 
@@ -226,10 +231,11 @@ function deactivate() {
 // to the main page or not to load
 function inputManipulation() {
 	var data: any = JSON.parse(sessionStorage.getItem("primaryData"));
-	var elem = <HTMLInputElement>document.getElementById("text");
+	var label = <HTMLInputElement>document.getElementById("activate");
+	var input = <HTMLInputElement>document.getElementById("text");
 
 	if (sessionStorage.getItem("ifToChange") === "true") {
-		elem.value = sessionStorage.getItem("filter");
+		input.value = sessionStorage.getItem("filter");
 
 		placeForData.innerHTML = `
 		<tr>
@@ -251,7 +257,12 @@ function inputManipulation() {
 			`
 		}
 	} else {
-		elem.value = "";
+		input.value = "";
 	}
+
+	if (input.value.length > 0) {
+		label.classList.add("active");
+	}
+
 	sessionStorage.setItem("ifToChange", "false");
 };

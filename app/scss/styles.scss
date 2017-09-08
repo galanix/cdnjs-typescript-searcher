@@ -13,16 +13,48 @@ body{
 nav {
 	background-color: $navigationColor;
 	color: black;
+	#btn-ul{
+		margin-right: 10px;
+	}
 	.nav-wrapper{
 		a{
 			color: black;
 		}
+		#backBtn{
+			width: 210px;
+			text-overflow: ellipsis;
+		}
 	}
 }
 
-
 #main{
     flex: 1 0 auto;
+    table{
+    	tr{
+    		width: 100%;
+    		td.btnCol{
+    			margin-top: 5px;
+    			text-align: center;
+    			padding-top: 20px;
+    			padding-bottom: 10px;
+    		}
+    		td#cont{
+    			padding-bottom: 20px;
+    			margin-bottom: 5px;
+	    	}
+    	}
+    	.table-btn{
+    		width: 250px;
+	    	text-overflow: ellipsis;
+	    	margin-right: 50px;
+    	}
+    }
+}
+
+ul{
+	li.collection-item{
+		word-wrap: break-word;
+	}
 }
 
 input[type="text"] + label {
@@ -50,4 +82,46 @@ footer.page-footer{
 
 .footer-brand{
 	color: black;
+}
+
+@media (max-width: 767px) {
+	nav{
+		height: 100px;
+		#btn-ul{
+			position: relative;
+			top: 40px;
+			right: calc(50% - 105px);
+			margin-right: 0px;
+			margin-top: 2px;
+		}
+	}
+}
+
+@media (max-width: 992px) {
+	#main{
+	    table{
+	    	tr{
+	    		border-bottom: 1px solid #bfbfbf;
+	    	}
+	    	th{
+	    		text-align: center;
+	    	}
+	    	.table-btn{
+	    		margin-right: 0px;
+	    	}
+	    }
+	}
+	.page-footer{
+		.footer-col{
+			text-align: center;
+		}
+	}
+}
+
+@media (min-width: 993px) and (max-width: 1366px) {
+	#main{
+		.table-container{
+			overflow: auto;
+		}
+	}
 }

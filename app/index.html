@@ -3,7 +3,6 @@
 <head>
 	<meta charset="utf-8">
 	<title>CDNjs</title>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
@@ -23,19 +22,21 @@
 				<input id="text" type="text" onfocus="activate();" onfocusout="deactivate();" onkeyup="sendForFiltering()">
 			 	<label id="activate" for="text">Name</label>
 			</div>
-			<table id="dataHolder"></table>
+		</div>
+		<div class="container table-container">
+			<table class="responsive-table" id="dataHolder"></table>
 		</div>
 	</div>
 
 	<footer class="page-footer">
         <div class="container">
           	<div class="row">
-            	<div class="col l6 s12">
+            	<div class="col l6 s12 footer-col">
               		<h5><a href="index.html" class="footer-brand"><i class="material-icons">developer_mode</i>CDNjs search app</a></h5>
               		<p class="explanation">Just write the name (or part) of technology you want to find to the input field.</p>
             	</div>
-           		<div class="col l4 offset-l2 s12">
-           		<br>
+           		<div class="col l4 offset-l2 s12 footer-col">
+           			<br>
               		<a class="grey-text text-lighten-3 gh-link" href="https://github.com/galanix/cdnjs-typescript-searcher" target="_blank">
               			<img src="images/gh-icon.png" width="50" height="50">
               		</a>
@@ -48,6 +49,7 @@
     </footer>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 	<script src="../dist/script.js"></script>
 </body>
 </html>

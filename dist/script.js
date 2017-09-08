@@ -46,7 +46,7 @@ function showFilteredData(data, ifShow, isEmptyString) {
         for (var i = 0; i < data.length; i++) {
             btnNum += 1;
             btnId = "btn" + btnNum;
-            placeForData.innerHTML += "\n\t\t\t\t<tr>\n\t\t\t\t\t<td><button class=\"btn waves-effect\" id=\"" + btnId + "\" onclick=\"redirectToNewPage(this.id)\">" + data[i].name + "</button></td>\n\t\t\t\t\t<td>" + data[i].latest + "</td>\n\t\t\t\t</tr>\n\t\t\t";
+            placeForData.innerHTML += "\n\t\t\t\t<tr>\n\t\t\t\t\t<td class=\"btnCol\"><button class=\"btn waves-effect table-btn\" id=\"" + btnId + "\" onclick=\"redirectToNewPage(this.id)\">" + data[i].name + "</button></td>\n\t\t\t\t\t<td id=\"cont\">" + data[i].latest + "</td>\n\t\t\t\t</tr>\n\t\t\t";
         }
     }
     else {
@@ -97,7 +97,7 @@ function setPageContent() {
     var filter = sessionStorage.getItem("filter");
     var button = document.getElementById("backBtn");
     if (sessionStorage.getItem("clicked") === "true") {
-        button.innerText = "Back to " + filter + " search";
+        button.innerText = "Back to " + filter;
         button.onclick = function () {
             sessionStorage.setItem("ifToChange", "true");
             location.replace("index.html");
@@ -171,22 +171,27 @@ function setPageContent() {
 }
 // 	Activates MaterializeCSS input label
 function activate() {
-    var element = document.getElementById("activate");
-    element.classList.add("active");
+    var label = document.getElementById("activate");
+    label.classList.add("active");
 }
 // Deactivates MaterializeCSS input label
 function deactivate() {
-    var element = document.getElementById("activate");
-    element.classList.remove("active");
+    var label = document.getElementById("activate");
+    var input = document.getElementById("text");
+    if (input.value.length > 0) {
+        return;
+    }
+    label.classList.remove("active");
 }
 // 	Decides if to load content 
 // (after click on "BACK TO THE SEARCH" button)
 // to the main page or not to load
 function inputManipulation() {
     var data = JSON.parse(sessionStorage.getItem("primaryData"));
-    var elem = document.getElementById("text");
+    var label = document.getElementById("activate");
+    var input = document.getElementById("text");
     if (sessionStorage.getItem("ifToChange") === "true") {
-        elem.value = sessionStorage.getItem("filter");
+        input.value = sessionStorage.getItem("filter");
         placeForData.innerHTML = "\n\t\t<tr>\n\t\t\t<th>Name</th>\n\t\t\t<th>Link</th>\n\t\t</tr>";
         var btnNum = 0;
         var btnId;
@@ -198,7 +203,10 @@ function inputManipulation() {
         }
     }
     else {
-        elem.value = "";
+        input.value = "";
+    }
+    if (input.value.length > 0) {
+        label.classList.add("active");
     }
     sessionStorage.setItem("ifToChange", "false");
 }
