@@ -54,6 +54,10 @@ nav {
 ul{
 	li.collection-item{
 		word-wrap: break-word;
+		.not-specified{
+			color: grey;
+			font-style: italic;
+		}
 	}
 }
 

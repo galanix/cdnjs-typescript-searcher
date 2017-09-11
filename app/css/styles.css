@@ -34,12 +34,12 @@ nav {
 
 ul li.collection-item {
   word-wrap: break-word; }
+  ul li.collection-item .not-specified {
+    color: grey;
+    font-style: italic; }
 
 .chip {
   cursor: pointer; }
-
-#placeForLink {
-  margin-left: 5px; }
 
 input[type="text"] + label {
   pointer-events: none; }

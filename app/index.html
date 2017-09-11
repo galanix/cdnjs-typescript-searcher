@@ -9,7 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="css/styles.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-<body onload="inputManipulation();">
+<body onload="FirstPagePreparing.inputManipulation();">
 	<nav>
 	    <div class="nav-wrapper">
 	      	<a href="index.html" class="brand-logo center"><i class="material-icons">developer_mode</i>CDNjs</a>
@@ -19,7 +19,7 @@
 	<div id="main">
 		<div class="container">
 			<div class="input-field">
-				<input id="text" type="text" onfocus="activate();" onfocusout="deactivate();" onkeyup="sendForFiltering()">
+				<input id="text" type="text" onfocus="FirstPagePreparing.activate();" onfocusout="FirstPagePreparing.deactivate();" onkeyup="first.sendForFiltering()">
 			 	<label id="activate" for="text">Name</label>
 			</div>
 		</div>
