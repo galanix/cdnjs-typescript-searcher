@@ -1,6 +1,6 @@
  {
    "compilerOptions": {
-     "module": "commonjs",
+     "module": "amd",
      "outDir": "./dist/",
      "noImplicitAny": true,
      "target": "es5",

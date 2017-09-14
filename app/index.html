@@ -9,7 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="css/styles.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-<body onload="FirstPagePreparing.inputManipulation();">
+<body>
 	<nav>
 	    <div class="nav-wrapper">
 	      	<a href="index.html" class="brand-logo center"><i class="material-icons">developer_mode</i>CDNjs</a>
@@ -19,7 +19,7 @@
 	<div id="main">
 		<div class="container">
 			<div class="input-field">
-				<input id="text" type="text" onfocus="FirstPagePreparing.activate();" onfocusout="FirstPagePreparing.deactivate();" onkeyup="first.sendForFiltering()">
+				<input id="text" type="text">
 			 	<label id="activate" for="text">Name</label>
 			</div>
 		</div>
@@ -48,8 +48,6 @@
         </div>
     </footer>
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-	<script src="../dist/script.js"></script>
+	<script data-main="../dist/script" src="../require.js"></script>
 </body>
 </html>

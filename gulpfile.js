@@ -10,7 +10,7 @@ gulp.task('sass', function(){
 });
 
 gulp.task('typescript', function(){
-	return tsProject.src()
+	return gulp.src('app/ts/*.ts')
 		.pipe(tsProject())
 		.js.pipe(gulp.dest("dist"))
 });
