@@ -11,6 +11,8 @@ nav {
     margin-right: 10px; }
   nav .nav-wrapper a {
     color: black; }
+  nav .nav-wrapper a:active {
+    font-size: 2em; }
   nav .nav-wrapper #backBtn {
     width: 210px;
     text-overflow: ellipsis; }
@@ -64,13 +66,14 @@ nav {
     /* Could be more or less, depending on screen size */
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     -webkit-animation-name: animatetop;
-    -webkit-animation-duration: 0.5s;
+    -webkit-animation-duration: 0.8s;
     animation-name: animatetop;
-    animation-duration: 0.5s; }
+    animation-duration: 0.8s; }
     .the-modal .the-modal-content .the-modal-header {
       padding: 2px 16px;
       background-color: #A6E4E7;
-      color: black; }
+      color: black;
+      text-align: center; }
     .the-modal .the-modal-content .the-modal-body {
       padding: 2px 16px; }
   .the-modal #close {
@@ -81,7 +84,7 @@ nav {
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
-    color: grey; }
+    color: dimgrey; }
   .the-modal #close:hover,
   .the-modal #close:focus {
     -webkit-transition: all 0.5s ease;

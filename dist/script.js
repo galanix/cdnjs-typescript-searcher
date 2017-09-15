@@ -1,4 +1,4 @@
-define(["require", "exports", "jquery", "./dataoperations", "./preparefirst"], function (require, exports, $, dataoperations_1, preparefirst_1) {
+define(["require", "exports", "./dataoperations", "./preparefirst"], function (require, exports, dataoperations_1, preparefirst_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var elem = document.getElementById("text");
@@ -50,12 +50,12 @@ define(["require", "exports", "jquery", "./dataoperations", "./preparefirst"], f
             var span = document.getElementById("close");
             // When the user clicks on <span> (x), close the modal
             span.onclick = function () {
-                modal.style.display = "none";
+                $('#myModal').fadeOut();
             };
             // When the user clicks anywhere outside of the modal, close it
             window.onclick = function (event) {
                 if (event.target == modal) {
-                    modal.style.display = "none";
+                    $('#myModal').fadeOut();
                 }
             };
         }

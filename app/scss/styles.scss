@@ -20,6 +20,9 @@ nav {
 		a{
 			color: black;
 		}
+		a:active{
+			font-size: 2em;
+		}
 		#backBtn{
 			width: 210px;
 			text-overflow: ellipsis;
@@ -74,13 +77,14 @@ nav {
 	    width: 80%; /* Could be more or less, depending on screen size */
 	    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
 	    -webkit-animation-name: #{animatetop};
-	    -webkit-animation-duration: 0.5s;
+	    -webkit-animation-duration: 0.8s;
 	    animation-name: #{animatetop};
-	    animation-duration: 0.5s;
+	    animation-duration: 0.8s;
 	    .the-modal-header{
 		    padding: 2px 16px;
 		    background-color: #A6E4E7;
 		    color: black;
+		    text-align: center;
 		}
 		.the-modal-body{
 			padding: 2px 16px;
@@ -96,7 +100,7 @@ nav {
       	-moz-transition: all 0.5s ease;
       	-o-transition: all 0.5s ease;
       	transition: all 0.5s ease;
-      	color: grey;
+      	color: dimgrey;
 	}
 
 	#close:hover,
