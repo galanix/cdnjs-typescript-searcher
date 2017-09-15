@@ -1,16 +1,13 @@
 import {
 	DataOperations
 } from './dataoperations';
-import 'materialize.min';
 
 export default class SecondPagePreparing {
 	public static setPageContent() {
-		console.log(DataOperations.getClickedFlag());
 		var data: any = DataOperations.getSecondaryRequestData();
 		var filter = DataOperations.getInputFilter();
 		var button = <HTMLInputElement>document.getElementById("backBtn");
 		var versionLinkPrimary = "https://cdnjs.cloudflare.com/ajax/libs/";
-		console.log(DataOperations.getClickedFlag());
 
 		if (DataOperations.getClickedFlag() === "true") {
 			button.innerText = `Back to ${filter}`;
@@ -102,12 +99,6 @@ export default class SecondPagePreparing {
 		var placeForAssets = <HTMLInputElement>document.getElementById("list");
 
 		for (var i = 0; i < data.assets.length; i++) {
-			console.log(data.assets[i].version);
-			/*placeForAssets.innerHTML += `
-				<div class="chip" data-id="${versionLinkPrimary}${data.name}/${data.assets[i].version}/${data.name}.js">
-					<a href='#modal'>${data.assets[i].version}</a>
-				</div>
-			`;*/
 			placeForAssets.innerHTML += `
 				<button class='chip' data-id="${versionLinkPrimary}${data.name}/${data.assets[i].version}/" 
 				id="modalTrigger">${data.assets[i].version}</button>

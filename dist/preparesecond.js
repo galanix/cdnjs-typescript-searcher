@@ -1,16 +1,14 @@
-define(["require", "exports", "./dataoperations", "materialize.min"], function (require, exports, dataoperations_1) {
+define(["require", "exports", "./dataoperations"], function (require, exports, dataoperations_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var SecondPagePreparing = /** @class */ (function () {
         function SecondPagePreparing() {
         }
         SecondPagePreparing.setPageContent = function () {
-            console.log(dataoperations_1.DataOperations.getClickedFlag());
             var data = dataoperations_1.DataOperations.getSecondaryRequestData();
             var filter = dataoperations_1.DataOperations.getInputFilter();
             var button = document.getElementById("backBtn");
             var versionLinkPrimary = "https://cdnjs.cloudflare.com/ajax/libs/";
-            console.log(dataoperations_1.DataOperations.getClickedFlag());
             if (dataoperations_1.DataOperations.getClickedFlag() === "true") {
                 button.innerText = "Back to " + filter;
                 button.onclick = function () {
@@ -82,12 +80,6 @@ define(["require", "exports", "./dataoperations", "materialize.min"], function (
             }
             var placeForAssets = document.getElementById("list");
             for (var i = 0; i < data.assets.length; i++) {
-                console.log(data.assets[i].version);
-                /*placeForAssets.innerHTML += `
-                    <div class="chip" data-id="${versionLinkPrimary}${data.name}/${data.assets[i].version}/${data.name}.js">
-                        <a href='#modal'>${data.assets[i].version}</a>
-                    </div>
-                `;*/
                 placeForAssets.innerHTML += "\n\t\t\t\t<button class='chip' data-id=\"" + versionLinkPrimary + data.name + "/" + data.assets[i].version + "/\" \n\t\t\t\tid=\"modalTrigger\">" + data.assets[i].version + "</button>\n\t\t\t";
             }
             var chips = document.getElementsByClassName('chip');
