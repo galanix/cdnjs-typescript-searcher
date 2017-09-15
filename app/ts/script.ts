@@ -38,9 +38,9 @@ var second = new SecondPageUp;
 
 $(document).ready(function() {
 	if (location.href.indexOf('newpage.html') === -1) {
-		elem.onkeyup = function() {
+		$('#text').bind('input', function() {
 			first.sendForFiltering();
-		}
+		});
 
 		elem.onfocus = function() {
 			prepareFirst.activate();
