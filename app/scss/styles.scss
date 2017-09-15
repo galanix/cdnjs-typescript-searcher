@@ -29,6 +29,9 @@ nav {
 
 #main{
     flex: 1 0 auto;
+    #progress{
+    	display: none;
+    }
     table{
     	tr{
     		width: 100%;

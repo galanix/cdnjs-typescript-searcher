@@ -29,21 +29,27 @@ define(["require", "exports", "./dataoperations", "./preparesecond"], function (
             if (isEmptyString === void 0) { isEmptyString = false; }
             var placeForData = document.getElementById("dataHolder");
             if (ifShow === true) {
-                placeForData.innerHTML = "\n\t\t\t<tr>\n\t\t\t\t<th>Name</th>\n\t\t\t\t<th>Link</th>\n\t\t\t</tr>";
-                var btnNum = 0;
-                var btnId;
-                for (var i = 0; i < data.length; i++) {
-                    btnNum += 1;
-                    btnId = "btn" + btnNum;
-                    placeForData.innerHTML += "\n\t\t\t\t\t<tr>\n\t\t\t\t\t\t<td class=\"btnCol\"><button class=\"btn waves-effect table-btn to-new-page\" id=\"" + btnId + "\">" + data[i].name + "</button></td>\n\t\t\t\t\t\t<td id=\"cont\">" + data[i].latest + "</td>\n\t\t\t\t\t</tr>\n\t\t\t\t";
-                }
+                placeForData.innerHTML = '';
+                setTimeout(function () {
+                    $('#progress').css('display', 'none');
+                    placeForData.innerHTML = "\n\t\t\t\t\t<tr>\n\t\t\t\t\t\t<th>Name</th>\n\t\t\t\t\t\t<th>Link</th>\n\t\t\t\t\t</tr>";
+                    var btnNum = 0;
+                    var btnId;
+                    for (var i = 0; i < data.length; i++) {
+                        btnNum += 1;
+                        btnId = "btn" + btnNum;
+                        placeForData.innerHTML += "\n\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t<td class=\"btnCol\"><button class=\"btn waves-effect table-btn to-new-page\" id=\"" + btnId + "\">" + data[i].name + "</button></td>\n\t\t\t\t\t\t\t<td id=\"cont\">" + data[i].latest + "</td>\n\t\t\t\t\t\t</tr>\n\t\t\t\t\t";
+                    }
+                }, 700);
             }
             else {
                 if (isEmptyString === true) {
+                    $('#progress').css('display', 'none');
                     placeForData.innerHTML = "";
                     return;
                 }
                 else if (isEmptyString === false) {
+                    $('#progress').css('display', 'none');
                     placeForData.innerHTML = "Please, write MORE than just one letter";
                 }
             }

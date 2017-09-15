@@ -8,6 +8,7 @@ define(["require", "exports", "jquery", "./dataoperations", "./preparefirst"], f
         FirstPageUp.prototype.sendForFiltering = function () {
             var elem = document.getElementById("text");
             var value = elem.value;
+            $('#progress').css('display', 'block');
             dataoperations_1.DataOperations.makeRequest();
             dataoperations_1.DataOperations.setInputFilter(value);
             preparefirst_1.default.renderHTML(value);

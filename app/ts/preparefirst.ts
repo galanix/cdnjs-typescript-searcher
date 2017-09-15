@@ -6,6 +6,7 @@ import prepareSecond from './preparesecond';
 export default class FirstPagePreparing {
 	public static renderHTML(filter: any) {
 		var filteredData = [];
+
 		var myData: any = DataOperations.getPrimaryRequestData();
 
 	    for (var i = 0; i < myData.results.length; i++) {
@@ -29,30 +30,36 @@ export default class FirstPagePreparing {
 		var placeForData = <HTMLInputElement>document.getElementById("dataHolder");
 
 		if (ifShow === true) {
-			placeForData.innerHTML = `
-			<tr>
-				<th>Name</th>
-				<th>Link</th>
-			</tr>`;
-
-			var btnNum: number = 0;
-			var btnId: string;
-
-			for (var i = 0; i < data.length; i++) {
-				btnNum += 1;
-				btnId = `btn${btnNum}`
-				placeForData.innerHTML += `
+			placeForData.innerHTML = '';
+			setTimeout(function(){
+			    $('#progress').css('display', 'none')
+			    placeForData.innerHTML = `
 					<tr>
-						<td class="btnCol"><button class="btn waves-effect table-btn to-new-page" id="${btnId}">${data[i].name}</button></td>
-						<td id="cont">${data[i].latest}</td>
-					</tr>
-				`
-			}
+						<th>Name</th>
+						<th>Link</th>
+					</tr>`;
+
+				var btnNum: number = 0;
+				var btnId: string;
+
+				for (var i = 0; i < data.length; i++) {
+					btnNum += 1;
+					btnId = `btn${btnNum}`
+					placeForData.innerHTML += `
+						<tr>
+							<td class="btnCol"><button class="btn waves-effect table-btn to-new-page" id="${btnId}">${data[i].name}</button></td>
+							<td id="cont">${data[i].latest}</td>
+						</tr>
+					`
+				}
+			}, 700);
 		} else {
 			if (isEmptyString === true) {
+				$('#progress').css('display', 'none');
 				placeForData.innerHTML = ``;
 				return;
 			} else if (isEmptyString === false) {
+				$('#progress').css('display', 'none');
 				placeForData.innerHTML = `Please, write MORE than just one letter`;
 			}
 		}

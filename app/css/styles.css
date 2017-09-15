@@ -17,6 +17,8 @@ nav {
 
 #main {
   flex: 1 0 auto; }
+  #main #progress {
+    display: none; }
   #main table tr {
     width: 100%; }
     #main table tr td.btnCol {
