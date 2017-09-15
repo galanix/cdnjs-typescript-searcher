@@ -52,7 +52,15 @@ export default class FirstPagePreparing {
 						</tr>
 					`
 				}
-			}, 700);
+				$(document).ready(function(){
+					var buttons = document.getElementsByClassName('to-new-page');
+					for (var i = 0; i < buttons.length; i++) {
+						buttons[i].addEventListener("click", function() {
+							prepareSecond.redirectToNewPage(this.id);
+						});
+					}
+				});
+			}, 500);
 		} else {
 			if (isEmptyString === true) {
 				$('#progress').css('display', 'none');
@@ -63,15 +71,6 @@ export default class FirstPagePreparing {
 				placeForData.innerHTML = `Please, write MORE than just one letter`;
 			}
 		}
-
-		$(document).ready(function(){
-			var buttons = document.getElementsByClassName('to-new-page');
-			for (var i = 0; i < buttons.length; i++) {
-				buttons[i].addEventListener("click", function() {
-					prepareSecond.redirectToNewPage(this.id);
-				});
-			}
-		});
 
 		DataOperations.setFilteredPrimaryRequestData(JSON.stringify(data));
 	}

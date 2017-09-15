@@ -40,7 +40,15 @@ define(["require", "exports", "./dataoperations", "./preparesecond"], function (
                         btnId = "btn" + btnNum;
                         placeForData.innerHTML += "\n\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t<td class=\"btnCol\"><button class=\"btn waves-effect table-btn to-new-page\" id=\"" + btnId + "\">" + data[i].name + "</button></td>\n\t\t\t\t\t\t\t<td id=\"cont\">" + data[i].latest + "</td>\n\t\t\t\t\t\t</tr>\n\t\t\t\t\t";
                     }
-                }, 700);
+                    $(document).ready(function () {
+                        var buttons = document.getElementsByClassName('to-new-page');
+                        for (var i = 0; i < buttons.length; i++) {
+                            buttons[i].addEventListener("click", function () {
+                                preparesecond_1.default.redirectToNewPage(this.id);
+                            });
+                        }
+                    });
+                }, 500);
             }
             else {
                 if (isEmptyString === true) {
@@ -53,14 +61,6 @@ define(["require", "exports", "./dataoperations", "./preparesecond"], function (
                     placeForData.innerHTML = "Please, write MORE than just one letter";
                 }
             }
-            $(document).ready(function () {
-                var buttons = document.getElementsByClassName('to-new-page');
-                for (var i = 0; i < buttons.length; i++) {
-                    buttons[i].addEventListener("click", function () {
-                        preparesecond_1.default.redirectToNewPage(this.id);
-                    });
-                }
-            });
             dataoperations_1.DataOperations.setFilteredPrimaryRequestData(JSON.stringify(data));
         };
         FirstPagePreparing.activate = function () {
