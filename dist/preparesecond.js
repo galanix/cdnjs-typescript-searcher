@@ -1,4 +1,4 @@
-define(["require", "exports", "./dataoperations"], function (require, exports, dataoperations_1) {
+define(["require", "exports", "./dataoperations", "materialize.min"], function (require, exports, dataoperations_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var SecondPagePreparing = /** @class */ (function () {
@@ -83,17 +83,32 @@ define(["require", "exports", "./dataoperations"], function (require, exports, d
             var placeForAssets = document.getElementById("list");
             for (var i = 0; i < data.assets.length; i++) {
                 console.log(data.assets[i].version);
-                placeForAssets.innerHTML += "\n\t\t\t\t<div class=\"chip\" data-id=\"" + versionLinkPrimary + data.name + "/" + data.assets[i].version + "/" + data.name + ".js\">\n\t\t\t\t\t" + data.assets[i].version + "\n\t\t\t\t</div>\n\t\t\t";
+                /*placeForAssets.innerHTML += `
+                    <div class="chip" data-id="${versionLinkPrimary}${data.name}/${data.assets[i].version}/${data.name}.js">
+                        <a href='#modal'>${data.assets[i].version}</a>
+                    </div>
+                `;*/
+                placeForAssets.innerHTML += "\n\t\t\t\t<button class='chip' data-id=\"" + versionLinkPrimary + data.name + "/" + data.assets[i].version + "/\" \n\t\t\t\tid=\"modalTrigger\">" + data.assets[i].version + "</button>\n\t\t\t";
             }
             var chips = document.getElementsByClassName('chip');
-            $(document).ready(function () {
-                for (var i = 0; i < chips.length; i++) {
-                    chips[i].addEventListener("click", function () {
-                        SecondPagePreparing.toggleVersionLink(this.getAttribute('data-id'));
-                    });
-                }
-                ;
-            });
+            for (var i = 0; i < chips.length; i++) {
+                chips[i].addEventListener('click', function () {
+                    var version = this.textContent;
+                    var baseUri = this.attributes[1].value;
+                    $('.the-modal-header h3').text('Version: ' + version);
+                    for (var j = 0; j < data.assets.length; j++) {
+                        if (data.assets[j].version === version) {
+                            $('.the-modal-body ul').empty();
+                            $("<li class=\"collection-header\"><h5>Links:</h4></li>").appendTo('.the-modal-body ul');
+                            for (var k = 0; k < data.assets[j].files.length; k++) {
+                                $("<li class=\"collection-item\">" + (baseUri + data.assets[j].files[k]) + "</li>").appendTo('.the-modal-body ul');
+                            }
+                        }
+                    }
+                    $('.the-modal-body p').text(this.attributes[1].value);
+                    $('#myModal').css('display', 'block');
+                });
+            }
             dataoperations_1.DataOperations.setClickedFlag("false");
         };
         SecondPagePreparing.redirectToNewPage = function (id) {

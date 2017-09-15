@@ -20,8 +20,22 @@
 	    </div>
 	</nav>
 
+	<div id="myModal" class="the-modal">
+	  <!-- Modal content -->
+	  	<div class="the-modal-content">
+	    	<div class="the-modal-header">
+	      		<span id="close">&times;</span>
+	      		<h3></h3>
+	    	</div>
+	    	<div class="the-modal-body">
+	      		<ul class="collection with-header"></ul>
+	    	</div>
+	  	</div>
+	</div>
+
 	<div class="container" id="main">
-		<div id="newDataHolder"></div>
+		<div id="newDataHolder">
+		</div>
 	</div>
 
 	<footer class="page-footer">
@@ -44,6 +58,9 @@
         </div>
     </footer>
 
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script type="text/javascript" src="../dist/materialize.min.js"></script>
 	<script data-main="../dist/script" src="../require.js"></script>
 </body>
 </html>

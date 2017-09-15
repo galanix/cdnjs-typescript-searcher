@@ -1,0 +1,8 @@
+{
+  "resolution": "main",
+  "tree": {
+    "src": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/24c5a18d44b9811f74d2a2afb16fe5ade3258d41/materialize-css/index.d.ts",
+    "raw": "registry:dt/materialize-css#0.98.0+20170131031752",
+    "typings": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/24c5a18d44b9811f74d2a2afb16fe5ade3258d41/materialize-css/index.d.ts"
+  }
+}
