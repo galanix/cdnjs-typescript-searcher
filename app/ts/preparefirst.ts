@@ -48,10 +48,40 @@ export default class FirstPagePreparing {
 					placeForData.innerHTML += `
 						<tr>
 							<td class="btnCol"><button class="btn waves-effect table-btn to-new-page" id="${btnId}">${data[i].name}</button></td>
-							<td id="cont">${data[i].latest}</td>
+							<td class="content">${data[i].latest}</td>
+							<td>
+								<div>
+									<span class="tooltiptext" data-tooltip="tooltip${i}">Copied!</span>
+									<a class="btn btn-floating btn-copy" data-link="${data[i].latest}" data-tooltip="tooltip${i}"><i class="material-icons">content_copy</i></a>
+								</div>
+							</td>
 						</tr>
 					`
 				}
+
+				var copyButtons = document.getElementsByClassName('btn-copy');
+				for (var j = 0; j < copyButtons.length; j++) {
+					copyButtons[j].addEventListener("click", function() {
+						var $temp = $("<input>");
+						$("body").append($temp);
+						$temp.val(this.attributes[1].value).select();
+						document.execCommand("copy");
+						$temp.remove();
+
+						var tooltips = $('.tooltiptext');
+						for (var k = 0; k < tooltips.length; k++) {
+							if (tooltips[k].attributes[1].value === this.attributes[2].value) {
+								var selector = `.tooltiptext[data-tooltip='${tooltips[k].attributes[1].value}']`;
+								$(selector.toString()).css('display', 'inline');
+								$(selector.toString()).fadeTo('slow', 1);
+								setTimeout(function() {
+									$(selector.toString()).fadeTo('slow', 0);
+								}, 2000)
+							};
+						};
+					});
+				};
+
 				$(document).ready(function(){
 					var buttons = document.getElementsByClassName('to-new-page');
 					for (var i = 0; i < buttons.length; i++) {

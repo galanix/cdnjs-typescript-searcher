@@ -23,16 +23,45 @@ nav {
     display: none; }
   #main table tr {
     width: 100%; }
+    #main table tr td {
+      padding-top: 5px; }
     #main table tr td.btnCol {
       margin-top: 5px;
       text-align: center;
       padding-top: 20px;
       padding-bottom: 10px; }
-    #main table tr td#cont {
-      padding-bottom: 20px;
-      margin-bottom: 5px; }
+    #main table tr td.content {
+      padding-bottom: 5px;
+      margin-bottom: 5px;
+      font-size: 0.8em; }
+    #main table tr .tooltiptext {
+      z-index: 1;
+      opacity: 0;
+      cursor: default;
+      position: relative;
+      bottom: 3px;
+      background-color: dimgrey;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 3px 6px 3px 6px;
+      margin-right: 3px; }
+    #main table tr .tooltiptext::after {
+      content: " ";
+      position: absolute;
+      top: 50%;
+      left: 100%;
+      /* To the right of the tooltip */
+      margin-top: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: transparent transparent transparent dimgrey; }
+    #main table tr .btn-copy {
+      align: right; }
   #main table .table-btn {
-    width: 250px;
+    width: 230px;
+    padding-right: 20px;
+    padding-left: 20px;
     text-overflow: ellipsis;
     margin-right: 50px; }
 
@@ -75,7 +104,51 @@ nav {
       color: black;
       text-align: center; }
     .the-modal .the-modal-content .the-modal-body {
-      padding: 2px 16px; }
+      padding: 2px 16px;
+      background-color: #F9F9F9; }
+      .the-modal .the-modal-content .the-modal-body .collection-header {
+        background-color: white; }
+      .the-modal .the-modal-content .the-modal-body .collection-item {
+        background-color: white; }
+        .the-modal .the-modal-content .the-modal-body .collection-item div {
+          float: right; }
+      .the-modal .the-modal-content .the-modal-body .collection-item:hover {
+        background-color: #f2f2f2;
+        cursor: default; }
+      .the-modal .the-modal-content .the-modal-body .btn-copy {
+        width: 30px;
+        height: 30px;
+        position: relative;
+        display: inline-block;
+        bottom: 4px; }
+        .the-modal .the-modal-content .the-modal-body .btn-copy i {
+          width: 25px;
+          height: 25px;
+          font-size: 1.1em;
+          position: relative;
+          bottom: 3px; }
+      .the-modal .the-modal-content .the-modal-body .tooltiptext {
+        opacity: 0;
+        display: none;
+        cursor: default;
+        position: relative;
+        bottom: 3px;
+        background-color: dimgrey;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 3px 6px 3px 6px;
+        margin-right: 3px; }
+      .the-modal .the-modal-content .the-modal-body .tooltiptext::after {
+        content: " ";
+        position: absolute;
+        top: 50%;
+        left: 100%;
+        /* To the right of the tooltip */
+        margin-top: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: transparent transparent transparent dimgrey; }
   .the-modal #close {
     float: right;
     font-size: 28px;
@@ -153,10 +226,36 @@ footer.page-footer {
 @media (max-width: 992px) {
   #main table tr {
     border-bottom: 1px solid #bfbfbf; }
+  #main table td div {
+    width: 100px;
+    margin: auto;
+    text-align: center;
+    margin-bottom: 5px; }
+    #main table td div .btn-copy, #main table td div .tooltiptext {
+      position: relative;
+      right: 32px; }
   #main table th {
     text-align: center; }
   #main table .table-btn {
     margin-right: 0px; }
+  .the-modal .the-modal-content .the-modal-body .collection-item .link {
+    margin-bottom: 5px; }
+  .the-modal .the-modal-content .the-modal-body .collection-item div {
+    float: none;
+    width: 30px;
+    margin: auto; }
+  .the-modal .the-modal-content .the-modal-body .btn-copy {
+    width: 27px;
+    height: 27px;
+    position: relative;
+    top: 3px;
+    display: inline-block; }
+    .the-modal .the-modal-content .the-modal-body .btn-copy i {
+      width: 20px;
+      height: 20px;
+      font-size: 1em;
+      position: relative;
+      bottom: 6px; }
   .page-footer .footer-col {
     text-align: center; } }
 

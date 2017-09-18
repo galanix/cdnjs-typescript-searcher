@@ -93,11 +93,53 @@ define(["require", "exports", "./dataoperations"], function (require, exports, d
                             $('.the-modal-body ul').empty();
                             $("<li class=\"collection-header\"><h5>Links:</h4></li>").appendTo('.the-modal-body ul');
                             for (var k = 0; k < data.assets[j].files.length; k++) {
-                                $("<li class=\"collection-item\">" + (baseUri + data.assets[j].files[k]) + "</li>").appendTo('.the-modal-body ul');
+                                $("<li class=\"collection-item modal-collection\">\n\t\t\t\t\t\t\t\t\t<span class=\"link\">" + (baseUri + data.assets[j].files[k]) + "</span>\n\t\t\t\t\t\t\t\t\t<div>\n\t\t\t\t\t\t\t\t\t\t<span class=\"tooltiptext\" data-tooltip=\"tooltip" + k + "\">Copied!</span>\n\t\t\t\t\t\t\t\t\t\t<a class=\"btn btn-floating btn-copy\" data-link=\"" + (baseUri + data.assets[j].files[k]) + "\" data-tooltip=\"tooltip" + k + "\">\n\t\t\t\t\t\t\t\t\t\t\t<i class=\"material-icons\">content_copy</i>\n\t\t\t\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t</li>").appendTo('.the-modal-body ul');
                             }
                         }
                     }
-                    $('.the-modal-body p').text(this.attributes[1].value);
+                    var copyButtons = document.getElementsByClassName('btn-copy');
+                    for (var j = 0; j < copyButtons.length; j++) {
+                        copyButtons[j].addEventListener("click", function () {
+                            var $temp = $("<input>");
+                            $("body").append($temp);
+                            $temp.val(this.attributes[1].value).select();
+                            document.execCommand("copy");
+                            $temp.remove();
+                            var tooltips = $('.tooltiptext');
+                            for (var k = 0; k < tooltips.length; k++) {
+                                if (tooltips[k].attributes[1].value === this.attributes[2].value) {
+                                    var selector = ".tooltiptext[data-tooltip='" + tooltips[k].attributes[1].value + "']";
+                                    $(selector.toString()).css('display', 'inline-block');
+                                    $(selector.toString()).fadeTo('slow', 1);
+                                    setTimeout(function () {
+                                        $(selector.toString()).fadeTo('slow', 0);
+                                    }, 2000);
+                                }
+                                ;
+                            }
+                            ;
+                        });
+                    }
+                    ;
+                    var collItems = document.getElementsByClassName('modal-collection');
+                    for (var j = 0; j < collItems.length; j++) {
+                        collItems[j].addEventListener("mouseover", function () {
+                            var buttonWrap = this.childNodes[3];
+                            var button = buttonWrap.childNodes[3];
+                            button.classList.add("pulse");
+                        });
+                        collItems[j].addEventListener("mouseout", function () {
+                            var buttonWrap = this.childNodes[3];
+                            var button = buttonWrap.childNodes[3];
+                            button.classList.remove("pulse");
+                        });
+                        var buttonWrap = collItems[j].childNodes[3];
+                        var button = buttonWrap.childNodes[3];
+                        button.addEventListener("click", function () {
+                            this.classList.remove("pulse");
+                        });
+                    }
+                    //$('.the-modal-body p').text(this.attributes[1].value);
                     $('#myModal').css('display', 'block');
                 });
             }
