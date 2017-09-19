@@ -10,7 +10,7 @@ export default class FirstPagePreparing {
 		var myData: any = DataOperations.getPrimaryRequestData();
 
 	    for (var i = 0; i < myData.results.length; i++) {
-	 		if (myData.results[i].name.indexOf(filter) !== -1) {
+	 		if (myData.results[i].name.toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
 				filteredData.push(myData.results[i])
 			}
 		}

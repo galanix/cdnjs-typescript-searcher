@@ -8,7 +8,7 @@ define(["require", "exports", "./dataoperations", "./preparesecond"], function (
             var filteredData = [];
             var myData = dataoperations_1.DataOperations.getPrimaryRequestData();
             for (var i = 0; i < myData.results.length; i++) {
-                if (myData.results[i].name.indexOf(filter) !== -1) {
+                if (myData.results[i].name.toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
                     filteredData.push(myData.results[i]);
                 }
             }
