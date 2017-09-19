@@ -110,6 +110,8 @@ export default class SecondPagePreparing {
 			chips[i].addEventListener('click', function() {
 				var version = this.textContent;
 				var baseUri = this.attributes[1].value;
+
+				$('body').css('overflow-y', 'hidden');
 				$('.the-modal-header h3').text('Version: ' + version);
 				for (var j = 0; j < data.assets.length; j++) {
 					if (data.assets[j].version === version) {
@@ -185,7 +187,7 @@ export default class SecondPagePreparing {
 
 	public static redirectToNewPage(id: string) {
 		var button = <HTMLInputElement>document.getElementById(`${id}`);
-		var param: string = button.innerText.toLowerCase();
+		var param: string = button.innerText;
 
 		DataOperations.setClickedFlag("true");
 		var w = window.open(`newpage.html#${param}`);

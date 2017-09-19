@@ -85,6 +85,7 @@ nav {
 			padding-left: 20px;
 	    	text-overflow: ellipsis;
 	    	margin-right: 50px;
+	    	text-transform: none;
     	}
     }
 }
@@ -93,6 +94,7 @@ nav {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
+    overflow: auto;
     left: 0;
     top: 0;
     width: 100%; /* Full width */
@@ -120,7 +122,6 @@ nav {
 		.the-modal-body{
 			padding: 2px 16px;
 			background-color: #F9F9F9;
-    		overflow: auto; /* Enable scroll if needed */
 			.collection-header{
 				background-color: white;
 			}

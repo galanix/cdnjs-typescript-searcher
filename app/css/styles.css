@@ -63,7 +63,8 @@ nav {
     padding-right: 20px;
     padding-left: 20px;
     text-overflow: ellipsis;
-    margin-right: 50px; }
+    margin-right: 50px;
+    text-transform: none; }
 
 .the-modal {
   display: none;
@@ -72,6 +73,7 @@ nav {
   /* Stay in place */
   z-index: 1;
   /* Sit on top */
+  overflow: auto;
   left: 0;
   top: 0;
   width: 100%;
@@ -103,9 +105,7 @@ nav {
       text-align: center; }
     .the-modal .the-modal-content .the-modal-body {
       padding: 2px 16px;
-      background-color: #F9F9F9;
-      overflow: auto;
-      /* Enable scroll if needed */ }
+      background-color: #F9F9F9; }
       .the-modal .the-modal-content .the-modal-body .collection-header {
         background-color: white; }
       .the-modal .the-modal-content .the-modal-body .collection-item {

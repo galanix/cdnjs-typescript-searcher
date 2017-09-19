@@ -124,8 +124,32 @@ define(["require", "exports", "./dataoperations", "./preparesecond"], function (
                 for (var i = 0; i < data.length; i++) {
                     btnNum += 1;
                     btnId = "btn" + btnNum;
-                    placeForData.innerHTML += "\n\t\t\t\t\t<tr>\n\t\t\t\t\t\t<td><button class=\"btn waves-effect to-new-page\" id=\"" + btnId + "\">" + data[i].name + "</button></td>\n\t\t\t\t\t\t<td>" + data[i].latest + "</td>\n\t\t\t\t\t</tr>\n\t\t\t\t";
+                    placeForData.innerHTML += "\n\t\t\t\t\t<tr>\n\t\t\t\t\t\t<td class=\"btnCol\"><button class=\"btn waves-effect table-btn to-new-page\" id=\"" + btnId + "\">" + data[i].name + "</button></td>\n\t\t\t\t\t\t<td class=\"content\">" + data[i].latest + "</td>\n\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t<div>\n\t\t\t\t\t\t\t\t<span class=\"tooltiptext\" data-tooltip=\"tooltip" + i + "\">Copied!</span>\n\t\t\t\t\t\t\t\t<a class=\"btn btn-floating btn-copy\" data-link=\"" + data[i].latest + "\" data-tooltip=\"tooltip" + i + "\"><i class=\"material-icons\">content_copy</i></a>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</td>\n\t\t\t\t\t</tr>\n\t\t\t\t";
                 }
+                var copyButtons = document.getElementsByClassName('btn-copy');
+                for (var j = 0; j < copyButtons.length; j++) {
+                    copyButtons[j].addEventListener("click", function () {
+                        var $temp = $("<input>");
+                        $("body").append($temp);
+                        $temp.val(this.attributes[1].value).select();
+                        document.execCommand("copy");
+                        $temp.remove();
+                        var tooltips = $('.tooltiptext');
+                        for (var k = 0; k < tooltips.length; k++) {
+                            if (tooltips[k].attributes[1].value === this.attributes[2].value) {
+                                var selector = ".tooltiptext[data-tooltip='" + tooltips[k].attributes[1].value + "']";
+                                $(selector.toString()).css('display', 'inline');
+                                $(selector.toString()).fadeTo('slow', 1);
+                                setTimeout(function () {
+                                    $(selector.toString()).fadeTo('slow', 0);
+                                }, 2000);
+                            }
+                            ;
+                        }
+                        ;
+                    });
+                }
+                ;
                 $(document).ready(function () {
                     var buttons = document.getElementsByClassName('to-new-page');
                     for (var i = 0; i < buttons.length; i++) {

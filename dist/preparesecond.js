@@ -87,6 +87,7 @@ define(["require", "exports", "./dataoperations"], function (require, exports, d
                 chips[i].addEventListener('click', function () {
                     var version = this.textContent;
                     var baseUri = this.attributes[1].value;
+                    $('body').css('overflow-y', 'hidden');
                     $('.the-modal-header h3').text('Version: ' + version);
                     for (var j = 0; j < data.assets.length; j++) {
                         if (data.assets[j].version === version) {
@@ -147,7 +148,7 @@ define(["require", "exports", "./dataoperations"], function (require, exports, d
         };
         SecondPagePreparing.redirectToNewPage = function (id) {
             var button = document.getElementById("" + id);
-            var param = button.innerText.toLowerCase();
+            var param = button.innerText;
             dataoperations_1.DataOperations.setClickedFlag("true");
             var w = window.open("newpage.html#" + param);
         };
