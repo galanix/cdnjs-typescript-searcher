@@ -78,8 +78,6 @@ nav {
   /* Full width */
   height: 100%;
   /* Full height */
-  overflow: auto;
-  /* Enable scroll if needed */
   background-color: black;
   /* Fallback color */
   background-color: rgba(0, 0, 0, 0.4);
@@ -105,7 +103,9 @@ nav {
       text-align: center; }
     .the-modal .the-modal-content .the-modal-body {
       padding: 2px 16px;
-      background-color: #F9F9F9; }
+      background-color: #F9F9F9;
+      overflow: auto;
+      /* Enable scroll if needed */ }
       .the-modal .the-modal-content .the-modal-body .collection-header {
         background-color: white; }
       .the-modal .the-modal-content .the-modal-body .collection-item {
