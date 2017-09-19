@@ -13,7 +13,12 @@ define(["require", "exports", "./dataoperations", "./preparesecond"], function (
                 }
             }
             if (filter.length > 1) {
-                FirstPagePreparing.showFilteredData(filteredData);
+                if (filteredData.length !== 0) {
+                    FirstPagePreparing.showFilteredData(filteredData);
+                }
+                else {
+                    FirstPagePreparing.showFilteredData(filteredData, true, false, false);
+                }
             }
             else {
                 if (filter == "") {
@@ -24,55 +29,62 @@ define(["require", "exports", "./dataoperations", "./preparesecond"], function (
                 }
             }
         };
-        FirstPagePreparing.showFilteredData = function (data, ifShow, isEmptyString) {
+        FirstPagePreparing.showFilteredData = function (data, ifShow, isEmptyString, areThereAnyResults) {
             if (ifShow === void 0) { ifShow = true; }
             if (isEmptyString === void 0) { isEmptyString = false; }
+            if (areThereAnyResults === void 0) { areThereAnyResults = true; }
             var placeForData = document.getElementById("dataHolder");
             if (ifShow === true) {
-                placeForData.innerHTML = '';
-                setTimeout(function () {
-                    $('#progress').css('display', 'none');
-                    placeForData.innerHTML = "\n\t\t\t\t\t<tr>\n\t\t\t\t\t\t<th>Name</th>\n\t\t\t\t\t\t<th>Link</th>\n\t\t\t\t\t</tr>";
-                    var btnNum = 0;
-                    var btnId;
-                    for (var i = 0; i < data.length; i++) {
-                        btnNum += 1;
-                        btnId = "btn" + btnNum;
-                        placeForData.innerHTML += "\n\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t<td class=\"btnCol\"><button class=\"btn waves-effect table-btn to-new-page\" id=\"" + btnId + "\">" + data[i].name + "</button></td>\n\t\t\t\t\t\t\t<td class=\"content\">" + data[i].latest + "</td>\n\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t\t<div>\n\t\t\t\t\t\t\t\t\t<span class=\"tooltiptext\" data-tooltip=\"tooltip" + i + "\">Copied!</span>\n\t\t\t\t\t\t\t\t\t<a class=\"btn btn-floating btn-copy\" data-link=\"" + data[i].latest + "\" data-tooltip=\"tooltip" + i + "\"><i class=\"material-icons\">content_copy</i></a>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t</tr>\n\t\t\t\t\t";
-                    }
-                    var copyButtons = document.getElementsByClassName('btn-copy');
-                    for (var j = 0; j < copyButtons.length; j++) {
-                        copyButtons[j].addEventListener("click", function () {
-                            var $temp = $("<input>");
-                            $("body").append($temp);
-                            $temp.val(this.attributes[1].value).select();
-                            document.execCommand("copy");
-                            $temp.remove();
-                            var tooltips = $('.tooltiptext');
-                            for (var k = 0; k < tooltips.length; k++) {
-                                if (tooltips[k].attributes[1].value === this.attributes[2].value) {
-                                    var selector = ".tooltiptext[data-tooltip='" + tooltips[k].attributes[1].value + "']";
-                                    $(selector.toString()).css('display', 'inline');
-                                    $(selector.toString()).fadeTo('slow', 1);
-                                    setTimeout(function () {
-                                        $(selector.toString()).fadeTo('slow', 0);
-                                    }, 2000);
+                if (areThereAnyResults === true) {
+                    placeForData.innerHTML = '';
+                    setTimeout(function () {
+                        $('#progress').css('display', 'none');
+                        placeForData.innerHTML = "\n\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t<th>Name</th>\n\t\t\t\t\t\t\t<th>Link</th>\n\t\t\t\t\t\t</tr>";
+                        var btnNum = 0;
+                        var btnId;
+                        for (var i = 0; i < data.length; i++) {
+                            btnNum += 1;
+                            btnId = "btn" + btnNum;
+                            placeForData.innerHTML += "\n\t\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t\t<td class=\"btnCol\"><button class=\"btn waves-effect table-btn to-new-page\" id=\"" + btnId + "\">" + data[i].name + "</button></td>\n\t\t\t\t\t\t\t\t<td class=\"content\">" + data[i].latest + "</td>\n\t\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t\t\t<div>\n\t\t\t\t\t\t\t\t\t\t<span class=\"tooltiptext\" data-tooltip=\"tooltip" + i + "\">Copied!</span>\n\t\t\t\t\t\t\t\t\t\t<a class=\"btn btn-floating btn-copy\" data-link=\"" + data[i].latest + "\" data-tooltip=\"tooltip" + i + "\"><i class=\"material-icons\">content_copy</i></a>\n\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t\t</tr>\n\t\t\t\t\t\t";
+                        }
+                        var copyButtons = document.getElementsByClassName('btn-copy');
+                        for (var j = 0; j < copyButtons.length; j++) {
+                            copyButtons[j].addEventListener("click", function () {
+                                var $temp = $("<input>");
+                                $("body").append($temp);
+                                $temp.val(this.attributes[1].value).select();
+                                document.execCommand("copy");
+                                $temp.remove();
+                                var tooltips = $('.tooltiptext');
+                                for (var k = 0; k < tooltips.length; k++) {
+                                    if (tooltips[k].attributes[1].value === this.attributes[2].value) {
+                                        var selector = ".tooltiptext[data-tooltip='" + tooltips[k].attributes[1].value + "']";
+                                        $(selector.toString()).css('display', 'inline');
+                                        $(selector.toString()).fadeTo('slow', 1);
+                                        setTimeout(function () {
+                                            $(selector.toString()).fadeTo('slow', 0);
+                                        }, 2000);
+                                    }
+                                    ;
                                 }
                                 ;
-                            }
-                            ;
-                        });
-                    }
-                    ;
-                    $(document).ready(function () {
-                        var buttons = document.getElementsByClassName('to-new-page');
-                        for (var i = 0; i < buttons.length; i++) {
-                            buttons[i].addEventListener("click", function () {
-                                preparesecond_1.default.redirectToNewPage(this.id);
                             });
                         }
-                    });
-                }, 500);
+                        ;
+                        $(document).ready(function () {
+                            var buttons = document.getElementsByClassName('to-new-page');
+                            for (var i = 0; i < buttons.length; i++) {
+                                buttons[i].addEventListener("click", function () {
+                                    preparesecond_1.default.redirectToNewPage(this.id);
+                                });
+                            }
+                        });
+                    }, 500);
+                }
+                else {
+                    $('#progress').css('display', 'none');
+                    placeForData.innerHTML = 'Nothing found';
+                }
             }
             else {
                 if (isEmptyString === true) {
