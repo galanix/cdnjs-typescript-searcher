@@ -144,7 +144,6 @@ export default class SecondPagePreparing {
 						for (var k = 0; k < tooltips.length; k++) {
 							if (tooltips[k].attributes[1].value === this.attributes[2].value) {
 								var selector = `.tooltiptext[data-tooltip='${tooltips[k].attributes[1].value}']`;
-								$(selector.toString()).css('display', 'inline-block');
 								$(selector.toString()).fadeTo('slow', 1);
 								setTimeout(function() {
 									$(selector.toString()).fadeTo('slow', 0);

@@ -83,7 +83,7 @@ define(["require", "exports", "./dataoperations", "./preparesecond"], function (
                 }
                 else {
                     $('#progress').css('display', 'none');
-                    placeForData.innerHTML = 'Nothing found';
+                    placeForData.innerHTML = "There is no such library. Try: \"drawer\".";
                 }
             }
             else {

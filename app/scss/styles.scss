@@ -151,7 +151,6 @@ nav {
 			}
 			.tooltiptext{
 				opacity: 0;
-				display: none;
 				cursor: default;
 			    position: relative;
 			    bottom: 3px;
@@ -296,9 +295,14 @@ footer.page-footer{
 					.link{
 						margin-bottom: 5px;
 					}
+					.tooltiptext{
+						position: relative;
+						top: 4px;
+					}
 					div{
+						padding-top: 2px;
 						float: none;
-						width: 30px;
+						width: 150px;
 						margin: auto;
 					}
 				}
