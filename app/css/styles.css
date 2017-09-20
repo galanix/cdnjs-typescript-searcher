@@ -72,6 +72,21 @@ nav {
     margin-right: 50px;
     text-transform: none; }
 
+#newDataHolder .alert-box {
+  color: #555;
+  border-radius: 10px;
+  padding: 10px 36px;
+  margin: 10px; }
+
+#newDataHolder .alert-box span {
+  font-weight: bold;
+  text-transform: uppercase; }
+
+#newDataHolder .error {
+  background: #ffecec url("../images/error.png") no-repeat 5px 7px;
+  background-size: 27px 27px;
+  border: 1px solid #f5aca6; }
+
 .the-modal {
   display: none;
   /* Hidden by default */

@@ -9,6 +9,7 @@ define(["require", "exports", "./dataoperations"], function (require, exports, d
             var filter = dataoperations_1.DataOperations.getInputFilter();
             var button = document.getElementById("backBtn");
             var versionLinkPrimary = "https://cdnjs.cloudflare.com/ajax/libs/";
+            var placeForData = document.getElementById("newDataHolder");
             if (dataoperations_1.DataOperations.getClickedFlag() === "true") {
                 button.innerHTML = "Back to " + filter;
                 button.onclick = function () {
@@ -20,6 +21,10 @@ define(["require", "exports", "./dataoperations"], function (require, exports, d
                 button.onclick = function () {
                     location.replace("index.html");
                 };
+            }
+            if ($.isEmptyObject(data)) {
+                placeForData.innerHTML = "\n\t\t\t\t<div class=\"alert-box error\">\n\t\t\t\t\t<span>error: </span>\n\t\t\t\t\tThe URL is incorrect.\n\t\t\t\t</div>\n\t\t\t";
+                return;
             }
             //verifications if there are such properties
             if (data.author !== undefined) {
@@ -69,7 +74,6 @@ define(["require", "exports", "./dataoperations"], function (require, exports, d
             else {
                 var repository = "The repository is not specified";
             }
-            var placeForData = document.getElementById("newDataHolder");
             placeForData.innerHTML = "\n\t\t\t<ul class=\"collection with-header\">\n\t\t\t\t<li class=\"collection-header\"><h4>" + data.name + "</h4></li>\n\t\t\t\t<li class=\"collection-item\"><b>Name:</b> " + data.name + "</li>\n\t\t\t\t<li class=\"collection-item\"><b>Description:</b> <span class=\"items\">" + description + "</span></li>\n\t\t\t\t<li class=\"collection-item\"><b>Author:</b> <span class=\"items\">" + author + "</span></li>\n\t\t\t\t<li class=\"collection-item\"><b>Homepage:</b> <span class=\"items\">" + homepage + "</span></li>\n\t\t\t\t<li class=\"collection-item\"><b>License:</b> <span class=\"items\">" + license + "</span></li>\n\t\t\t\t<li class=\"collection-item\"><b>Keywords:</b> <span class=\"items\">" + keywords + "</span></li>\n\t\t\t\t<li class=\"collection-item\"><b>Version:</b> <span class=\"items\">" + version + "</span></li>\n\t\t\t\t<li class=\"collection-item\"><b>Repository:</b> <span class=\"items\">" + repository + "</span></li>\n\t\t\t\t<li class=\"collection-item\"><b>Versions list:</b><span id=\"versionLink\"></span>\n\t\t\t\t\t<ul id=\"list\"></ul>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t";
             var items = document.getElementsByClassName("items");
             for (var i = 0; i < items.length; i++) {

@@ -8,6 +8,7 @@ export default class SecondPagePreparing {
 		var filter = DataOperations.getInputFilter();
 		var button = <HTMLInputElement>document.getElementById("backBtn");
 		var versionLinkPrimary = "https://cdnjs.cloudflare.com/ajax/libs/";
+		var placeForData = <HTMLInputElement>document.getElementById("newDataHolder");
 
 		if (DataOperations.getClickedFlag() === "true") {
 			button.innerHTML = `Back to ${filter}`;
@@ -19,6 +20,16 @@ export default class SecondPagePreparing {
 			button.onclick = function() {
 				location.replace("index.html");
 			}
+		}
+
+		if ($.isEmptyObject(data)) {
+			placeForData.innerHTML = `
+				<div class="alert-box error">
+					<span>error: </span>
+					The URL is incorrect.
+				</div>
+			`;
+			return;
 		}
 
 		//verifications if there are such properties
@@ -67,8 +78,6 @@ export default class SecondPagePreparing {
 		} else {
 			var repository: any = "The repository is not specified";
 		}
-
-		var placeForData = <HTMLInputElement>document.getElementById("newDataHolder");
 
 		placeForData.innerHTML = `
 			<ul class="collection with-header">

@@ -97,6 +97,24 @@ nav {
     }
 }
 
+#newDataHolder{
+	.alert-box {
+		color:#555;
+		border-radius:10px;
+		padding:10px 36px;
+		margin:10px;
+	}
+	.alert-box span {
+		font-weight:bold;
+		text-transform:uppercase;
+	}
+	.error {
+		background:#ffecec url('../images/error.png') no-repeat 5px 7px;
+		background-size: 27px 27px;
+		border:1px solid #f5aca6;
+	}
+}
+
 .the-modal{
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
