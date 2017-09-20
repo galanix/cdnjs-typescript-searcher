@@ -10,7 +10,7 @@ export default class SecondPagePreparing {
 		var versionLinkPrimary = "https://cdnjs.cloudflare.com/ajax/libs/";
 
 		if (DataOperations.getClickedFlag() === "true") {
-			button.innerText = `Back to ${filter}`;
+			button.innerHTML = `Back to ${filter}`;
 			button.onclick = function() {
 				DataOperations.setIfToChangeFlag("true");
 				location.replace("index.html");

@@ -15,10 +15,16 @@ nav {
     font-size: 2em; }
   nav .nav-wrapper #backBtn {
     width: 210px;
+    padding-left: 15px;
+    padding-right: 15px;
+    overflow: hidden;
+    white-space: nowrap;
     text-overflow: ellipsis; }
 
 #main {
   flex: 1 0 auto; }
+  #main #message {
+    cursor: pointer; }
   #main #progress {
     display: none; }
   #main table tr {

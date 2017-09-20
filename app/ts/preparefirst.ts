@@ -6,10 +6,10 @@ import prepareSecond from './preparesecond';
 export default class FirstPagePreparing {
 	public static renderHTML(filter: any) {
 		var filteredData = [];
-
+		var recommendedData = [];
 		var myData: any = DataOperations.getPrimaryRequestData();
 
-	    for (var i = 0; i < myData.results.length; i++) {
+		for (var i = 0; i < myData.results.length; i++) {
 	 		if (myData.results[i].name.toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
 				filteredData.push(myData.results[i])
 			}
@@ -19,7 +19,20 @@ export default class FirstPagePreparing {
 	    	if (filteredData.length !== 0) {
 	    		FirstPagePreparing.showFilteredData(filteredData);
 	    	} else {
-	    		FirstPagePreparing.showFilteredData(filteredData, true, false, false);
+	    		for (var i = 0; i < filter.length; i++) {
+					var slicedFilter = filter.slice(0, i+1);
+					var buffer = [];
+
+					for (var j = 0; j < myData.results.length; j++) {
+				 		if (myData.results[j].name.toLowerCase().indexOf(slicedFilter.toLowerCase()) !== -1) {
+							buffer.push(myData.results[j])
+						}
+					}
+					if (buffer.length !== 0) {
+						recommendedData = buffer;
+					}
+				}
+	    		FirstPagePreparing.showFilteredData(myData, true, false, false, recommendedData);
 	    	}
 	    } else {
 	    	if (filter == "") {
@@ -30,14 +43,16 @@ export default class FirstPagePreparing {
 	    }
 	}
 
-	private static showFilteredData(data: any, ifShow: boolean = true, isEmptyString: boolean = false, areThereAnyResults: boolean = true) {
+	private static showFilteredData(data: any, ifShow: boolean = true, isEmptyString: boolean = false, areThereAnyResults: boolean = true, recommended: any = []) {
 		var placeForData = <HTMLInputElement>document.getElementById("dataHolder");
+		var placeForMessage = <HTMLInputElement>document.getElementById("message");
 
 		if (ifShow === true) {
 			if (areThereAnyResults === true) {
+				placeForMessage.innerHTML = '';
 				placeForData.innerHTML = '';
 				setTimeout(function(){
-				    $('#progress').css('display', 'none')
+				    $('#progress').css('display', 'none');
 				    placeForData.innerHTML = `
 						<tr>
 							<th>Name</th>
@@ -97,18 +112,44 @@ export default class FirstPagePreparing {
 					});
 				}, 500);
 			} else {
-				$('#progress').css('display', 'none');
-				placeForData.innerHTML = `There is no such library. Try: "drawer".`;
+				if (recommended.length === 0) {
+					var recommendedItem = data.results[Math.floor(Math.random()*data.total)];
+
+					$('#progress').css('display', 'none');
+					placeForData.innerHTML = '';
+					placeForMessage.innerHTML = `The input is incorrect. Try: <a id="recommend">${recommendedItem.name}</a>.`;
+					$('#recommend').click(function() {
+						var input = <HTMLInputElement>document.getElementById("text");
+						$('#progress').css('display', 'block');
+						DataOperations.setInputFilter(recommendedItem.name);
+						input.value = recommendedItem.name;
+						FirstPagePreparing.renderHTML(recommendedItem.name);
+					});
+				} else {
+					var recommendedItem = recommended[Math.floor(Math.random()*recommended.length)];
+
+					$('#progress').css('display', 'none');
+					placeForData.innerHTML = '';
+					placeForMessage.innerHTML = `There is no such library. Maybe you meant: <a id="recommend">${recommendedItem.name}</a>.`;
+					$('#recommend').click(function() {
+						var input = <HTMLInputElement>document.getElementById("text");
+						$('#progress').css('display', 'block');
+						DataOperations.setInputFilter(recommendedItem.name);
+						input.value = recommendedItem.name;
+						FirstPagePreparing.renderHTML(recommendedItem.name);
+					});
+				}
 			}
 			
 		} else {
 			if (isEmptyString === true) {
 				$('#progress').css('display', 'none');
-				placeForData.innerHTML = ``;
+				placeForMessage.innerHTML = ``;
 				return;
 			} else if (isEmptyString === false) {
 				$('#progress').css('display', 'none');
-				placeForData.innerHTML = `Please, write MORE than just one letter`;
+				placeForData.innerHTML = '';
+				placeForMessage.innerHTML = `Please, write MORE than just one letter`;
 			}
 		}
 

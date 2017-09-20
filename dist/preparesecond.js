@@ -10,7 +10,7 @@ define(["require", "exports", "./dataoperations"], function (require, exports, d
             var button = document.getElementById("backBtn");
             var versionLinkPrimary = "https://cdnjs.cloudflare.com/ajax/libs/";
             if (dataoperations_1.DataOperations.getClickedFlag() === "true") {
-                button.innerText = "Back to " + filter;
+                button.innerHTML = "Back to " + filter;
                 button.onclick = function () {
                     dataoperations_1.DataOperations.setIfToChangeFlag("true");
                     location.replace("index.html");
@@ -110,7 +110,6 @@ define(["require", "exports", "./dataoperations"], function (require, exports, d
                             for (var k = 0; k < tooltips.length; k++) {
                                 if (tooltips[k].attributes[1].value === this.attributes[2].value) {
                                     var selector = ".tooltiptext[data-tooltip='" + tooltips[k].attributes[1].value + "']";
-                                    $(selector.toString()).css('display', 'inline-block');
                                     $(selector.toString()).fadeTo('slow', 1);
                                     setTimeout(function () {
                                         $(selector.toString()).fadeTo('slow', 0);
