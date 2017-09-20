@@ -96,18 +96,43 @@ define(["require", "exports", "./dataoperations"], function (require, exports, d
                     for (var j = 0; j < data.assets.length; j++) {
                         if (data.assets[j].version === version) {
                             $('.the-modal-body ul').empty();
-                            $("<li class=\"collection-header\"><h5>Links:</h4></li>").appendTo('.the-modal-body ul');
+                            $("<li class=\"collection-header\"><h5>Links:</h5>\n\t\t\t\t\t\t\t\t<div>\n\t\t\t\t\t\t\t\t\t<span class=\"tooltip-question\">CLICK for the link copying or DBLCLICK for the script tag copying.</span>\n\t\t\t\t\t\t\t\t\t<span class=\"question bounce\"></span>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t</li>").appendTo('.the-modal-body ul');
                             for (var k = 0; k < data.assets[j].files.length; k++) {
                                 $("<li class=\"collection-item modal-collection\">\n\t\t\t\t\t\t\t\t\t<span class=\"link\">" + (baseUri + data.assets[j].files[k]) + "</span>\n\t\t\t\t\t\t\t\t\t<div>\n\t\t\t\t\t\t\t\t\t\t<span class=\"tooltiptext\" data-tooltip=\"tooltip" + k + "\">Copied!</span>\n\t\t\t\t\t\t\t\t\t\t<a class=\"btn btn-floating btn-copy\" data-link=\"" + (baseUri + data.assets[j].files[k]) + "\" data-tooltip=\"tooltip" + k + "\">\n\t\t\t\t\t\t\t\t\t\t\t<i class=\"material-icons\">content_copy</i>\n\t\t\t\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t</li>").appendTo('.the-modal-body ul');
                             }
                         }
                     }
+                    $('.question').hover(function () {
+                        $('.tooltip-question').fadeTo('fast', 1);
+                    }, function () {
+                        $('.tooltip-question').fadeTo('fast', 0);
+                    });
                     var copyButtons = document.getElementsByClassName('btn-copy');
                     for (var j = 0; j < copyButtons.length; j++) {
                         copyButtons[j].addEventListener("click", function () {
                             var $temp = $("<input>");
                             $("body").append($temp);
                             $temp.val(this.attributes[1].value).select();
+                            document.execCommand("copy");
+                            $temp.remove();
+                            var tooltips = $('.tooltiptext');
+                            for (var k = 0; k < tooltips.length; k++) {
+                                if (tooltips[k].attributes[1].value === this.attributes[2].value) {
+                                    var selector = ".tooltiptext[data-tooltip='" + tooltips[k].attributes[1].value + "']";
+                                    $(selector.toString()).fadeTo('slow', 1);
+                                    setTimeout(function () {
+                                        $(selector.toString()).fadeTo('slow', 0);
+                                    }, 1000);
+                                }
+                                ;
+                            }
+                            ;
+                        });
+                        copyButtons[j].addEventListener("dblclick", function () {
+                            var $temp = $("<input>");
+                            var value = "<script src=\"" + this.attributes[1].value + "\"></script>";
+                            $("body").append($temp);
+                            $temp.val(value).select();
                             document.execCommand("copy");
                             $temp.remove();
                             var tooltips = $('.tooltiptext');
@@ -145,6 +170,10 @@ define(["require", "exports", "./dataoperations"], function (require, exports, d
                     }
                     //$('.the-modal-body p').text(this.attributes[1].value);
                     $('#myModal').css('display', 'block');
+                    setTimeout(function () {
+                        $('.bounce').css('-webkit-animation-name', 'bounce');
+                        $('.bounce').css('animation-name', 'bounce');
+                    }, 100);
                 });
             }
             dataoperations_1.DataOperations.setClickedFlag("false");

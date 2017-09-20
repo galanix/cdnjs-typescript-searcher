@@ -129,6 +129,63 @@ nav {
       background-color: #F9F9F9; }
       .the-modal .the-modal-content .the-modal-body .collection-header {
         background-color: white; }
+        .the-modal .the-modal-content .the-modal-body .collection-header div {
+          display: flex;
+          text-align: right;
+          float: right; }
+        .the-modal .the-modal-content .the-modal-body .collection-header h5 {
+          display: inline-block; }
+        .the-modal .the-modal-content .the-modal-body .collection-header .tooltip-question {
+          text-align: right;
+          opacity: 0;
+          cursor: default;
+          position: relative;
+          top: 12px;
+          background-color: dimgrey;
+          color: #fff;
+          text-align: center;
+          border-radius: 6px;
+          padding: 3px 6px 3px 6px;
+          margin-right: 3px; }
+        .the-modal .the-modal-content .the-modal-body .collection-header .tooltip-question::after {
+          content: " ";
+          position: absolute;
+          top: 50%;
+          left: 100%;
+          /* To the right of the tooltip */
+          margin-top: -5px;
+          border-width: 5px;
+          border-style: solid;
+          border-color: transparent transparent transparent dimgrey; }
+        .the-modal .the-modal-content .the-modal-body .collection-header .question {
+          float: right;
+          width: 30px;
+          height: 30px;
+          background: url(../images/question.png) no-repeat;
+          background-size: 25px 25px;
+          position: relative;
+          top: 11px;
+          -webkit-animation-duration: 0.7s;
+          animation-duration: 0.7s;
+          -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+          cursor: pointer; }
+
+@-webkit-keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    -webkit-transform: translateY(0); }
+  40% {
+    -webkit-transform: translateY(-30px); }
+  60% {
+    -webkit-transform: translateY(-15px); } }
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0); }
+  40% {
+    transform: translateY(-30px); }
+  60% {
+    transform: translateY(-15px); } }
       .the-modal .the-modal-content .the-modal-body .collection-item {
         background-color: white; }
         .the-modal .the-modal-content .the-modal-body .collection-item div {
@@ -141,7 +198,11 @@ nav {
         height: 30px;
         position: relative;
         display: inline-block;
-        bottom: 4px; }
+        bottom: 4px;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        user-select: none; }
         .the-modal .the-modal-content .the-modal-body .btn-copy i {
           width: 25px;
           height: 25px;
@@ -232,6 +293,12 @@ footer.page-footer {
 
 .footer-brand {
   color: black; }
+
+@media (max-width: 320px) {
+  .the-modal-content .the-modal-body .collection-header {
+    height: 140px; }
+    .the-modal-content .the-modal-body .collection-header div {
+      float: none; } }
 
 @media (max-width: 767px) {
   nav {

@@ -1,6 +1,7 @@
 {
   "globalDependencies": {
     "jquery": "registry:dt/jquery#1.10.0+20170310222111",
+    "jqueryui": "registry:dt/jqueryui#1.11.0+20161214061125",
     "materialize-css": "registry:dt/materialize-css#0.98.0+20170131031752"
   }
 }
