@@ -110,6 +110,27 @@ nav {
 
 /*----------The main content of newpage.html----------*/
 #newDataHolder{
+	.card-title{
+		font-size: 2.3em;
+		text-shadow: 1px 1px 1px white;
+	}
+	.card-content{
+		.collection-header{
+			div{
+				display: flex;
+				justify-content: space-between;
+				i{
+					position: relative;
+					top: 5px;
+				}
+			}
+		}
+	}
+	.github-collection{
+		.collection-header{
+			text-align: center;
+		}
+	}
 	.alert-box {
 		color:#555;
 		border-radius:10px;
@@ -117,8 +138,8 @@ nav {
 		margin:10px;
 	}
 	.alert-box span {
-		font-weight:bold;
-		text-transform:uppercase;
+		font-weight: bold;
+		text-transform: uppercase;
 	}
 	.error {
 		background:#ffecec url('../images/error.png') no-repeat 5px 7px;
@@ -469,6 +490,19 @@ footer.page-footer{
 	#main{
 		.table-container{
 			overflow: auto;
+		}
+	}
+}
+
+@media (min-width: 1025px) {
+	#newDataHolder{
+		.card-content{
+			.collection-header{
+				div{
+					padding-left: 50px;
+					padding-right: 50px;
+				}
+			}
 		}
 	}
 }

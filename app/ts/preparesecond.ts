@@ -5,11 +5,23 @@ import {
 export default class SecondPagePreparing {
 	public static setPageContent() {
 		var data: any = DataOperations.getSecondaryRequestData();
+		var gitHubData: any = DataOperations.getGitHubRequestData();
 		var filter = DataOperations.getInputFilter();
 		var button = <HTMLInputElement>document.getElementById("backBtn");
 		var versionLinkPrimary = "https://cdnjs.cloudflare.com/ajax/libs/";
 		var placeForData = <HTMLInputElement>document.getElementById("newDataHolder");
+		var gitHubItem;
 
+		if (gitHubData.total_count === 0) {
+			var myUrl: string = window.location.href;
+			var urlArray: any = myUrl.split('#');
+			var parameter = urlArray[1];
+			var slicedFilter = parameter.slice((parameter.indexOf('-') + 1), );
+
+			DataOperations.makeRequest(slicedFilter, true);
+		}
+
+		/*----------Checks if the page was loaded by click, or by manual URL entering----------*/
 		if (DataOperations.getClickedFlag() === "true") {
 			button.innerHTML = `Back to ${filter}`;
 			button.onclick = function() {
@@ -21,7 +33,7 @@ export default class SecondPagePreparing {
 				location.replace("index.html");
 			}
 		}
-
+		/*----------If the URL is incorrect----------*/
 		if ($.isEmptyObject(data)) {
 			placeForData.innerHTML = `
 				<div class="alert-box error">
@@ -31,8 +43,8 @@ export default class SecondPagePreparing {
 			`;
 			return;
 		}
-
-		//verifications if there are such properties
+		/*-----------------------------------Start working with secondary request data-----------------------------------*/
+		//Verifications if there are such properties in data
 		if (data.author !== undefined) {
 			if (data.author.name === undefined) {
 				var author = data.author;
@@ -78,10 +90,100 @@ export default class SecondPagePreparing {
 		} else {
 			var repository: any = "The repository is not specified";
 		}
+		/*-----------------------------------End working with secondary request data-----------------------------------*/
+
+
+		/*------------------------------------Start working with GitHub request data-----------------------------------*/
+		if (gitHubData.total_count === 1) {
+			gitHubItem = gitHubData.items[0];
+		} else {
+			for (var i = 0; i < gitHubData.items.length; i++) {
+				if (gitHubData.items[i].name.toLowerCase() === data.name.toLowerCase()) {
+					gitHubItem = gitHubData.items[i];
+				}
+			}
+
+			if (gitHubItem === undefined) {
+				for (var i = 0; i < gitHubData.items.length; i++) {
+					var primaryRequestRepository = data.repository.url.slice(data.repository.url.indexOf('github.com'), );
+					var currentRepository = gitHubData.items[i].git_url.slice(gitHubData.items[i].git_url.indexOf('github.com'), );
+
+					if (primaryRequestRepository === currentRepository) {
+						gitHubItem = gitHubData.items[i];
+					} else if (primaryRequestRepository.slice(primaryRequestRepository.lastIndexOf('/'), ) === currentRepository.slice(currentRepository.lastIndexOf('/'), )) {
+						gitHubItem = gitHubData.items[i]; //Anyway it will show different repositories, because they are different in cdnJS API and GitHub API
+					}
+				}
+			}
+		}
+
+		if (gitHubItem.name !== undefined && gitHubItem.name !== null) {
+			var name = gitHubItem.name;
+		} else {
+			var name: any = "The name is not specified";
+		}
+
+		if (gitHubItem.description !== undefined && gitHubItem.description !== null) {
+			var description = gitHubItem.description;
+		} else {
+			var description: any = "The description is not specified";
+		}
+
+		if (gitHubItem.language !== undefined && gitHubItem.language !== null) {
+			var language = gitHubItem.language;
+		} else {
+			var language: any = "The language is not specified";
+		}
+
+		if (gitHubItem.created_at !== undefined && gitHubItem.created_at !== null) {
+			var created_at = gitHubItem.created_at;
+		} else {
+			var created_at: any = "The creation date is not specified";
+		}
+
+		if (gitHubItem.owner.login !== undefined && gitHubItem.owner.login !== null) {
+			var ownerLogin = gitHubItem.owner.login;
+		} else {
+			var ownerLogin: any = "The description is not specified";
+		}
+
+		if (gitHubItem.owner.html_url !== undefined && gitHubItem.owner.html_url !== null) {
+			var ownerHtml = gitHubItem.owner.html_url;
+		} else {
+			var ownerHtml: any = "The description is not specified";
+		}
+		/*------------------------------------End working with GitHub request data-------------------------------------*/
 
 		placeForData.innerHTML = `
-			<ul class="collection with-header">
-				<li class="collection-header"><h4>${data.name}</h4></li>
+			<div class="row">
+			  	<div class="col s12">
+			  	  	<div class="card">
+			  	  	  	<div class="card-image">
+			  	  	  	  	<img src="../app/images/github.png">
+			  	  	  	  	<span class="card-title">GitHub info</span>
+			  	  	  	  	<a class="btn-floating halfway-fab waves-effect waves-light red" href="${gitHubItem.html_url}" target="_blank"><i class="material-icons">link</i></a>
+			  	  	  	</div>
+			  	  	  	<div class="card-content">
+			  	  	  	  	<ul class="collection with-header github-collection">
+			  	  	  	  		<li class="collection-header">
+			  	  	  	  			<h5><span class="items">${name}</span></h5>
+			  	  	  	  			<div>
+			  	  	  	  				<span class=".views"> <i class="material-icons">remove_red_eye</i> ${gitHubItem.watchers}</span>
+				  	  	  	  			<span class=".stars">  <i class="material-icons">star</i>${gitHubItem.stargazers_count}</span>
+				  	  	  	  			<span class=".forks"> <i class="material-icons">device_hub</i> ${gitHubItem.forks}</span>
+			  	  	  	  			</div>
+			  	  	  	  		</li>
+			  	  	  	  		<li class="collection-item"><b>GitHub description: </b><span class="items">${description}</span></li>
+			  	  	  	  		<li class="collection-item"><b>Language: </b><span class="items">${language}</span></li>
+			  	  	  	  		<li class="collection-item"><b>Created at: </b><span class="items">${created_at}</span></li>
+			  	  	  	  		<li class="collection-item"><b>Creator: </b><span class="items">${ownerLogin}, ${ownerHtml}</span></li>
+			  	  	  	  	</ul>
+			  	  	  	</div>
+			  	  	</div>
+			  	</div>
+			</div>
+
+			<ul class="collection">
 				<li class="collection-item"><b>Name:</b> ${data.name}</li>
 				<li class="collection-item"><b>Description:</b> <span class="items">${description}</span></li>
 				<li class="collection-item"><b>Author:</b> <span class="items">${author}</span></li>
@@ -113,13 +215,14 @@ export default class SecondPagePreparing {
 				id="modalTrigger">${data.assets[i].version}</button>
 			`;
 		}
-
+		/*----------Add versions chips----------*/
 		var chips = document.getElementsByClassName('chip');
 		for(var i = 0; i < chips.length; i++) {
 			chips[i].addEventListener('click', function() {
 				var version = this.textContent;
 				var baseUri = this.attributes[1].value;
 
+				/*----------Working with modal popup----------*/
 				$('body').css('overflow-y', 'hidden');
 				$('.the-modal-header h3').text('Version: ' + version);
 				for (var j = 0; j < data.assets.length; j++) {
@@ -224,7 +327,7 @@ export default class SecondPagePreparing {
 						this.classList.remove("pulse");
 					})
 				}
-				//$('.the-modal-body p').text(this.attributes[1].value);
+
 				$('#myModal').css('display', 'block');
 				setTimeout(function() {
 					$('.bounce').css('-webkit-animation-name', 'bounce');
@@ -242,10 +345,5 @@ export default class SecondPagePreparing {
 
 		DataOperations.setClickedFlag("true");
 		var w = window.open(`newpage.html#${param}`);
-	}
-
-	public static toggleVersionLink(link: string){
-		var placeForLink = <HTMLInputElement>document.getElementById("versionLink");
-		placeForLink.innerHTML = link;
 	}
 }

@@ -24,6 +24,7 @@ define(["require", "exports", "./dataoperations", "./preparefirst"], function (r
         SecondPageUp.prototype.showPage = function () {
             console.log(location.href);
             dataoperations_1.DataOperations.makeRequest(this.parameter);
+            dataoperations_1.DataOperations.makeRequest(this.parameter, true);
         };
         return SecondPageUp;
     }());

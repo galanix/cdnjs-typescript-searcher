@@ -6,10 +6,20 @@ define(["require", "exports", "./dataoperations"], function (require, exports, d
         }
         SecondPagePreparing.setPageContent = function () {
             var data = dataoperations_1.DataOperations.getSecondaryRequestData();
+            var gitHubData = dataoperations_1.DataOperations.getGitHubRequestData();
             var filter = dataoperations_1.DataOperations.getInputFilter();
             var button = document.getElementById("backBtn");
             var versionLinkPrimary = "https://cdnjs.cloudflare.com/ajax/libs/";
             var placeForData = document.getElementById("newDataHolder");
+            var gitHubItem;
+            if (gitHubData.total_count === 0) {
+                var myUrl = window.location.href;
+                var urlArray = myUrl.split('#');
+                var parameter = urlArray[1];
+                var slicedFilter = parameter.slice((parameter.indexOf('-') + 1));
+                dataoperations_1.DataOperations.makeRequest(slicedFilter, true);
+            }
+            /*----------Checks if the page was loaded by click, or by manual URL entering----------*/
             if (dataoperations_1.DataOperations.getClickedFlag() === "true") {
                 button.innerHTML = "Back to " + filter;
                 button.onclick = function () {
@@ -22,11 +32,13 @@ define(["require", "exports", "./dataoperations"], function (require, exports, d
                     location.replace("index.html");
                 };
             }
+            /*----------If the URL is incorrect----------*/
             if ($.isEmptyObject(data)) {
                 placeForData.innerHTML = "\n\t\t\t\t<div class=\"alert-box error\">\n\t\t\t\t\t<span>error: </span>\n\t\t\t\t\tThe URL is incorrect.\n\t\t\t\t</div>\n\t\t\t";
                 return;
             }
-            //verifications if there are such properties
+            /*-----------------------------------Start working with secondary request data-----------------------------------*/
+            //Verifications if there are such properties in data
             if (data.author !== undefined) {
                 if (data.author.name === undefined) {
                     var author = data.author;
@@ -74,7 +86,68 @@ define(["require", "exports", "./dataoperations"], function (require, exports, d
             else {
                 var repository = "The repository is not specified";
             }
-            placeForData.innerHTML = "\n\t\t\t<ul class=\"collection with-header\">\n\t\t\t\t<li class=\"collection-header\"><h4>" + data.name + "</h4></li>\n\t\t\t\t<li class=\"collection-item\"><b>Name:</b> " + data.name + "</li>\n\t\t\t\t<li class=\"collection-item\"><b>Description:</b> <span class=\"items\">" + description + "</span></li>\n\t\t\t\t<li class=\"collection-item\"><b>Author:</b> <span class=\"items\">" + author + "</span></li>\n\t\t\t\t<li class=\"collection-item\"><b>Homepage:</b> <span class=\"items\">" + homepage + "</span></li>\n\t\t\t\t<li class=\"collection-item\"><b>License:</b> <span class=\"items\">" + license + "</span></li>\n\t\t\t\t<li class=\"collection-item\"><b>Keywords:</b> <span class=\"items\">" + keywords + "</span></li>\n\t\t\t\t<li class=\"collection-item\"><b>Version:</b> <span class=\"items\">" + version + "</span></li>\n\t\t\t\t<li class=\"collection-item\"><b>Repository:</b> <span class=\"items\">" + repository + "</span></li>\n\t\t\t\t<li class=\"collection-item\"><b>Versions list:</b><span id=\"versionLink\"></span>\n\t\t\t\t\t<ul id=\"list\"></ul>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t";
+            /*-----------------------------------End working with secondary request data-----------------------------------*/
+            /*------------------------------------Start working with GitHub request data-----------------------------------*/
+            if (gitHubData.total_count === 1) {
+                gitHubItem = gitHubData.items[0];
+            }
+            else {
+                for (var i = 0; i < gitHubData.items.length; i++) {
+                    if (gitHubData.items[i].name.toLowerCase() === data.name.toLowerCase()) {
+                        gitHubItem = gitHubData.items[i];
+                    }
+                }
+                if (gitHubItem === undefined) {
+                    for (var i = 0; i < gitHubData.items.length; i++) {
+                        var primaryRequestRepository = data.repository.url.slice(data.repository.url.indexOf('github.com'));
+                        var currentRepository = gitHubData.items[i].git_url.slice(gitHubData.items[i].git_url.indexOf('github.com'));
+                        if (primaryRequestRepository === currentRepository) {
+                            gitHubItem = gitHubData.items[i];
+                        }
+                        else if (primaryRequestRepository.slice(primaryRequestRepository.lastIndexOf('/')) === currentRepository.slice(currentRepository.lastIndexOf('/'))) {
+                            gitHubItem = gitHubData.items[i]; //Anyway it will show different repositories, because they are different in cdnJS API and GitHub API
+                        }
+                    }
+                }
+            }
+            if (gitHubItem.name !== undefined && gitHubItem.name !== null) {
+                var name = gitHubItem.name;
+            }
+            else {
+                var name = "The name is not specified";
+            }
+            if (gitHubItem.description !== undefined && gitHubItem.description !== null) {
+                var description = gitHubItem.description;
+            }
+            else {
+                var description = "The description is not specified";
+            }
+            if (gitHubItem.language !== undefined && gitHubItem.language !== null) {
+                var language = gitHubItem.language;
+            }
+            else {
+                var language = "The language is not specified";
+            }
+            if (gitHubItem.created_at !== undefined && gitHubItem.created_at !== null) {
+                var created_at = gitHubItem.created_at;
+            }
+            else {
+                var created_at = "The creation date is not specified";
+            }
+            if (gitHubItem.owner.login !== undefined && gitHubItem.owner.login !== null) {
+                var ownerLogin = gitHubItem.owner.login;
+            }
+            else {
+                var ownerLogin = "The description is not specified";
+            }
+            if (gitHubItem.owner.html_url !== undefined && gitHubItem.owner.html_url !== null) {
+                var ownerHtml = gitHubItem.owner.html_url;
+            }
+            else {
+                var ownerHtml = "The description is not specified";
+            }
+            /*------------------------------------End working with GitHub request data-------------------------------------*/
+            placeForData.innerHTML = "\n\t\t\t<div class=\"row\">\n\t\t\t  \t<div class=\"col s12\">\n\t\t\t  \t  \t<div class=\"card\">\n\t\t\t  \t  \t  \t<div class=\"card-image\">\n\t\t\t  \t  \t  \t  \t<img src=\"../app/images/github.png\">\n\t\t\t  \t  \t  \t  \t<span class=\"card-title\">GitHub info</span>\n\t\t\t  \t  \t  \t  \t<a class=\"btn-floating halfway-fab waves-effect waves-light red\" href=\"" + gitHubItem.html_url + "\" target=\"_blank\"><i class=\"material-icons\">link</i></a>\n\t\t\t  \t  \t  \t</div>\n\t\t\t  \t  \t  \t<div class=\"card-content\">\n\t\t\t  \t  \t  \t  \t<ul class=\"collection with-header github-collection\">\n\t\t\t  \t  \t  \t  \t\t<li class=\"collection-header\">\n\t\t\t  \t  \t  \t  \t\t\t<h5><span class=\"items\">" + name + "</span></h5>\n\t\t\t  \t  \t  \t  \t\t\t<div>\n\t\t\t  \t  \t  \t  \t\t\t\t<span class=\".views\"> <i class=\"material-icons\">remove_red_eye</i> " + gitHubItem.watchers + "</span>\n\t\t\t\t  \t  \t  \t  \t\t\t<span class=\".stars\">  <i class=\"material-icons\">star</i>" + gitHubItem.stargazers_count + "</span>\n\t\t\t\t  \t  \t  \t  \t\t\t<span class=\".forks\"> <i class=\"material-icons\">device_hub</i> " + gitHubItem.forks + "</span>\n\t\t\t  \t  \t  \t  \t\t\t</div>\n\t\t\t  \t  \t  \t  \t\t</li>\n\t\t\t  \t  \t  \t  \t\t<li class=\"collection-item\"><b>GitHub description: </b><span class=\"items\">" + description + "</span></li>\n\t\t\t  \t  \t  \t  \t\t<li class=\"collection-item\"><b>Language: </b><span class=\"items\">" + language + "</span></li>\n\t\t\t  \t  \t  \t  \t\t<li class=\"collection-item\"><b>Created at: </b><span class=\"items\">" + created_at + "</span></li>\n\t\t\t  \t  \t  \t  \t\t<li class=\"collection-item\"><b>Creator: </b><span class=\"items\">" + ownerLogin + ", " + ownerHtml + "</span></li>\n\t\t\t  \t  \t  \t  \t</ul>\n\t\t\t  \t  \t  \t</div>\n\t\t\t  \t  \t</div>\n\t\t\t  \t</div>\n\t\t\t</div>\n\n\t\t\t<ul class=\"collection\">\n\t\t\t\t<li class=\"collection-item\"><b>Name:</b> " + data.name + "</li>\n\t\t\t\t<li class=\"collection-item\"><b>Description:</b> <span class=\"items\">" + description + "</span></li>\n\t\t\t\t<li class=\"collection-item\"><b>Author:</b> <span class=\"items\">" + author + "</span></li>\n\t\t\t\t<li class=\"collection-item\"><b>Homepage:</b> <span class=\"items\">" + homepage + "</span></li>\n\t\t\t\t<li class=\"collection-item\"><b>License:</b> <span class=\"items\">" + license + "</span></li>\n\t\t\t\t<li class=\"collection-item\"><b>Keywords:</b> <span class=\"items\">" + keywords + "</span></li>\n\t\t\t\t<li class=\"collection-item\"><b>Version:</b> <span class=\"items\">" + version + "</span></li>\n\t\t\t\t<li class=\"collection-item\"><b>Repository:</b> <span class=\"items\">" + repository + "</span></li>\n\t\t\t\t<li class=\"collection-item\"><b>Versions list:</b><span id=\"versionLink\"></span>\n\t\t\t\t\t<ul id=\"list\"></ul>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t";
             var items = document.getElementsByClassName("items");
             for (var i = 0; i < items.length; i++) {
                 var text = items[i].innerHTML;
@@ -86,11 +159,13 @@ define(["require", "exports", "./dataoperations"], function (require, exports, d
             for (var i = 0; i < data.assets.length; i++) {
                 placeForAssets.innerHTML += "\n\t\t\t\t<button class='chip' data-id=\"" + versionLinkPrimary + data.name + "/" + data.assets[i].version + "/\" \n\t\t\t\tid=\"modalTrigger\">" + data.assets[i].version + "</button>\n\t\t\t";
             }
+            /*----------Add versions chips----------*/
             var chips = document.getElementsByClassName('chip');
             for (var i = 0; i < chips.length; i++) {
                 chips[i].addEventListener('click', function () {
                     var version = this.textContent;
                     var baseUri = this.attributes[1].value;
+                    /*----------Working with modal popup----------*/
                     $('body').css('overflow-y', 'hidden');
                     $('.the-modal-header h3').text('Version: ' + version);
                     for (var j = 0; j < data.assets.length; j++) {
@@ -173,7 +248,6 @@ define(["require", "exports", "./dataoperations"], function (require, exports, d
                             this.classList.remove("pulse");
                         });
                     }
-                    //$('.the-modal-body p').text(this.attributes[1].value);
                     $('#myModal').css('display', 'block');
                     setTimeout(function () {
                         $('.bounce').css('-webkit-animation-name', 'bounce');
@@ -188,10 +262,6 @@ define(["require", "exports", "./dataoperations"], function (require, exports, d
             var param = button.innerText;
             dataoperations_1.DataOperations.setClickedFlag("true");
             var w = window.open("newpage.html#" + param);
-        };
-        SecondPagePreparing.toggleVersionLink = function (link) {
-            var placeForLink = document.getElementById("versionLink");
-            placeForLink.innerHTML = link;
         };
         return SecondPagePreparing;
     }());
