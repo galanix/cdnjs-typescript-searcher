@@ -1,3 +1,6 @@
+//FIRSTLY: make new request https://api.github.com/repos/*username*/*repo*
+//EXAMPLE: https://api.github.com/repos/danielgindi/jquery-backstretch
+
 import {
 	DataOperations
 } from './dataoperations';
