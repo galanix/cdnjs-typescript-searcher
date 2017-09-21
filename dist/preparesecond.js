@@ -96,7 +96,7 @@ define(["require", "exports", "./dataoperations"], function (require, exports, d
                     for (var j = 0; j < data.assets.length; j++) {
                         if (data.assets[j].version === version) {
                             $('.the-modal-body ul').empty();
-                            $("<li class=\"collection-header\"><h5>Links:</h5>\n\t\t\t\t\t\t\t\t<div>\n\t\t\t\t\t\t\t\t\t<span class=\"tooltip-question\">CLICK for the link copying or DBLCLICK for the script tag copying.</span>\n\t\t\t\t\t\t\t\t\t<span class=\"question bounce\"></span>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t</li>").appendTo('.the-modal-body ul');
+                            $("<li class=\"collection-header\"><h5>Links:</h5>\n\t\t\t\t\t\t\t\t<span class=\"question bounce quest-768px\"></span>\n\t\t\t\t\t\t\t\t<div>\n\t\t\t\t\t\t\t\t\t<span class=\"tooltip-question\">CLICK for the link copying or DBLCLICK for the script tag copying.</span>\n\t\t\t\t\t\t\t\t\t<span class=\"question bounce\"></span>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t<p class=\"tooltip-quest-768px\">CLICK for the link copying or DBLCLICK for the script tag copying.</p>\n\t\t\t\t\t\t\t</li>").appendTo('.the-modal-body ul');
                             for (var k = 0; k < data.assets[j].files.length; k++) {
                                 $("<li class=\"collection-item modal-collection\">\n\t\t\t\t\t\t\t\t\t<span class=\"link\">" + (baseUri + data.assets[j].files[k]) + "</span>\n\t\t\t\t\t\t\t\t\t<div>\n\t\t\t\t\t\t\t\t\t\t<span class=\"tooltiptext\" data-tooltip=\"tooltip" + k + "\">Copied!</span>\n\t\t\t\t\t\t\t\t\t\t<a class=\"btn btn-floating btn-copy\" data-link=\"" + (baseUri + data.assets[j].files[k]) + "\" data-tooltip=\"tooltip" + k + "\">\n\t\t\t\t\t\t\t\t\t\t\t<i class=\"material-icons\">content_copy</i>\n\t\t\t\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t</li>").appendTo('.the-modal-body ul');
                             }
@@ -106,6 +106,11 @@ define(["require", "exports", "./dataoperations"], function (require, exports, d
                         $('.tooltip-question').fadeTo('fast', 1);
                     }, function () {
                         $('.tooltip-question').fadeTo('fast', 0);
+                    });
+                    $('.quest-768px').hover(function () {
+                        $('.tooltip-quest-768px').slideDown("slow");
+                    }, function () {
+                        $('.tooltip-quest-768px').slideUp("slow");
                     });
                     var copyButtons = document.getElementsByClassName('btn-copy');
                     for (var j = 0; j < copyButtons.length; j++) {

@@ -126,10 +126,12 @@ export default class SecondPagePreparing {
 					if (data.assets[j].version === version) {
 						$('.the-modal-body ul').empty();
 						$(`<li class="collection-header"><h5>Links:</h5>
+								<span class="question bounce quest-768px"></span>
 								<div>
 									<span class="tooltip-question">CLICK for the link copying or DBLCLICK for the script tag copying.</span>
 									<span class="question bounce"></span>
 								</div>
+								<p class="tooltip-quest-768px">CLICK for the link copying or DBLCLICK for the script tag copying.</p>
 							</li>`).appendTo('.the-modal-body ul');
 						for (var k = 0; k < data.assets[j].files.length; k++) {
 							$(`<li class="collection-item modal-collection">
@@ -149,6 +151,12 @@ export default class SecondPagePreparing {
 					$('.tooltip-question').fadeTo('fast', 1);
 				}, function() {
 					$('.tooltip-question').fadeTo('fast', 0);
+				});
+
+				$('.quest-768px').hover(function() {
+					$('.tooltip-quest-768px').slideDown("slow");
+				}, function() {
+					$('.tooltip-quest-768px').slideUp("slow");
 				});
 
 				var copyButtons = document.getElementsByClassName('btn-copy');
