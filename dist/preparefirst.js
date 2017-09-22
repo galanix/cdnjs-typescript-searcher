@@ -95,7 +95,7 @@ define(["require", "exports", "./dataoperations", "./preparesecond"], function (
                                 });
                             }
                         });
-                    }, 500);
+                    }, 400);
                 }
                 else {
                     if (recommended.length === 0) {

@@ -111,87 +111,114 @@ export default class SecondPagePreparing {
 				}
 			}
 		}*/
+		if (gitHubData.message === "Not Found") {
+			placeForData.innerHTML = `
+				<div class="row">
+				  	<div class="col s12">
+				  	  	<div class="card">
+				  	  	  	<div class="card-image">
+				  	  	  	  	<img src="../app/images/githubMessage.png">
+				  	  	  	</div>
+				  	  	</div>
+				  	</div>
+				</div>
 
-		if (gitHubData.name !== undefined && gitHubData.name !== null) {
-			var name = gitHubData.name;
+				<ul class="collection">
+					<li class="collection-item"><b>Name:</b> ${data.name}</li>
+					<li class="collection-item"><b>Description:</b> <span class="items">${description}</span></li>
+					<li class="collection-item"><b>Author:</b> <span class="items">${author}</span></li>
+					<li class="collection-item"><b>Homepage:</b> <span class="items">${homepage}</span></li>
+					<li class="collection-item"><b>License:</b> <span class="items">${license}</span></li>
+					<li class="collection-item"><b>Keywords:</b> <span class="items">${keywords}</span></li>
+					<li class="collection-item"><b>Version:</b> <span class="items">${version}</span></li>
+					<li class="collection-item"><b>Repository:</b> <span class="items">${repository}</span></li>
+					<li class="collection-item"><b>Versions list:</b><span id="versionLink"></span>
+						<ul id="list"></ul>
+					</li>
+				</ul>
+			`;
 		} else {
-			var name: any = "The name is not specified";
+			if (gitHubData.name !== undefined && gitHubData.name !== null) {
+				var name = gitHubData.name;
+			} else {
+				var name: any = "The name is not specified";
+			}
+
+			if (gitHubData.description !== undefined && gitHubData.description !== null) {
+				var description = gitHubData.description;
+			} else {
+				var description: any = "The description is not specified";
+			}
+
+			if (gitHubData.language !== undefined && gitHubData.language !== null) {
+				var language = gitHubData.language;
+			} else {
+				var language: any = "The language is not specified";
+			}
+
+			if (gitHubData.created_at !== undefined && gitHubData.created_at !== null) {
+				var created_at = gitHubData.created_at;
+			} else {
+				var created_at: any = "The creation date is not specified";
+			}
+
+			if (gitHubData.owner.login !== undefined && gitHubData.owner.login !== null) {
+				var ownerLogin = gitHubData.owner.login;
+			} else {
+				var ownerLogin: any = "The description is not specified";
+			}
+
+			if (gitHubData.owner.html_url !== undefined && gitHubData.owner.html_url !== null) {
+				var ownerHtml = gitHubData.owner.html_url;
+			} else {
+				var ownerHtml: any = "The description is not specified";
+			}
+			/*------------------------------------End working with GitHub request data-------------------------------------*/
+
+			placeForData.innerHTML = `
+				<div class="row">
+				  	<div class="col s12">
+				  	  	<div class="card">
+				  	  	  	<div class="card-image">
+				  	  	  	  	<img src="../app/images/github.png">
+				  	  	  	  	<span class="card-title">GitHub info</span>
+				  	  	  	  	<a class="btn-floating halfway-fab waves-effect waves-light red" href="${gitHubData.html_url}" target="_blank"><i class="material-icons">link</i></a>
+				  	  	  	</div>
+				  	  	  	<div class="card-content">
+				  	  	  	  	<ul class="collection with-header github-collection">
+				  	  	  	  		<li class="collection-header">
+				  	  	  	  			<h5><span class="items">${name}</span></h5>
+				  	  	  	  			<div>
+				  	  	  	  				<span class=".views"> <i class="material-icons">remove_red_eye</i> ${gitHubData.watchers}</span>
+					  	  	  	  			<span class=".stars">  <i class="material-icons">star</i>${gitHubData.stargazers_count}</span>
+					  	  	  	  			<span class=".forks"> <i class="material-icons">device_hub</i> ${gitHubData.forks}</span>
+				  	  	  	  			</div>
+				  	  	  	  		</li>
+				  	  	  	  		<li class="collection-item"><b>GitHub description: </b><span class="items">${description}</span></li>
+				  	  	  	  		<li class="collection-item"><b>Language: </b><span class="items">${language}</span></li>
+				  	  	  	  		<li class="collection-item"><b>Created at: </b><span class="items">${created_at}</span></li>
+				  	  	  	  		<li class="collection-item"><b>Creator: </b><span class="items">${ownerLogin}, ${ownerHtml}</span></li>
+				  	  	  	  	</ul>
+				  	  	  	</div>
+				  	  	</div>
+				  	</div>
+				</div>
+
+				<ul class="collection">
+					<li class="collection-item"><b>Name:</b> ${data.name}</li>
+					<li class="collection-item"><b>Description:</b> <span class="items">${description}</span></li>
+					<li class="collection-item"><b>Author:</b> <span class="items">${author}</span></li>
+					<li class="collection-item"><b>Homepage:</b> <span class="items">${homepage}</span></li>
+					<li class="collection-item"><b>License:</b> <span class="items">${license}</span></li>
+					<li class="collection-item"><b>Keywords:</b> <span class="items">${keywords}</span></li>
+					<li class="collection-item"><b>Version:</b> <span class="items">${version}</span></li>
+					<li class="collection-item"><b>Repository:</b> <span class="items">${repository}</span></li>
+					<li class="collection-item"><b>Versions list:</b><span id="versionLink"></span>
+						<ul id="list"></ul>
+					</li>
+				</ul>
+			`;
 		}
-
-		if (gitHubData.description !== undefined && gitHubData.description !== null) {
-			var description = gitHubData.description;
-		} else {
-			var description: any = "The description is not specified";
-		}
-
-		if (gitHubData.language !== undefined && gitHubData.language !== null) {
-			var language = gitHubData.language;
-		} else {
-			var language: any = "The language is not specified";
-		}
-
-		if (gitHubData.created_at !== undefined && gitHubData.created_at !== null) {
-			var created_at = gitHubData.created_at;
-		} else {
-			var created_at: any = "The creation date is not specified";
-		}
-
-		if (gitHubData.owner.login !== undefined && gitHubData.owner.login !== null) {
-			var ownerLogin = gitHubData.owner.login;
-		} else {
-			var ownerLogin: any = "The description is not specified";
-		}
-
-		if (gitHubData.owner.html_url !== undefined && gitHubData.owner.html_url !== null) {
-			var ownerHtml = gitHubData.owner.html_url;
-		} else {
-			var ownerHtml: any = "The description is not specified";
-		}
-		/*------------------------------------End working with GitHub request data-------------------------------------*/
-
-		placeForData.innerHTML = `
-			<div class="row">
-			  	<div class="col s12">
-			  	  	<div class="card">
-			  	  	  	<div class="card-image">
-			  	  	  	  	<img src="../app/images/github.png">
-			  	  	  	  	<span class="card-title">GitHub info</span>
-			  	  	  	  	<a class="btn-floating halfway-fab waves-effect waves-light red" href="${gitHubData.html_url}" target="_blank"><i class="material-icons">link</i></a>
-			  	  	  	</div>
-			  	  	  	<div class="card-content">
-			  	  	  	  	<ul class="collection with-header github-collection">
-			  	  	  	  		<li class="collection-header">
-			  	  	  	  			<h5><span class="items">${name}</span></h5>
-			  	  	  	  			<div>
-			  	  	  	  				<span class=".views"> <i class="material-icons">remove_red_eye</i> ${gitHubData.watchers}</span>
-				  	  	  	  			<span class=".stars">  <i class="material-icons">star</i>${gitHubData.stargazers_count}</span>
-				  	  	  	  			<span class=".forks"> <i class="material-icons">device_hub</i> ${gitHubData.forks}</span>
-			  	  	  	  			</div>
-			  	  	  	  		</li>
-			  	  	  	  		<li class="collection-item"><b>GitHub description: </b><span class="items">${description}</span></li>
-			  	  	  	  		<li class="collection-item"><b>Language: </b><span class="items">${language}</span></li>
-			  	  	  	  		<li class="collection-item"><b>Created at: </b><span class="items">${created_at}</span></li>
-			  	  	  	  		<li class="collection-item"><b>Creator: </b><span class="items">${ownerLogin}, ${ownerHtml}</span></li>
-			  	  	  	  	</ul>
-			  	  	  	</div>
-			  	  	</div>
-			  	</div>
-			</div>
-
-			<ul class="collection">
-				<li class="collection-item"><b>Name:</b> ${data.name}</li>
-				<li class="collection-item"><b>Description:</b> <span class="items">${description}</span></li>
-				<li class="collection-item"><b>Author:</b> <span class="items">${author}</span></li>
-				<li class="collection-item"><b>Homepage:</b> <span class="items">${homepage}</span></li>
-				<li class="collection-item"><b>License:</b> <span class="items">${license}</span></li>
-				<li class="collection-item"><b>Keywords:</b> <span class="items">${keywords}</span></li>
-				<li class="collection-item"><b>Version:</b> <span class="items">${version}</span></li>
-				<li class="collection-item"><b>Repository:</b> <span class="items">${repository}</span></li>
-				<li class="collection-item"><b>Versions list:</b><span id="versionLink"></span>
-					<ul id="list"></ul>
-				</li>
-			</ul>
-		`;
 
 		var items = document.getElementsByClassName("items");
 

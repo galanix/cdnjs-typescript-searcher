@@ -93,6 +93,9 @@ nav {
   right: 0;
   margin: auto; }
 
+#newDataHolder .card-image .btn-floating .halfway-fab .waves-effect .waves-light {
+  z-index: 1; }
+
 #newDataHolder .card-content .collection-header div {
   display: flex;
   justify-content: space-between; }
@@ -131,7 +134,7 @@ nav {
 .the-modal {
   display: none;
   position: fixed;
-  z-index: 1;
+  z-index: 2;
   overflow: auto;
   left: 0;
   top: 0;

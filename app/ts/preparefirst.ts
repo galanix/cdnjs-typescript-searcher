@@ -110,7 +110,7 @@ export default class FirstPagePreparing {
 							});
 						}
 					});
-				}, 500);
+				}, 400);
 			} else {
 				if (recommended.length === 0) {
 					var recommendedItem = data.results[Math.floor(Math.random()*data.total)];

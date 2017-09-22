@@ -105,44 +105,49 @@ define(["require", "exports", "./dataoperations"], function (require, exports, d
                     }
                 }
             }*/
-            if (gitHubData.name !== undefined && gitHubData.name !== null) {
-                var name = gitHubData.name;
+            if (gitHubData.message === "Not Found") {
+                placeForData.innerHTML = "\n\t\t\t\t<div class=\"row\">\n\t\t\t\t  \t<div class=\"col s12\">\n\t\t\t\t  \t  \t<div class=\"card\">\n\t\t\t\t  \t  \t  \t<div class=\"card-image\">\n\t\t\t\t  \t  \t  \t  \t<img src=\"../app/images/githubMessage.png\">\n\t\t\t\t  \t  \t  \t</div>\n\t\t\t\t  \t  \t</div>\n\t\t\t\t  \t</div>\n\t\t\t\t</div>\n\n\t\t\t\t<ul class=\"collection\">\n\t\t\t\t\t<li class=\"collection-item\"><b>Name:</b> " + data.name + "</li>\n\t\t\t\t\t<li class=\"collection-item\"><b>Description:</b> <span class=\"items\">" + description + "</span></li>\n\t\t\t\t\t<li class=\"collection-item\"><b>Author:</b> <span class=\"items\">" + author + "</span></li>\n\t\t\t\t\t<li class=\"collection-item\"><b>Homepage:</b> <span class=\"items\">" + homepage + "</span></li>\n\t\t\t\t\t<li class=\"collection-item\"><b>License:</b> <span class=\"items\">" + license + "</span></li>\n\t\t\t\t\t<li class=\"collection-item\"><b>Keywords:</b> <span class=\"items\">" + keywords + "</span></li>\n\t\t\t\t\t<li class=\"collection-item\"><b>Version:</b> <span class=\"items\">" + version + "</span></li>\n\t\t\t\t\t<li class=\"collection-item\"><b>Repository:</b> <span class=\"items\">" + repository + "</span></li>\n\t\t\t\t\t<li class=\"collection-item\"><b>Versions list:</b><span id=\"versionLink\"></span>\n\t\t\t\t\t\t<ul id=\"list\"></ul>\n\t\t\t\t\t</li>\n\t\t\t\t</ul>\n\t\t\t";
             }
             else {
-                var name = "The name is not specified";
+                if (gitHubData.name !== undefined && gitHubData.name !== null) {
+                    var name = gitHubData.name;
+                }
+                else {
+                    var name = "The name is not specified";
+                }
+                if (gitHubData.description !== undefined && gitHubData.description !== null) {
+                    var description = gitHubData.description;
+                }
+                else {
+                    var description = "The description is not specified";
+                }
+                if (gitHubData.language !== undefined && gitHubData.language !== null) {
+                    var language = gitHubData.language;
+                }
+                else {
+                    var language = "The language is not specified";
+                }
+                if (gitHubData.created_at !== undefined && gitHubData.created_at !== null) {
+                    var created_at = gitHubData.created_at;
+                }
+                else {
+                    var created_at = "The creation date is not specified";
+                }
+                if (gitHubData.owner.login !== undefined && gitHubData.owner.login !== null) {
+                    var ownerLogin = gitHubData.owner.login;
+                }
+                else {
+                    var ownerLogin = "The description is not specified";
+                }
+                if (gitHubData.owner.html_url !== undefined && gitHubData.owner.html_url !== null) {
+                    var ownerHtml = gitHubData.owner.html_url;
+                }
+                else {
+                    var ownerHtml = "The description is not specified";
+                }
+                /*------------------------------------End working with GitHub request data-------------------------------------*/
+                placeForData.innerHTML = "\n\t\t\t\t<div class=\"row\">\n\t\t\t\t  \t<div class=\"col s12\">\n\t\t\t\t  \t  \t<div class=\"card\">\n\t\t\t\t  \t  \t  \t<div class=\"card-image\">\n\t\t\t\t  \t  \t  \t  \t<img src=\"../app/images/github.png\">\n\t\t\t\t  \t  \t  \t  \t<span class=\"card-title\">GitHub info</span>\n\t\t\t\t  \t  \t  \t  \t<a class=\"btn-floating halfway-fab waves-effect waves-light red\" href=\"" + gitHubData.html_url + "\" target=\"_blank\"><i class=\"material-icons\">link</i></a>\n\t\t\t\t  \t  \t  \t</div>\n\t\t\t\t  \t  \t  \t<div class=\"card-content\">\n\t\t\t\t  \t  \t  \t  \t<ul class=\"collection with-header github-collection\">\n\t\t\t\t  \t  \t  \t  \t\t<li class=\"collection-header\">\n\t\t\t\t  \t  \t  \t  \t\t\t<h5><span class=\"items\">" + name + "</span></h5>\n\t\t\t\t  \t  \t  \t  \t\t\t<div>\n\t\t\t\t  \t  \t  \t  \t\t\t\t<span class=\".views\"> <i class=\"material-icons\">remove_red_eye</i> " + gitHubData.watchers + "</span>\n\t\t\t\t\t  \t  \t  \t  \t\t\t<span class=\".stars\">  <i class=\"material-icons\">star</i>" + gitHubData.stargazers_count + "</span>\n\t\t\t\t\t  \t  \t  \t  \t\t\t<span class=\".forks\"> <i class=\"material-icons\">device_hub</i> " + gitHubData.forks + "</span>\n\t\t\t\t  \t  \t  \t  \t\t\t</div>\n\t\t\t\t  \t  \t  \t  \t\t</li>\n\t\t\t\t  \t  \t  \t  \t\t<li class=\"collection-item\"><b>GitHub description: </b><span class=\"items\">" + description + "</span></li>\n\t\t\t\t  \t  \t  \t  \t\t<li class=\"collection-item\"><b>Language: </b><span class=\"items\">" + language + "</span></li>\n\t\t\t\t  \t  \t  \t  \t\t<li class=\"collection-item\"><b>Created at: </b><span class=\"items\">" + created_at + "</span></li>\n\t\t\t\t  \t  \t  \t  \t\t<li class=\"collection-item\"><b>Creator: </b><span class=\"items\">" + ownerLogin + ", " + ownerHtml + "</span></li>\n\t\t\t\t  \t  \t  \t  \t</ul>\n\t\t\t\t  \t  \t  \t</div>\n\t\t\t\t  \t  \t</div>\n\t\t\t\t  \t</div>\n\t\t\t\t</div>\n\n\t\t\t\t<ul class=\"collection\">\n\t\t\t\t\t<li class=\"collection-item\"><b>Name:</b> " + data.name + "</li>\n\t\t\t\t\t<li class=\"collection-item\"><b>Description:</b> <span class=\"items\">" + description + "</span></li>\n\t\t\t\t\t<li class=\"collection-item\"><b>Author:</b> <span class=\"items\">" + author + "</span></li>\n\t\t\t\t\t<li class=\"collection-item\"><b>Homepage:</b> <span class=\"items\">" + homepage + "</span></li>\n\t\t\t\t\t<li class=\"collection-item\"><b>License:</b> <span class=\"items\">" + license + "</span></li>\n\t\t\t\t\t<li class=\"collection-item\"><b>Keywords:</b> <span class=\"items\">" + keywords + "</span></li>\n\t\t\t\t\t<li class=\"collection-item\"><b>Version:</b> <span class=\"items\">" + version + "</span></li>\n\t\t\t\t\t<li class=\"collection-item\"><b>Repository:</b> <span class=\"items\">" + repository + "</span></li>\n\t\t\t\t\t<li class=\"collection-item\"><b>Versions list:</b><span id=\"versionLink\"></span>\n\t\t\t\t\t\t<ul id=\"list\"></ul>\n\t\t\t\t\t</li>\n\t\t\t\t</ul>\n\t\t\t";
             }
-            if (gitHubData.description !== undefined && gitHubData.description !== null) {
-                var description = gitHubData.description;
-            }
-            else {
-                var description = "The description is not specified";
-            }
-            if (gitHubData.language !== undefined && gitHubData.language !== null) {
-                var language = gitHubData.language;
-            }
-            else {
-                var language = "The language is not specified";
-            }
-            if (gitHubData.created_at !== undefined && gitHubData.created_at !== null) {
-                var created_at = gitHubData.created_at;
-            }
-            else {
-                var created_at = "The creation date is not specified";
-            }
-            if (gitHubData.owner.login !== undefined && gitHubData.owner.login !== null) {
-                var ownerLogin = gitHubData.owner.login;
-            }
-            else {
-                var ownerLogin = "The description is not specified";
-            }
-            if (gitHubData.owner.html_url !== undefined && gitHubData.owner.html_url !== null) {
-                var ownerHtml = gitHubData.owner.html_url;
-            }
-            else {
-                var ownerHtml = "The description is not specified";
-            }
-            /*------------------------------------End working with GitHub request data-------------------------------------*/
-            placeForData.innerHTML = "\n\t\t\t<div class=\"row\">\n\t\t\t  \t<div class=\"col s12\">\n\t\t\t  \t  \t<div class=\"card\">\n\t\t\t  \t  \t  \t<div class=\"card-image\">\n\t\t\t  \t  \t  \t  \t<img src=\"../app/images/github.png\">\n\t\t\t  \t  \t  \t  \t<span class=\"card-title\">GitHub info</span>\n\t\t\t  \t  \t  \t  \t<a class=\"btn-floating halfway-fab waves-effect waves-light red\" href=\"" + gitHubData.html_url + "\" target=\"_blank\"><i class=\"material-icons\">link</i></a>\n\t\t\t  \t  \t  \t</div>\n\t\t\t  \t  \t  \t<div class=\"card-content\">\n\t\t\t  \t  \t  \t  \t<ul class=\"collection with-header github-collection\">\n\t\t\t  \t  \t  \t  \t\t<li class=\"collection-header\">\n\t\t\t  \t  \t  \t  \t\t\t<h5><span class=\"items\">" + name + "</span></h5>\n\t\t\t  \t  \t  \t  \t\t\t<div>\n\t\t\t  \t  \t  \t  \t\t\t\t<span class=\".views\"> <i class=\"material-icons\">remove_red_eye</i> " + gitHubData.watchers + "</span>\n\t\t\t\t  \t  \t  \t  \t\t\t<span class=\".stars\">  <i class=\"material-icons\">star</i>" + gitHubData.stargazers_count + "</span>\n\t\t\t\t  \t  \t  \t  \t\t\t<span class=\".forks\"> <i class=\"material-icons\">device_hub</i> " + gitHubData.forks + "</span>\n\t\t\t  \t  \t  \t  \t\t\t</div>\n\t\t\t  \t  \t  \t  \t\t</li>\n\t\t\t  \t  \t  \t  \t\t<li class=\"collection-item\"><b>GitHub description: </b><span class=\"items\">" + description + "</span></li>\n\t\t\t  \t  \t  \t  \t\t<li class=\"collection-item\"><b>Language: </b><span class=\"items\">" + language + "</span></li>\n\t\t\t  \t  \t  \t  \t\t<li class=\"collection-item\"><b>Created at: </b><span class=\"items\">" + created_at + "</span></li>\n\t\t\t  \t  \t  \t  \t\t<li class=\"collection-item\"><b>Creator: </b><span class=\"items\">" + ownerLogin + ", " + ownerHtml + "</span></li>\n\t\t\t  \t  \t  \t  \t</ul>\n\t\t\t  \t  \t  \t</div>\n\t\t\t  \t  \t</div>\n\t\t\t  \t</div>\n\t\t\t</div>\n\n\t\t\t<ul class=\"collection\">\n\t\t\t\t<li class=\"collection-item\"><b>Name:</b> " + data.name + "</li>\n\t\t\t\t<li class=\"collection-item\"><b>Description:</b> <span class=\"items\">" + description + "</span></li>\n\t\t\t\t<li class=\"collection-item\"><b>Author:</b> <span class=\"items\">" + author + "</span></li>\n\t\t\t\t<li class=\"collection-item\"><b>Homepage:</b> <span class=\"items\">" + homepage + "</span></li>\n\t\t\t\t<li class=\"collection-item\"><b>License:</b> <span class=\"items\">" + license + "</span></li>\n\t\t\t\t<li class=\"collection-item\"><b>Keywords:</b> <span class=\"items\">" + keywords + "</span></li>\n\t\t\t\t<li class=\"collection-item\"><b>Version:</b> <span class=\"items\">" + version + "</span></li>\n\t\t\t\t<li class=\"collection-item\"><b>Repository:</b> <span class=\"items\">" + repository + "</span></li>\n\t\t\t\t<li class=\"collection-item\"><b>Versions list:</b><span id=\"versionLink\"></span>\n\t\t\t\t\t<ul id=\"list\"></ul>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t";
             var items = document.getElementsByClassName("items");
             for (var i = 0; i < items.length; i++) {
                 var text = items[i].innerHTML;

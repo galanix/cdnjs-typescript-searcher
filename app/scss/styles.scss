@@ -125,6 +125,17 @@ nav {
 
 	    margin: auto;
 	}
+	.card-image{
+		.btn-floating{
+			.halfway-fab{
+				.waves-effect{
+					.waves-light{
+						z-index: 1
+					}
+				}
+			}
+		}
+	}
 	.card-content{
 		.collection-header{
 			div{
@@ -176,7 +187,7 @@ nav {
 .the-modal{
     display: none;
     position: fixed;
-    z-index: 1;
+    z-index: 2;
     overflow: auto;
     left: 0;
     top: 0;
