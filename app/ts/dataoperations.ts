@@ -1,9 +1,9 @@
 import prepareSecond from './preparesecond';
 
 export class DataOperations {
-	public static makeRequest(param: string = '', github: boolean = false) {
+	public static makeRequest(param: any = '', github: boolean = false) {
 		var url: string = `https://api.cdnjs.com/libraries`;
-		var githubUrl: string = 'https://api.github.com/search/repositories';
+		var githubUrl: string = 'https://api.github.com/repos';
 		var myRequest = new XMLHttpRequest();
 
 		if (param === '') {
@@ -15,7 +15,7 @@ export class DataOperations {
 			myRequest.send();
 		} else {
 			if (github === true) {
-				myRequest.open('GET', `${githubUrl}?q=${param}`);
+				myRequest.open('GET', `${githubUrl}/${param[0]}/${param[1]}`);
 				myRequest.onload = function () {
 					var data = JSON.parse(myRequest.responseText);
 				    DataOperations.setGitHubRequestData(JSON.stringify(data));
@@ -27,6 +27,21 @@ export class DataOperations {
 				myRequest.onload = function () {
 					var data = JSON.parse(myRequest.responseText);
 				    DataOperations.setSecondaryRequestData(JSON.stringify(data));
+
+				    var parameter = [];
+				    var repo = DataOperations.getSecondaryRequestData().repository.url;
+				    if (repo.indexOf('.git') === -1) {
+				    	if (repo.substr(repo.length - 1) !== '/') {
+				    		var repoSlice = repo.slice(repo.indexOf('github.com') + 11, );
+				    	} else {
+				    		var repoSlice = repo.slice(repo.indexOf('github.com') + 11, -1);
+				    	}
+				    } else {
+				    	var repoSlice = repo.slice(repo.indexOf('github.com') + 11, repo.indexOf('.git'))
+				    }
+					parameter.push(repoSlice.slice(0, repoSlice.indexOf('/')));
+					parameter.push(repoSlice.slice(repoSlice.indexOf('/') + 1, ));
+					DataOperations.makeRequest(parameter, true);
 				};
 				myRequest.send();
 			}

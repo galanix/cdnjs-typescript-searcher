@@ -8,7 +8,7 @@ define(["require", "exports", "./preparesecond"], function (require, exports, pr
             if (param === void 0) { param = ''; }
             if (github === void 0) { github = false; }
             var url = "https://api.cdnjs.com/libraries";
-            var githubUrl = 'https://api.github.com/search/repositories';
+            var githubUrl = 'https://api.github.com/repos';
             var myRequest = new XMLHttpRequest();
             if (param === '') {
                 myRequest.open('GET', url);
@@ -20,7 +20,7 @@ define(["require", "exports", "./preparesecond"], function (require, exports, pr
             }
             else {
                 if (github === true) {
-                    myRequest.open('GET', githubUrl + "?q=" + param);
+                    myRequest.open('GET', githubUrl + "/" + param[0] + "/" + param[1]);
                     myRequest.onload = function () {
                         var data = JSON.parse(myRequest.responseText);
                         DataOperations.setGitHubRequestData(JSON.stringify(data));
@@ -33,6 +33,22 @@ define(["require", "exports", "./preparesecond"], function (require, exports, pr
                     myRequest.onload = function () {
                         var data = JSON.parse(myRequest.responseText);
                         DataOperations.setSecondaryRequestData(JSON.stringify(data));
+                        var parameter = [];
+                        var repo = DataOperations.getSecondaryRequestData().repository.url;
+                        if (repo.indexOf('.git') === -1) {
+                            if (repo.substr(repo.length - 1) !== '/') {
+                                var repoSlice = repo.slice(repo.indexOf('github.com') + 11);
+                            }
+                            else {
+                                var repoSlice = repo.slice(repo.indexOf('github.com') + 11, -1);
+                            }
+                        }
+                        else {
+                            var repoSlice = repo.slice(repo.indexOf('github.com') + 11, repo.indexOf('.git'));
+                        }
+                        parameter.push(repoSlice.slice(0, repoSlice.indexOf('/')));
+                        parameter.push(repoSlice.slice(repoSlice.indexOf('/') + 1));
+                        DataOperations.makeRequest(parameter, true);
                     };
                     myRequest.send();
                 }

@@ -26,7 +26,6 @@ class SecondPageUp {
 	public showPage() {
 		console.log(location.href);
 		DataOperations.makeRequest(this.parameter);
-		DataOperations.makeRequest(this.parameter, true);
 	}
 }
 

@@ -8,21 +8,13 @@ import {
 export default class SecondPagePreparing {
 	public static setPageContent() {
 		var data: any = DataOperations.getSecondaryRequestData();
-		var gitHubData: any = DataOperations.getGitHubRequestData();
 		var filter = DataOperations.getInputFilter();
 		var button = <HTMLInputElement>document.getElementById("backBtn");
 		var versionLinkPrimary = "https://cdnjs.cloudflare.com/ajax/libs/";
 		var placeForData = <HTMLInputElement>document.getElementById("newDataHolder");
-		var gitHubItem;
+		var parameter = [];
 
-		if (gitHubData.total_count === 0) {
-			var myUrl: string = window.location.href;
-			var urlArray: any = myUrl.split('#');
-			var parameter = urlArray[1];
-			var slicedFilter = parameter.slice((parameter.indexOf('-') + 1), );
-
-			DataOperations.makeRequest(slicedFilter, true);
-		}
+		var gitHubData = DataOperations.getGitHubRequestData();
 
 		/*----------Checks if the page was loaded by click, or by manual URL entering----------*/
 		if (DataOperations.getClickedFlag() === "true") {
@@ -97,7 +89,7 @@ export default class SecondPagePreparing {
 
 
 		/*------------------------------------Start working with GitHub request data-----------------------------------*/
-		if (gitHubData.total_count === 1) {
+		/*if (gitHubData.total_count === 1) {
 			gitHubItem = gitHubData.items[0];
 		} else {
 			for (var i = 0; i < gitHubData.items.length; i++) {
@@ -118,40 +110,40 @@ export default class SecondPagePreparing {
 					}
 				}
 			}
-		}
+		}*/
 
-		if (gitHubItem.name !== undefined && gitHubItem.name !== null) {
-			var name = gitHubItem.name;
+		if (gitHubData.name !== undefined && gitHubData.name !== null) {
+			var name = gitHubData.name;
 		} else {
 			var name: any = "The name is not specified";
 		}
 
-		if (gitHubItem.description !== undefined && gitHubItem.description !== null) {
-			var description = gitHubItem.description;
+		if (gitHubData.description !== undefined && gitHubData.description !== null) {
+			var description = gitHubData.description;
 		} else {
 			var description: any = "The description is not specified";
 		}
 
-		if (gitHubItem.language !== undefined && gitHubItem.language !== null) {
-			var language = gitHubItem.language;
+		if (gitHubData.language !== undefined && gitHubData.language !== null) {
+			var language = gitHubData.language;
 		} else {
 			var language: any = "The language is not specified";
 		}
 
-		if (gitHubItem.created_at !== undefined && gitHubItem.created_at !== null) {
-			var created_at = gitHubItem.created_at;
+		if (gitHubData.created_at !== undefined && gitHubData.created_at !== null) {
+			var created_at = gitHubData.created_at;
 		} else {
 			var created_at: any = "The creation date is not specified";
 		}
 
-		if (gitHubItem.owner.login !== undefined && gitHubItem.owner.login !== null) {
-			var ownerLogin = gitHubItem.owner.login;
+		if (gitHubData.owner.login !== undefined && gitHubData.owner.login !== null) {
+			var ownerLogin = gitHubData.owner.login;
 		} else {
 			var ownerLogin: any = "The description is not specified";
 		}
 
-		if (gitHubItem.owner.html_url !== undefined && gitHubItem.owner.html_url !== null) {
-			var ownerHtml = gitHubItem.owner.html_url;
+		if (gitHubData.owner.html_url !== undefined && gitHubData.owner.html_url !== null) {
+			var ownerHtml = gitHubData.owner.html_url;
 		} else {
 			var ownerHtml: any = "The description is not specified";
 		}
@@ -164,16 +156,16 @@ export default class SecondPagePreparing {
 			  	  	  	<div class="card-image">
 			  	  	  	  	<img src="../app/images/github.png">
 			  	  	  	  	<span class="card-title">GitHub info</span>
-			  	  	  	  	<a class="btn-floating halfway-fab waves-effect waves-light red" href="${gitHubItem.html_url}" target="_blank"><i class="material-icons">link</i></a>
+			  	  	  	  	<a class="btn-floating halfway-fab waves-effect waves-light red" href="${gitHubData.html_url}" target="_blank"><i class="material-icons">link</i></a>
 			  	  	  	</div>
 			  	  	  	<div class="card-content">
 			  	  	  	  	<ul class="collection with-header github-collection">
 			  	  	  	  		<li class="collection-header">
 			  	  	  	  			<h5><span class="items">${name}</span></h5>
 			  	  	  	  			<div>
-			  	  	  	  				<span class=".views"> <i class="material-icons">remove_red_eye</i> ${gitHubItem.watchers}</span>
-				  	  	  	  			<span class=".stars">  <i class="material-icons">star</i>${gitHubItem.stargazers_count}</span>
-				  	  	  	  			<span class=".forks"> <i class="material-icons">device_hub</i> ${gitHubItem.forks}</span>
+			  	  	  	  				<span class=".views"> <i class="material-icons">remove_red_eye</i> ${gitHubData.watchers}</span>
+				  	  	  	  			<span class=".stars">  <i class="material-icons">star</i>${gitHubData.stargazers_count}</span>
+				  	  	  	  			<span class=".forks"> <i class="material-icons">device_hub</i> ${gitHubData.forks}</span>
 			  	  	  	  			</div>
 			  	  	  	  		</li>
 			  	  	  	  		<li class="collection-item"><b>GitHub description: </b><span class="items">${description}</span></li>
