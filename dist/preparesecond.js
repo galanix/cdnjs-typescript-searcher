@@ -83,28 +83,6 @@ define(["require", "exports", "./dataoperations"], function (require, exports, d
             }
             /*-----------------------------------End working with secondary request data-----------------------------------*/
             /*------------------------------------Start working with GitHub request data-----------------------------------*/
-            /*if (gitHubData.total_count === 1) {
-                gitHubItem = gitHubData.items[0];
-            } else {
-                for (var i = 0; i < gitHubData.items.length; i++) {
-                    if (gitHubData.items[i].name.toLowerCase() === data.name.toLowerCase()) {
-                        gitHubItem = gitHubData.items[i];
-                    }
-                }
-    
-                if (gitHubItem === undefined) {
-                    for (var i = 0; i < gitHubData.items.length; i++) {
-                        var primaryRequestRepository = data.repository.url.slice(data.repository.url.indexOf('github.com'), );
-                        var currentRepository = gitHubData.items[i].git_url.slice(gitHubData.items[i].git_url.indexOf('github.com'), );
-    
-                        if (primaryRequestRepository === currentRepository) {
-                            gitHubItem = gitHubData.items[i];
-                        } else if (primaryRequestRepository.slice(primaryRequestRepository.lastIndexOf('/'), ) === currentRepository.slice(currentRepository.lastIndexOf('/'), )) {
-                            gitHubItem = gitHubData.items[i]; //Anyway it will show different repositories, because they are different in cdnJS API and GitHub API
-                        }
-                    }
-                }
-            }*/
             if (gitHubData.message === "Not Found") {
                 placeForData.innerHTML = "\n\t\t\t\t<div class=\"row\">\n\t\t\t\t  \t<div class=\"col s12\">\n\t\t\t\t  \t  \t<div class=\"card\">\n\t\t\t\t  \t  \t  \t<div class=\"card-image\">\n\t\t\t\t  \t  \t  \t  \t<img src=\"../app/images/githubMessage.png\">\n\t\t\t\t  \t  \t  \t</div>\n\t\t\t\t  \t  \t</div>\n\t\t\t\t  \t</div>\n\t\t\t\t</div>\n\n\t\t\t\t<ul class=\"collection\">\n\t\t\t\t\t<li class=\"collection-item\"><b>Name:</b> " + data.name + "</li>\n\t\t\t\t\t<li class=\"collection-item\"><b>Description:</b> <span class=\"items\">" + description + "</span></li>\n\t\t\t\t\t<li class=\"collection-item\"><b>Author:</b> <span class=\"items\">" + author + "</span></li>\n\t\t\t\t\t<li class=\"collection-item\"><b>Homepage:</b> <span class=\"items\">" + homepage + "</span></li>\n\t\t\t\t\t<li class=\"collection-item\"><b>License:</b> <span class=\"items\">" + license + "</span></li>\n\t\t\t\t\t<li class=\"collection-item\"><b>Keywords:</b> <span class=\"items\">" + keywords + "</span></li>\n\t\t\t\t\t<li class=\"collection-item\"><b>Version:</b> <span class=\"items\">" + version + "</span></li>\n\t\t\t\t\t<li class=\"collection-item\"><b>Repository:</b> <span class=\"items\">" + repository + "</span></li>\n\t\t\t\t\t<li class=\"collection-item\"><b>Versions list:</b><span id=\"versionLink\"></span>\n\t\t\t\t\t\t<ul id=\"list\"></ul>\n\t\t\t\t\t</li>\n\t\t\t\t</ul>\n\t\t\t";
             }
@@ -128,25 +106,37 @@ define(["require", "exports", "./dataoperations"], function (require, exports, d
                     var language = "The language is not specified";
                 }
                 if (gitHubData.created_at !== undefined && gitHubData.created_at !== null) {
-                    var created_at = gitHubData.created_at;
+                    var date = gitHubData.created_at.slice(0, gitHubData.created_at.indexOf('T'));
+                    var reversedDate = date.split('-').reverse().join('-');
+                    var time = gitHubData.created_at.slice(gitHubData.created_at.indexOf('T') + 1, gitHubData.created_at.indexOf('Z'));
+                    var created_at = reversedDate + ", " + time;
                 }
                 else {
-                    var created_at = "The creation date is not specified";
+                    var created_at = "The date of creation is not specified";
+                }
+                if (gitHubData.pushed_at !== undefined && gitHubData.pushed_at !== null) {
+                    var commitDate = gitHubData.pushed_at.slice(0, gitHubData.pushed_at.indexOf('T'));
+                    var commitReversedDate = commitDate.split('-').reverse().join('-');
+                    var commitTime = gitHubData.pushed_at.slice(gitHubData.pushed_at.indexOf('T') + 1, gitHubData.pushed_at.indexOf('Z'));
+                    var lastCommit_at = commitReversedDate + ", " + commitTime;
+                }
+                else {
+                    var created_at = "The date of last commit is not specified";
                 }
                 if (gitHubData.owner.login !== undefined && gitHubData.owner.login !== null) {
                     var ownerLogin = gitHubData.owner.login;
+                    if (gitHubData.owner.html_url !== undefined && gitHubData.owner.html_url !== null) {
+                        var ownerHtml = gitHubData.owner.html_url;
+                    }
+                    else {
+                        var owner = ownerLogin;
+                    }
                 }
                 else {
-                    var ownerLogin = "The description is not specified";
+                    var owner = "The owner is not specified";
                 }
-                if (gitHubData.owner.html_url !== undefined && gitHubData.owner.html_url !== null) {
-                    var ownerHtml = gitHubData.owner.html_url;
-                }
-                else {
-                    var ownerHtml = "The description is not specified";
-                }
-                /*------------------------------------End working with GitHub request data-------------------------------------*/
-                placeForData.innerHTML = "\n\t\t\t\t<div class=\"row\">\n\t\t\t\t  \t<div class=\"col s12\">\n\t\t\t\t  \t  \t<div class=\"card\">\n\t\t\t\t  \t  \t  \t<div class=\"card-image\">\n\t\t\t\t  \t  \t  \t  \t<img src=\"../app/images/github.png\">\n\t\t\t\t  \t  \t  \t  \t<span class=\"card-title\">GitHub info</span>\n\t\t\t\t  \t  \t  \t  \t<a class=\"btn-floating halfway-fab waves-effect waves-light red\" href=\"" + gitHubData.html_url + "\" target=\"_blank\"><i class=\"material-icons\">link</i></a>\n\t\t\t\t  \t  \t  \t</div>\n\t\t\t\t  \t  \t  \t<div class=\"card-content\">\n\t\t\t\t  \t  \t  \t  \t<ul class=\"collection with-header github-collection\">\n\t\t\t\t  \t  \t  \t  \t\t<li class=\"collection-header\">\n\t\t\t\t  \t  \t  \t  \t\t\t<h5><span class=\"items\">" + name + "</span></h5>\n\t\t\t\t  \t  \t  \t  \t\t\t<div>\n\t\t\t\t  \t  \t  \t  \t\t\t\t<span class=\".views\"> <i class=\"material-icons\">remove_red_eye</i> " + gitHubData.watchers + "</span>\n\t\t\t\t\t  \t  \t  \t  \t\t\t<span class=\".stars\">  <i class=\"material-icons\">star</i>" + gitHubData.stargazers_count + "</span>\n\t\t\t\t\t  \t  \t  \t  \t\t\t<span class=\".forks\"> <i class=\"material-icons\">device_hub</i> " + gitHubData.forks + "</span>\n\t\t\t\t  \t  \t  \t  \t\t\t</div>\n\t\t\t\t  \t  \t  \t  \t\t</li>\n\t\t\t\t  \t  \t  \t  \t\t<li class=\"collection-item\"><b>GitHub description: </b><span class=\"items\">" + description + "</span></li>\n\t\t\t\t  \t  \t  \t  \t\t<li class=\"collection-item\"><b>Language: </b><span class=\"items\">" + language + "</span></li>\n\t\t\t\t  \t  \t  \t  \t\t<li class=\"collection-item\"><b>Created at: </b><span class=\"items\">" + created_at + "</span></li>\n\t\t\t\t  \t  \t  \t  \t\t<li class=\"collection-item\"><b>Creator: </b><span class=\"items\">" + ownerLogin + ", " + ownerHtml + "</span></li>\n\t\t\t\t  \t  \t  \t  \t</ul>\n\t\t\t\t  \t  \t  \t</div>\n\t\t\t\t  \t  \t</div>\n\t\t\t\t  \t</div>\n\t\t\t\t</div>\n\n\t\t\t\t<ul class=\"collection\">\n\t\t\t\t\t<li class=\"collection-item\"><b>Name:</b> " + data.name + "</li>\n\t\t\t\t\t<li class=\"collection-item\"><b>Description:</b> <span class=\"items\">" + description + "</span></li>\n\t\t\t\t\t<li class=\"collection-item\"><b>Author:</b> <span class=\"items\">" + author + "</span></li>\n\t\t\t\t\t<li class=\"collection-item\"><b>Homepage:</b> <span class=\"items\">" + homepage + "</span></li>\n\t\t\t\t\t<li class=\"collection-item\"><b>License:</b> <span class=\"items\">" + license + "</span></li>\n\t\t\t\t\t<li class=\"collection-item\"><b>Keywords:</b> <span class=\"items\">" + keywords + "</span></li>\n\t\t\t\t\t<li class=\"collection-item\"><b>Version:</b> <span class=\"items\">" + version + "</span></li>\n\t\t\t\t\t<li class=\"collection-item\"><b>Repository:</b> <span class=\"items\">" + repository + "</span></li>\n\t\t\t\t\t<li class=\"collection-item\"><b>Versions list:</b><span id=\"versionLink\"></span>\n\t\t\t\t\t\t<ul id=\"list\"></ul>\n\t\t\t\t\t</li>\n\t\t\t\t</ul>\n\t\t\t";
+                var owner = "<a href=\"" + ownerHtml + "\" target=\"_blank\">" + ownerLogin + "</a>";
+                placeForData.innerHTML = "\n\t\t\t\t<div class=\"row\">\n\t\t\t\t  \t<div class=\"col s12\">\n\t\t\t\t  \t  \t<div class=\"card\">\n\t\t\t\t  \t  \t  \t<div class=\"card-image\">\n\t\t\t\t  \t  \t  \t  \t<img src=\"../app/images/github.png\">\n\t\t\t\t  \t  \t  \t  \t<span class=\"card-title\">GitHub info</span>\n\t\t\t\t  \t  \t  \t  \t<a class=\"btn-floating halfway-fab waves-effect waves-light red\" href=\"" + gitHubData.html_url + "\" target=\"_blank\" title=\"Visit this repo on a GitHub!\"><i class=\"material-icons\">link</i></a>\n\t\t\t\t  \t  \t  \t</div>\n\t\t\t\t  \t  \t  \t<div class=\"card-content\">\n\t\t\t\t  \t  \t  \t  \t<ul class=\"collection with-header github-collection\">\n\t\t\t\t  \t  \t  \t  \t\t<li class=\"collection-header\">\n\t\t\t\t  \t  \t  \t  \t\t\t<h5><span class=\"items\">" + name + "</span></h5>\n\t\t\t\t  \t  \t  \t  \t\t\t<div>\n\t\t\t\t  \t  \t  \t  \t\t\t\t<span class=\".views\"> <i class=\"material-icons\">remove_red_eye</i> " + gitHubData.watchers + "</span>\n\t\t\t\t\t  \t  \t  \t  \t\t\t<span class=\".stars\">  <i class=\"material-icons\">star</i>" + gitHubData.stargazers_count + "</span>\n\t\t\t\t\t  \t  \t  \t  \t\t\t<span class=\".forks\"> <i class=\"material-icons\">device_hub</i> " + gitHubData.forks + "</span>\n\t\t\t\t  \t  \t  \t  \t\t\t</div>\n\t\t\t\t  \t  \t  \t  \t\t</li>\n\t\t\t\t  \t  \t  \t  \t\t<li class=\"collection-item\"><b>GitHub description: </b><span class=\"items\">" + description + "</span></li>\n\t\t\t\t  \t  \t  \t  \t\t<li class=\"collection-item\"><b>Language: </b><span class=\"items\">" + language + "</span></li>\n\t\t\t\t  \t  \t  \t  \t\t<li class=\"collection-item\"><b>Created at: </b><span class=\"items\">" + created_at + "</span></li>\n\t\t\t\t  \t  \t  \t  \t\t<li class=\"collection-item\"><b>Last commit: </b><span class=\"items\">" + lastCommit_at + "</span></li>\n\t\t\t\t  \t  \t  \t  \t\t<li class=\"collection-item\"><b>Creator: </b><span class=\"items\">" + owner + "</span></li>\n\t\t\t\t  \t  \t  \t  \t</ul>\n\t\t\t\t  \t  \t  \t</div>\n\t\t\t\t  \t  \t</div>\n\t\t\t\t  \t</div>\n\t\t\t\t</div>\n\n\t\t\t\t<ul class=\"collection\">\n\t\t\t\t\t<li class=\"collection-item\"><b>Name:</b> " + data.name + "</li>\n\t\t\t\t\t<li class=\"collection-item\"><b>Description:</b> <span class=\"items\">" + description + "</span></li>\n\t\t\t\t\t<li class=\"collection-item\"><b>Author:</b> <span class=\"items\">" + author + "</span></li>\n\t\t\t\t\t<li class=\"collection-item\"><b>Homepage:</b> <span class=\"items\">" + homepage + "</span></li>\n\t\t\t\t\t<li class=\"collection-item\"><b>License:</b> <span class=\"items\">" + license + "</span></li>\n\t\t\t\t\t<li class=\"collection-item\"><b>Keywords:</b> <span class=\"items\">" + keywords + "</span></li>\n\t\t\t\t\t<li class=\"collection-item\"><b>Version:</b> <span class=\"items\">" + version + "</span></li>\n\t\t\t\t\t<li class=\"collection-item\"><b>Repository:</b> <span class=\"items\">" + repository + "</span></li>\n\t\t\t\t\t<li class=\"collection-item\"><b>Versions list:</b><span id=\"versionLink\"></span>\n\t\t\t\t\t\t<ul id=\"list\"></ul>\n\t\t\t\t\t</li>\n\t\t\t\t</ul>\n\t\t\t";
             }
             var items = document.getElementsByClassName("items");
             for (var i = 0; i < items.length; i++) {

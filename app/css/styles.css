@@ -96,6 +96,32 @@ nav {
 #newDataHolder .card-image .btn-floating .halfway-fab .waves-effect .waves-light {
   z-index: 1; }
 
+#newDataHolder .card-image div {
+  display: flex; }
+  #newDataHolder .card-image div .tooltip-visit {
+    text-align: right;
+    opacity: 0;
+    cursor: default;
+    position: relative;
+    top: 9px;
+    right: 2px;
+    background-color: dimgrey;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 3px 6px 3px 6px;
+    margin-right: 3px; }
+  #newDataHolder .card-image div .tooltip-visit::after {
+    content: " ";
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    /* To the right of the tooltip */
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent transparent dimgrey; }
+
 #newDataHolder .card-content .collection-header div {
   display: flex;
   justify-content: space-between; }

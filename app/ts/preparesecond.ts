@@ -89,28 +89,6 @@ export default class SecondPagePreparing {
 
 
 		/*------------------------------------Start working with GitHub request data-----------------------------------*/
-		/*if (gitHubData.total_count === 1) {
-			gitHubItem = gitHubData.items[0];
-		} else {
-			for (var i = 0; i < gitHubData.items.length; i++) {
-				if (gitHubData.items[i].name.toLowerCase() === data.name.toLowerCase()) {
-					gitHubItem = gitHubData.items[i];
-				}
-			}
-
-			if (gitHubItem === undefined) {
-				for (var i = 0; i < gitHubData.items.length; i++) {
-					var primaryRequestRepository = data.repository.url.slice(data.repository.url.indexOf('github.com'), );
-					var currentRepository = gitHubData.items[i].git_url.slice(gitHubData.items[i].git_url.indexOf('github.com'), );
-
-					if (primaryRequestRepository === currentRepository) {
-						gitHubItem = gitHubData.items[i];
-					} else if (primaryRequestRepository.slice(primaryRequestRepository.lastIndexOf('/'), ) === currentRepository.slice(currentRepository.lastIndexOf('/'), )) {
-						gitHubItem = gitHubData.items[i]; //Anyway it will show different repositories, because they are different in cdnJS API and GitHub API
-					}
-				}
-			}
-		}*/
 		if (gitHubData.message === "Not Found") {
 			placeForData.innerHTML = `
 				<div class="row">
@@ -157,23 +135,35 @@ export default class SecondPagePreparing {
 			}
 
 			if (gitHubData.created_at !== undefined && gitHubData.created_at !== null) {
-				var created_at = gitHubData.created_at;
+				var date = gitHubData.created_at.slice(0, gitHubData.created_at.indexOf('T'));
+				var reversedDate = date.split('-').reverse().join('-');
+				var time = gitHubData.created_at.slice(gitHubData.created_at.indexOf('T') + 1, gitHubData.created_at.indexOf('Z'));
+				var created_at = `${reversedDate}, ${time}`;
 			} else {
-				var created_at: any = "The creation date is not specified";
+				var created_at: string = "The date of creation is not specified";
+			}
+
+			if (gitHubData.pushed_at !== undefined && gitHubData.pushed_at !== null) {
+				var commitDate = gitHubData.pushed_at.slice(0, gitHubData.pushed_at.indexOf('T'));
+				var commitReversedDate = commitDate.split('-').reverse().join('-');
+				var commitTime = gitHubData.pushed_at.slice(gitHubData.pushed_at.indexOf('T') + 1, gitHubData.pushed_at.indexOf('Z'));
+				var lastCommit_at = `${commitReversedDate}, ${commitTime}`;
+			} else {
+				var created_at: string = "The date of last commit is not specified";
 			}
 
 			if (gitHubData.owner.login !== undefined && gitHubData.owner.login !== null) {
 				var ownerLogin = gitHubData.owner.login;
+				if (gitHubData.owner.html_url !== undefined && gitHubData.owner.html_url !== null) {
+					var ownerHtml = gitHubData.owner.html_url;
+				} else {
+					var owner: any = ownerLogin;
+				}
 			} else {
-				var ownerLogin: any = "The description is not specified";
+				var owner: any = "The owner is not specified";
 			}
 
-			if (gitHubData.owner.html_url !== undefined && gitHubData.owner.html_url !== null) {
-				var ownerHtml = gitHubData.owner.html_url;
-			} else {
-				var ownerHtml: any = "The description is not specified";
-			}
-			/*------------------------------------End working with GitHub request data-------------------------------------*/
+			var owner: any = `<a href="${ownerHtml}" target="_blank">${ownerLogin}</a>`
 
 			placeForData.innerHTML = `
 				<div class="row">
@@ -182,7 +172,7 @@ export default class SecondPagePreparing {
 				  	  	  	<div class="card-image">
 				  	  	  	  	<img src="../app/images/github.png">
 				  	  	  	  	<span class="card-title">GitHub info</span>
-				  	  	  	  	<a class="btn-floating halfway-fab waves-effect waves-light red" href="${gitHubData.html_url}" target="_blank"><i class="material-icons">link</i></a>
+				  	  	  	  	<a class="btn-floating halfway-fab waves-effect waves-light red" href="${gitHubData.html_url}" target="_blank" title="Visit this repo on a GitHub!"><i class="material-icons">link</i></a>
 				  	  	  	</div>
 				  	  	  	<div class="card-content">
 				  	  	  	  	<ul class="collection with-header github-collection">
@@ -197,7 +187,8 @@ export default class SecondPagePreparing {
 				  	  	  	  		<li class="collection-item"><b>GitHub description: </b><span class="items">${description}</span></li>
 				  	  	  	  		<li class="collection-item"><b>Language: </b><span class="items">${language}</span></li>
 				  	  	  	  		<li class="collection-item"><b>Created at: </b><span class="items">${created_at}</span></li>
-				  	  	  	  		<li class="collection-item"><b>Creator: </b><span class="items">${ownerLogin}, ${ownerHtml}</span></li>
+				  	  	  	  		<li class="collection-item"><b>Last commit: </b><span class="items">${lastCommit_at}</span></li>
+				  	  	  	  		<li class="collection-item"><b>Creator: </b><span class="items">${owner}</span></li>
 				  	  	  	  	</ul>
 				  	  	  	</div>
 				  	  	</div>
