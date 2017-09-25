@@ -1,4 +1,5 @@
 import prepareSecond from './preparesecond';
+import prepareFirst from './preparefirst';
 
 export class DataOperations {
 	public static makeRequest(param: any = '', github: boolean = false) {
@@ -11,6 +12,7 @@ export class DataOperations {
 			myRequest.onload = function () {
 			    var data = JSON.parse(myRequest.responseText);
 			    DataOperations.setPrimaryRequestData(JSON.stringify(data));
+			    prepareFirst.renderHTML(DataOperations.getInputFilter());
 			};
 			myRequest.send();
 		} else {

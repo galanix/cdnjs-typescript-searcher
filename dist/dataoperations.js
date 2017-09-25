@@ -1,4 +1,4 @@
-define(["require", "exports", "./preparesecond"], function (require, exports, preparesecond_1) {
+define(["require", "exports", "./preparesecond", "./preparefirst"], function (require, exports, preparesecond_1, preparefirst_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var DataOperations = /** @class */ (function () {
@@ -15,6 +15,7 @@ define(["require", "exports", "./preparesecond"], function (require, exports, pr
                 myRequest.onload = function () {
                     var data = JSON.parse(myRequest.responseText);
                     DataOperations.setPrimaryRequestData(JSON.stringify(data));
+                    preparefirst_1.default.renderHTML(DataOperations.getInputFilter());
                 };
                 myRequest.send();
             }

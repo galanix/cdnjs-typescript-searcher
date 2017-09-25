@@ -10,11 +10,10 @@ class FirstPageUp {
  	public sendForFiltering() {
 		var elem = <HTMLInputElement>document.getElementById("text");
 		var value = elem.value;
+		DataOperations.setInputFilter(value);
 
 		$('#progress').css('display', 'block');
 		DataOperations.makeRequest();
-		DataOperations.setInputFilter(value);
-		prepareFirst.renderHTML(value);
 	}
 }
 
