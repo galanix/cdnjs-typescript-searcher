@@ -1,0 +1,186 @@
+$mainColor: rgba(243, 237, 216, 0.3);
+$footerColor: #333333;
+$navigationColor: #A6E4E7;
+
+
+/*----------Navigation----------*/
+nav {
+	background-color: dimgrey;
+	background-image: url(../assets/images/js-jumbo.png);
+	background-size: cover;
+	background-position-y: 15%;
+	color: black;
+	height: 700px;
+	.main-nav{
+		height: 100px;
+		.brand-logo{
+			width: 230px;
+			h1{
+				display: inline-block;
+				margin: 0;
+				position: relative;
+				left: 20px;
+			}
+		}
+		.js-icon{
+			position: relative;
+			top: 25px;
+		}
+	}
+	.nav-jumbo{
+		color: white;
+		margin-top: 200px;
+		text-align: center;
+		position: relative;
+		right: 25px;
+		i{
+			display: inline-block;
+			font-size: 3em;
+			margin-right: 5px;
+			position: relative;
+			top: 5px;
+		}
+		h2{
+			display: inline-block;
+		}
+		width: 100%
+	}
+
+
+	/*#btn-ul{
+		margin-right: 10px;
+	}
+	.nav-wrapper{
+		a{
+			color: black;
+		}
+		a:active{
+			font-size: 2em;
+		}
+		#backBtn{
+			width: 210px;
+			padding-left: 15px;
+			padding-right: 15px;
+			overflow: hidden;
+    		white-space: nowrap;
+    		text-overflow: ellipsis;
+		}
+	}*/
+}
+
+nav.index{
+	#btn-ul{
+		display: none;
+	}
+}
+
+nav.newpage{
+	#btn-ul{
+		display: block;
+	}
+}
+
+/*----------Main content----------*/
+#main-content{
+	flex: 1 0 auto;
+}
+
+#wrapper{
+	height: 100%;
+	width: 100%;
+	display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    background-color: $mainColor;
+}
+
+a{
+	outline-style: none;
+}
+
+/*----------Footer----------*/
+.page-footer{
+	padding-top: 0px;
+	background-color: $footerColor;
+	h5{
+		display: inline-block;
+	}
+	h5[data-name='cdn']{
+		position: relative;
+		left: 7px;
+	}
+	h5[data-name='search-app']{
+		position: relative;
+		right: 7px;
+	}
+}
+
+.icons-list{
+	margin-bottom: 10px;
+}
+.footer-brand{
+	.js-icon{
+		position: relative;
+		top: 14px;
+		right: 3px;
+	}
+}
+
+.contact-icon{
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+	background-color: #4f9630;
+	border-radius: 100%;
+	margin: 10px;
+}
+
+.icons{
+	position: relative;
+	top: 10px;
+}
+
+.footer-copyright{
+	background-color: #4f9630;
+}
+
+.copyright{
+	width: 400px;
+	margin: auto;
+	text-align: center;
+	color: white;
+	a{
+		color: white;
+		text-decoration: underline;
+	}
+}
+
+.footer-brand{
+	color: white;
+}
+
+@media (max-width: 767px) {
+	nav.newpage{
+		height: 100px;
+	}
+	nav.index{
+		height: 130px;
+	}
+	nav{
+		#btn-ul{
+			position: relative;
+			top: 40px;
+			right: calc(50% - 105px);
+			margin-right: 0px;
+			margin-top: 2px;
+		}
+	}
+}
+
+@media (max-width: 992px) {
+	.page-footer{
+		.footer-col{
+			text-align: center;
+		}
+	}
+}

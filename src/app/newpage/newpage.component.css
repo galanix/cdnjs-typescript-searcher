@@ -1,0 +1,282 @@
+/*----------The main content of newpage.html----------*/
+:host ::ng-deep #newDataHolder .card-title {
+  font-size: 2.3em;
+  text-shadow: 1px 1px 1px white; }
+
+:host ::ng-deep #newDataHolder .wrapper-for-background {
+  width: 100%;
+  height: 100%;
+  background-color: black; }
+
+:host ::ng-deep #newDataHolder .preloader-wrapper {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto; }
+
+:host ::ng-deep #newDataHolder .card-image .btn-floating .halfway-fab .waves-effect .waves-light {
+  z-index: 1; }
+
+:host ::ng-deep #newDataHolder .card-content .collection-header div {
+  display: flex;
+  justify-content: space-between; }
+  :host ::ng-deep #newDataHolder .card-content .collection-header div i {
+    position: relative;
+    top: 5px; }
+
+:host ::ng-deep #newDataHolder .github-collection .collection-header {
+  text-align: center; }
+
+:host ::ng-deep #newDataHolder .alert-box {
+  color: #555;
+  border-radius: 10px;
+  padding: 10px 36px;
+  margin: 10px; }
+
+:host ::ng-deep #newDataHolder .alert-box span {
+  font-weight: bold;
+  text-transform: uppercase; }
+
+:host ::ng-deep #newDataHolder .error {
+  background: #ffecec url("../../assets/images/error.png") no-repeat 5px 7px;
+  background-size: 27px 27px;
+  border: 1px solid #f5aca6; }
+
+:host ::ng-deep #newDataHolder ul li.collection-item {
+  word-wrap: break-word; }
+  :host ::ng-deep #newDataHolder ul li.collection-item .not-specified {
+    color: grey;
+    font-style: italic; }
+
+:host ::ng-deep #newDataHolder .chip {
+  cursor: pointer; }
+
+/*--------------------The hole modal popup--------------------*/
+:host ::ng-deep .the-modal {
+  display: none;
+  position: fixed;
+  z-index: 2;
+  overflow: auto;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  background-color: rgba(0, 0, 0, 0.4);
+  /* The Close Button */ }
+
+@-webkit-keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0; }
+  to {
+    top: 0;
+    opacity: 1; } }
+
+@keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0; }
+  to {
+    top: 0;
+    opacity: 1; } }
+  :host ::ng-deep .the-modal .the-modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    border: 1px solid #888;
+    width: 80%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.8s;
+    animation-name: animatetop;
+    animation-duration: 0.8s; }
+    :host ::ng-deep .the-modal .the-modal-content .the-modal-header {
+      padding: 2px 16px;
+      background-color: #A6E4E7;
+      color: black;
+      text-align: center; }
+    :host ::ng-deep .the-modal .the-modal-content .the-modal-body {
+      padding: 2px 16px;
+      background-color: #F9F9F9; }
+      :host ::ng-deep .the-modal .the-modal-content .the-modal-body .collection-header {
+        background-color: white; }
+        :host ::ng-deep .the-modal .the-modal-content .the-modal-body .collection-header .quest-768px {
+          display: none; }
+        :host ::ng-deep .the-modal .the-modal-content .the-modal-body .collection-header div {
+          display: flex;
+          text-align: right;
+          float: right; }
+        :host ::ng-deep .the-modal .the-modal-content .the-modal-body .collection-header .tooltip-quest-768px {
+          display: none;
+          background-color: dimgrey;
+          border-radius: 6px;
+          text-align: center;
+          color: #fff; }
+        :host ::ng-deep .the-modal .the-modal-content .the-modal-body .collection-header h5 {
+          display: inline-block; }
+        :host ::ng-deep .the-modal .the-modal-content .the-modal-body .collection-header .tooltip-question {
+          text-align: right;
+          opacity: 0;
+          cursor: default;
+          position: relative;
+          top: 9px;
+          right: 2px;
+          background-color: dimgrey;
+          color: #fff;
+          text-align: center;
+          border-radius: 6px;
+          padding: 3px 6px 3px 6px;
+          margin-right: 3px; }
+        :host ::ng-deep .the-modal .the-modal-content .the-modal-body .collection-header .tooltip-question::after {
+          content: " ";
+          position: absolute;
+          top: 50%;
+          left: 100%;
+          /* To the right of the tooltip */
+          margin-top: -5px;
+          border-width: 5px;
+          border-style: solid;
+          border-color: transparent transparent transparent dimgrey; }
+        :host ::ng-deep .the-modal .the-modal-content .the-modal-body .collection-header .question {
+          float: right;
+          width: 30px;
+          height: 30px;
+          background: url("../../assets/images/question.png") no-repeat;
+          background-size: 25px 25px;
+          position: relative;
+          top: 11px;
+          -webkit-animation-duration: 0.7s;
+          animation-duration: 0.7s;
+          -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+          cursor: pointer; }
+
+@-webkit-keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    -webkit-transform: translateY(0); }
+  40% {
+    -webkit-transform: translateY(-30px); }
+  60% {
+    -webkit-transform: translateY(-15px); } }
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0); }
+  40% {
+    transform: translateY(-30px); }
+  60% {
+    transform: translateY(-15px); } }
+      :host ::ng-deep .the-modal .the-modal-content .the-modal-body .collection-item {
+        background-color: white;
+        word-wrap: break-word; }
+        :host ::ng-deep .the-modal .the-modal-content .the-modal-body .collection-item div {
+          float: right; }
+      :host ::ng-deep .the-modal .the-modal-content .the-modal-body .collection-item:hover {
+        background-color: #f2f2f2;
+        cursor: default; }
+      :host ::ng-deep .the-modal .the-modal-content .the-modal-body .btn-copy {
+        width: 30px;
+        height: 30px;
+        position: relative;
+        display: inline-block;
+        bottom: 4px;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        user-select: none; }
+        :host ::ng-deep .the-modal .the-modal-content .the-modal-body .btn-copy i {
+          width: 25px;
+          height: 25px;
+          font-size: 1.1em;
+          position: relative;
+          bottom: 3px; }
+      :host ::ng-deep .the-modal .the-modal-content .the-modal-body .tooltiptext {
+        opacity: 0;
+        cursor: default;
+        position: relative;
+        bottom: 3px;
+        background-color: dimgrey;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 3px 6px 3px 6px;
+        margin-right: 3px; }
+      :host ::ng-deep .the-modal .the-modal-content .the-modal-body .tooltiptext::after {
+        content: " ";
+        position: absolute;
+        top: 50%;
+        left: 100%;
+        /* To the right of the tooltip */
+        margin-top: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: transparent transparent transparent dimgrey; }
+  :host ::ng-deep .the-modal #close {
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    color: dimgrey; }
+  :host ::ng-deep .the-modal #close:hover,
+  :host ::ng-deep .the-modal #close:focus {
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    color: black;
+    text-decoration: none;
+    cursor: pointer; }
+
+/*--------------------Adaptability--------------------*/
+@media (max-width: 320px) {
+  :host ::ng-deep .the-modal .the-modal-content .the-modal-body .collection-header {
+    overflow: visible; }
+    :host ::ng-deep .the-modal .the-modal-content .the-modal-body .collection-header div {
+      display: none; }
+    :host ::ng-deep .the-modal .the-modal-content .the-modal-body .collection-header .question {
+      position: relative;
+      bottom: 50px; } }
+
+@media (max-width: 767px) {
+  :host ::ng-deep #newDataHolder .preloader-wrapper {
+    bottom: 60px; }
+  :host ::ng-deep .the-modal .the-modal-content .the-modal-body .collection-header .quest-768px {
+    display: inline-block; }
+  :host ::ng-deep .the-modal .the-modal-content .the-modal-body .collection-header div {
+    display: none; } }
+
+@media (max-width: 992px) {
+  :host ::ng-deep .the-modal .the-modal-content .the-modal-body .collection-item .link {
+    margin-bottom: 5px; }
+  :host ::ng-deep .the-modal .the-modal-content .the-modal-body .collection-item .tooltiptext {
+    position: relative;
+    top: 4px; }
+  :host ::ng-deep .the-modal .the-modal-content .the-modal-body .collection-item div {
+    padding-top: 2px;
+    float: none;
+    width: 150px;
+    margin: auto; }
+  :host ::ng-deep .the-modal .the-modal-content .the-modal-body .btn-copy {
+    width: 27px;
+    height: 27px;
+    position: relative;
+    top: 3px;
+    display: inline-block; }
+    :host ::ng-deep .the-modal .the-modal-content .the-modal-body .btn-copy i {
+      width: 20px;
+      height: 20px;
+      font-size: 1em;
+      position: relative;
+      bottom: 6px; } }
+
+@media (min-width: 1025px) {
+  :host ::ng-deep #newDataHolder .card-content .collection-header div {
+    padding-left: 50px;
+    padding-right: 50px; } }

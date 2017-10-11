@@ -1,20 +1,78 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{title}}!
-  </h1>
-  <img width="300" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<div id="wrapper">
+	<nav>
+		<!-- <div class="nav-wrapper" id="nav">
+	    <a routerLink="/index" routerLinkActive="active" class="brand-logo center"><i class="material-icons">developer_mode</i>CDNjs</a>
+	  	<ul class="right" id="btn-ul">
+			<li>
+				<button id="backBtn" class="btn">Back to search</button>
+			</li>
+		</ul>
+	  </div> -->
+		<div class="nav-wrapper" id="nav">
+			<div class="main-nav">
+				<a routerLink="/index" routerLinkActive="active" class="brand-logo center">
+					<h1>CDN</h1>
+					<img class="js-icon" src="../assets/images/js-icon.png" width="90px" height="90px">
+				</a>
+				<ul class="right" id="btn-ul">
+					<li>
+						<button id="backBtn" class="btn light-green darken-2">Back to search</button>
+					</li>
+				</ul>
+			</div>
+			<div class="nav-jumbo">
+				<i class="large material-icons">search</i>
+				<h2>Feel free to search</h2>
+			</div>
+	    	<!-- <a routerLink="/index" routerLinkActive="active" class="brand-logo center"><i class="material-icons">developer_mode</i>CDNjs</a> -->
+	  	</div>
+	</nav>
 
+	<div id="main-content">
+	  <router-outlet></router-outlet>
+	</div>
+
+	<footer class="page-footer">
+	  <div class="container">
+	      <div class="row">
+	          	<div class="col s12 footer-col center">
+	              	<a routerLink="/index" routerLinkActive="active" class="footer-brand">
+	              		<h5 data-name="cdn">CDN</h5> 
+	              		<img class="js-icon" src="../assets/images/js-icon.png" width="45px" height="45px">
+	              		<h5 data-name="search-app">search app</h5>
+	              	</a>
+	          	</div>
+	          	<div class="col s12 footer-col center icons-list">
+	              	<a href="https://www.facebook.com/pages/Galanix-IT/698725300284621" target="_blank" class="contact-icon">
+	              		<img class="icons" src="../assets/images/facebook-icon.png" width="10px" height="20px">
+	              	</a>
+	              	<a href="https://ua.linkedin.com/in/galanix-it-51bb2986" target="_blank" class="contact-icon">
+	              		<img class="icons" src="../assets/images/linkedin-icon.png" width="20px" height="20px">
+	              	</a>
+	              	<a href="https://github.com/galanix/cdnjs-typescript-searcher" target="_blank" class="contact-icon">
+	              		<img class="icons" src="../assets/images/github-icon.png" width="18px" height="20px">
+	              	</a>
+	          	</div>
+	          	<div class="col s12 footer-col center">
+	          		<span>&nbsp;&nbsp; SEARCH &nbsp;&nbsp;</span>  |  
+	          		<span>&nbsp;&nbsp; CHECK IT OUT &nbsp;&nbsp;</span>  |  
+	          		<span>&nbsp;&nbsp; ENJOY &nbsp;&nbsp;</span>
+	          	</div>
+	          <!-- <div class="col l4 offset-l2 s12 footer-col">
+
+	              <br>
+	              <a class="grey-text text-lighten-3 gh-link" href="https://github.com/galanix/cdnjs-typescript-searcher" target="_blank">
+	                <img src="./assets/images/gh-icon.png" width="50" height="50">
+	              </a>
+	          </div> -->
+	      </div>
+	  </div>
+	  <div class="footer-copyright">
+	      <span class="copyright">
+	      	© 2017 
+	      	<a href="https://www.linkedin.com/in/vadym-hrynishyn-127406135/" target="_blank">Vadym Hrynishyn</a> - <br> 
+	      	Front-end Trainee at Galanix IT. All rights reserved.
+	      </span> 
+	  </div>
+	</footer>
+</div>

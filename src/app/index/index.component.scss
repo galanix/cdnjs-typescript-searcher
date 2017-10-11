@@ -1,0 +1,163 @@
+$navigationColor: #A6E4E7;
+$mainColor: #F9F9F9;
+
+/*----------The main content of index.html----------*/
+:host ::ng-deep #main{
+    flex: 1 0 auto;
+    #message{
+    	cursor: pointer;
+    }
+
+    #progress{
+    	display: none;
+    }
+
+    input[type="text"] + label {
+	    pointer-events: none;
+
+	    * {
+	        pointer-events: all;
+	    }
+	}
+
+	.input-field input[type=text]:focus + label {
+		color: #388e3c;
+	}
+
+	.input-field input[type=text]:focus {
+     	border-bottom: 1px solid #388e3c;
+     	box-shadow: 0 1px 0 0 #388e3c;
+	}
+
+	ul.collection{
+		border: 0px;
+		.header-btn{
+			text-align: center;
+		}
+		.header-link{
+			text-align: center;
+		}
+		.header-copy{
+			text-align: right;
+		}
+		.row{
+			margin-bottom: 0px;
+		}
+		li{
+			overflow-wrap: break-word;
+			margin-bottom: 5px;		
+		}
+		li:nth-of-type(even){
+			background: -webkit-radial-gradient(#e8e8e8, $mainColor); /* Safari 5.1 to 6.0 */
+		    background: -o-radial-gradient(#e8e8e8, $mainColor); /* For Opera 11.6 to 12.0 */
+		    background: -moz-radial-gradient(#e8e8e8, $mainColor); /* For Firefox 3.6 to 15 */
+		    background: radial-gradient(#e8e8e8, $mainColor); /* Standard syntax (must be last) */
+		}
+		.tooltiptext{
+	    	z-index: 1;
+			opacity: 0;
+			cursor: default;
+		    position: relative;
+		    bottom: 3px;
+		    background-color: dimgrey;
+		    color: #fff;
+		    text-align: center;
+		    border-radius: 6px;
+		    padding: 3px 6px 3px 6px;
+		    margin-right: 3px;
+		}
+		.col-copy{
+			padding-left: 0px;
+			text-align: right;
+			.btn-copy{
+				i{
+					position: relative;
+					top: 1px;
+					left: 1px;
+				}
+			}
+		}
+		.tooltiptext::after {
+		    content: " ";
+		    position: absolute;
+		    top: 50%;
+		    left: 100%; /* To the right of the tooltip */
+		    margin-top: -5px;
+		    border-width: 5px;
+		    border-style: solid;
+		    border-color: transparent transparent transparent dimgrey;
+		}
+		.to-newpage{
+    		width: 230px;
+			padding-right: 20px;
+			padding-left: 20px;
+	    	text-overflow: ellipsis;
+	    	margin-right: 50px;
+	    	text-transform: none;
+    	}
+	}
+}
+
+/*--------------------Adaptability--------------------*/
+@media (max-width: 992px) {
+	:host ::ng-deep #main{
+		ul.collection{
+			.header-btn, .header-link, .header-copy{
+				text-align: center;
+				h5{
+					font-size: 1.2em;
+				}
+			}
+	    	.col-btn{
+	    		text-align: center;
+	    		margin-bottom: 15px;
+	    	}
+	    	.col-link{
+	    		margin-bottom: 15px;
+	    	}
+	    	.to-newpage{
+	    		margin-right: 0px;
+	    	}
+	    	.col-copy{
+	    		text-align: center;
+	    		div{
+	    			position: relative;
+	    			right: 31px;
+	    		}
+	    	}
+	    }
+	}
+	nav{
+		height: 100px;
+		#btn-ul{
+			position: relative;
+			top: 40px;
+			right: calc(50% - 105px);
+			margin-right: 0px;
+			margin-top: 2px;
+		}
+	}
+}
+@media (min-width: 993px) and (max-width: 1366px) {
+	:host ::ng-deep #main{
+	    ul.collection{
+	    	.to-newpage{
+	    		width: 190px;
+	    	}
+	    }
+	}
+}
+@media (min-width: 993px) and (max-width: 1055px){
+	:host ::ng-deep #main{
+	    ul.collection{
+	    	.collection-item{
+	    		padding-right: 3px;
+	    		padding-left: 3px;
+	    	}
+	    	.collection-header{
+	    		padding-right: 7px;
+	    		padding-left: 7px;
+	    	}
+	    }
+	}
+}
