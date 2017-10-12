@@ -264,23 +264,28 @@ export class IndexComponent implements OnInit {
   		$('body').addClass("index");
   		$('nav').removeClass();
   		$('nav').addClass("index");
+  		if (here.data.getIfToChangeFlag() === 'true') {
+  			$('nav').addClass('responsive');
+  		}
 
   		$('#text').bind("click", function() {
   			if ($('#activate').hasClass('active')) {
-  				$('nav').animate({
+  				/*$('nav').animate({
   					height: '140px'
   				}, 300);
-  				$('.nav-jumbo').css('display', 'none');
+  				$('.nav-jumbo').css('display', 'none');*/
+  				$('nav').addClass('responsive');
   			}
   		});
 
   		$('#text').bind("blur", function() {
   			if ($('#activate').hasClass('active') === false) {
   				if (here.tableData.length == 0) {
-  					$('nav').animate({
+  					/*$('nav').animate({
 	  					height: '700px'
 	  				}, 300)
-	  				$('.nav-jumbo').css('display', 'block');
+	  				$('.nav-jumbo').css('display', 'block');*/
+  					$('nav').removeClass('responsive');
   				}
   			}
   		})

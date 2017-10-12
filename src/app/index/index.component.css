@@ -53,8 +53,7 @@
       text-align: right; }
       :host ::ng-deep #main ul.collection .col-copy .btn-copy i {
         position: relative;
-        top: 1px;
-        left: 1px; }
+        top: 1px; }
     :host ::ng-deep #main ul.collection .tooltiptext::after {
       content: " ";
       position: absolute;

@@ -10,7 +10,6 @@ nav {
 	background-size: cover;
 	background-position-y: 15%;
 	color: black;
-	height: 700px;
 	.main-nav{
 		height: 100px;
 		.brand-logo{
@@ -24,15 +23,13 @@ nav {
 		}
 		.js-icon{
 			position: relative;
-			top: 25px;
+			top: 23px;
 		}
 	}
 	.nav-jumbo{
 		color: white;
 		margin-top: 200px;
 		text-align: center;
-		position: relative;
-		right: 25px;
 		i{
 			display: inline-block;
 			font-size: 3em;
@@ -47,34 +44,37 @@ nav {
 	}
 
 
-	/*#btn-ul{
+	#btn-ul{
 		margin-right: 10px;
 	}
-	.nav-wrapper{
-		a{
-			color: black;
-		}
-		a:active{
-			font-size: 2em;
-		}
-		#backBtn{
-			width: 210px;
-			padding-left: 15px;
-			padding-right: 15px;
-			overflow: hidden;
-    		white-space: nowrap;
-    		text-overflow: ellipsis;
-		}
-	}*/
+	#backBtn{
+		width: 210px;
+		padding-left: 15px;
+		padding-right: 15px;
+		overflow: hidden;
+    	white-space: nowrap;
+    	text-overflow: ellipsis;
+	}
 }
 
 nav.index{
+	-webkit-transition: height 1s ease;
+    -moz-transition: height 1s ease;
+    -o-transition: height 1s ease;
+    transition: height 1s ease;
 	#btn-ul{
 		display: none;
 	}
 }
 
 nav.newpage{
+	-webkit-transition: height 1s ease;
+    -moz-transition: height 1s ease;
+    -o-transition:  height12s east;
+    transition: height 1s ease;
+	.nav-jumbo{
+		display: none;
+	}
 	#btn-ul{
 		display: block;
 	}
@@ -159,17 +159,144 @@ a{
 	color: white;
 }
 
-@media (max-width: 767px) {
-	nav.newpage{
-		height: 100px;
-	}
+@media (max-width: 425px){
 	nav.index{
-		height: 130px;
+		height: 250px;
+		.nav-jumbo{
+			position: relative;
+			bottom: 177px;
+			i{
+				font-size: 1.8em;
+			}
+			h2{
+				font-size: 1.8em;
+			}
+		}
+		.brand-logo{
+			h1{
+				font-size: 1.5em;
+			}
+			.js-icon{
+				width: 80px;
+				height: 80px;
+			}
+		}
 	}
-	nav{
+	nav.index.responsive{
+		height: 100px;
+		.nav-jumbo{
+			display: none;
+		}
+		.brand-logo{
+			position: relative;
+			bottom: 9px;
+			h1{
+				font-size: 1.2em;
+				position: relative;
+				top: 2px;
+			}
+			.js-icon{
+				width: 70px;
+				height: 70px;
+			}
+		}
+	}
+	nav.newpage{
+		height: 155px;
+
+		.brand-logo{
+			position: relative;
+			bottom: 9px;
+			h1{
+				font-size: 1.2em;
+				position: relative;
+				top: 2px;
+			}
+			.js-icon{
+				width: 70px;
+				height: 70px;
+			}
+		}
 		#btn-ul{
 			position: relative;
-			top: 40px;
+			bottom: 20px;
+			right: calc(50% - 95px);
+			margin-right: 0px;
+			margin-top: 2px;
+			#backBtn{
+				width: 190px;
+			}
+		}
+	}
+}
+
+@media (min-width: 420px) and (max-width: 425px){
+	#btn-ul{
+		position: relative;
+		top: 73px;
+	}
+}
+
+@media (min-width: 426px) and (max-width: 768px){
+	nav.index{
+		height: 350px;
+		.nav-jumbo{
+			position: relative;
+			bottom: 140px;
+			i{
+				font-size: 2.2em;
+			}
+			h2{
+				font-size: 2.2em;
+			}
+		}
+		.brand-logo{
+			h1{
+				font-size: 1.8em;
+				position: relative;
+				bottom: 1px;
+			}
+			.js-icon{
+				width: 90px;
+				height: 90px;
+			}
+		}
+	}
+	nav.index.responsive{
+		height: 135px;
+		.nav-jumbo{
+			display: none;
+		}
+		.brand-logo{
+			h1{
+				font-size: 1.7em;
+				position: relative;
+				top: 1px;
+			}
+			.js-icon{
+				width: 85px;
+				height: 85px;
+			}
+		}
+	}
+	nav.newpage{
+		height: 165px;
+		.brand-logo{
+			position: relative;
+			bottom: 15px;
+			h1{
+				font-size: 1.7em;
+				position: relative;
+				top: 1px;
+			}
+			.js-icon{
+				width: 85px;
+				height: 85px;
+			}
+		}
+		#btn-ul{
+			position: relative;
+			top: 82px;
 			right: calc(50% - 105px);
 			margin-right: 0px;
 			margin-top: 2px;
@@ -177,10 +304,113 @@ a{
 	}
 }
 
-@media (max-width: 992px) {
-	.page-footer{
-		.footer-col{
-			text-align: center;
+@media (min-width: 426px) and (max-width: 439px){
+	nav.newpage{
+		#btn-ul{
+			position: relative;
+			top: -30px;
 		}
+	}
+}
+
+@media (min-width: 769px){
+	nav.newpage{
+		height: 140px;
+		.nav-jumbo{
+			display: none;
+		}
+		#btn-ul{
+			position: relative;
+			top: 36px;
+		}
+	}
+}
+
+@media (min-width: 769px) and (max-width: 1024px){
+	nav.index{
+		height: 400px;
+		.nav-jumbo{
+			position: relative;
+			bottom: 140px;
+			i{
+				font-size: 2.5em;
+			}
+			h2{
+				font-size: 2.5em;
+			}
+		}
+		
+	}
+	nav.index.responsive{
+		height: 140px;
+		.nav-jumbo{
+			display: none;
+		}
+	}
+}
+
+@media (min-width: 1025px) and (max-width: 1366px){
+	nav.index{
+		height: 430px;
+		.nav-jumbo{
+			position: relative;
+			bottom: 120px;
+			i{
+				font-size: 2.5em;
+			}
+			h2{
+				font-size: 2.5em;
+			}
+		}
+		
+	}
+	nav.index.responsive{
+		height: 140px;
+		.nav-jumbo{
+			display: none;
+		}
+		
+	}
+}
+
+@media (min-width: 1367px) and (max-width: 1600px){
+	nav.index{
+		height: 500px;
+		.nav-jumbo{
+			position: relative;
+			bottom: 85px;
+			i{
+				font-size: 2.7em;
+			}
+			h2{
+				font-size: 2.7em;
+			}
+		}
+		
+	}
+	nav.index.responsive{
+		height: 140px;
+		.nav-jumbo{
+			display: none;
+		}
+		
+	}
+}
+
+@media (min-width: 1601px){
+	nav.index{
+		height: 650px;
+		.nav-jumbo{
+			position: relative;
+			bottom: 35px;
+		}
+		
+	}
+	nav.index.responsive{
+		height: 140px;
+		.nav-jumbo{
+			display: none;
+		}
+		
 	}
 }

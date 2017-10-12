@@ -4,27 +4,7 @@ nav {
   background-image: url(../assets/images/js-jumbo.png);
   background-size: cover;
   background-position-y: 15%;
-  color: black;
-  height: 700px;
-  /*#btn-ul{
-		margin-right: 10px;
-	}
-	.nav-wrapper{
-		a{
-			color: black;
-		}
-		a:active{
-			font-size: 2em;
-		}
-		#backBtn{
-			width: 210px;
-			padding-left: 15px;
-			padding-right: 15px;
-			overflow: hidden;
-    		white-space: nowrap;
-    		text-overflow: ellipsis;
-		}
-	}*/ }
+  color: black; }
   nav .main-nav {
     height: 100px; }
     nav .main-nav .brand-logo {
@@ -36,13 +16,11 @@ nav {
         left: 20px; }
     nav .main-nav .js-icon {
       position: relative;
-      top: 25px; }
+      top: 23px; }
   nav .nav-jumbo {
     color: white;
     margin-top: 200px;
     text-align: center;
-    position: relative;
-    right: 25px;
     width: 100%; }
     nav .nav-jumbo i {
       display: inline-block;
@@ -52,12 +30,33 @@ nav {
       top: 5px; }
     nav .nav-jumbo h2 {
       display: inline-block; }
+  nav #btn-ul {
+    margin-right: 10px; }
+  nav #backBtn {
+    width: 210px;
+    padding-left: 15px;
+    padding-right: 15px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis; }
 
-nav.index #btn-ul {
-  display: none; }
+nav.index {
+  -webkit-transition: height 1s ease;
+  -moz-transition: height 1s ease;
+  -o-transition: height 1s ease;
+  transition: height 1s ease; }
+  nav.index #btn-ul {
+    display: none; }
 
-nav.newpage #btn-ul {
-  display: block; }
+nav.newpage {
+  -webkit-transition: height 1s ease;
+  -moz-transition: height 1s ease;
+  -o-transition: height12s east;
+  transition: height 1s ease; }
+  nav.newpage .nav-jumbo {
+    display: none; }
+  nav.newpage #btn-ul {
+    display: block; }
 
 /*----------Main content----------*/
 #main-content {
@@ -122,18 +121,174 @@ a {
 .footer-brand {
   color: white; }
 
-@media (max-width: 767px) {
-  nav.newpage {
-    height: 100px; }
+@media (max-width: 425px) {
   nav.index {
-    height: 130px; }
-  nav #btn-ul {
-    position: relative;
-    top: 40px;
-    right: calc(50% - 105px);
-    margin-right: 0px;
-    margin-top: 2px; } }
+    height: 250px; }
+    nav.index .nav-jumbo {
+      position: relative;
+      bottom: 177px; }
+      nav.index .nav-jumbo i {
+        font-size: 1.8em; }
+      nav.index .nav-jumbo h2 {
+        font-size: 1.8em; }
+    nav.index .brand-logo h1 {
+      font-size: 1.5em; }
+    nav.index .brand-logo .js-icon {
+      width: 80px;
+      height: 80px; }
+  nav.index.responsive {
+    height: 100px; }
+    nav.index.responsive .nav-jumbo {
+      display: none; }
+    nav.index.responsive .brand-logo {
+      position: relative;
+      bottom: 9px; }
+      nav.index.responsive .brand-logo h1 {
+        font-size: 1.2em;
+        position: relative;
+        top: 2px; }
+      nav.index.responsive .brand-logo .js-icon {
+        width: 70px;
+        height: 70px; }
+  nav.newpage {
+    height: 155px; }
+    nav.newpage .brand-logo {
+      position: relative;
+      bottom: 9px; }
+      nav.newpage .brand-logo h1 {
+        font-size: 1.2em;
+        position: relative;
+        top: 2px; }
+      nav.newpage .brand-logo .js-icon {
+        width: 70px;
+        height: 70px; }
+    nav.newpage #btn-ul {
+      position: relative;
+      bottom: 20px;
+      right: calc(50% - 95px);
+      margin-right: 0px;
+      margin-top: 2px; }
+      nav.newpage #btn-ul #backBtn {
+        width: 190px; } }
 
-@media (max-width: 992px) {
-  .page-footer .footer-col {
-    text-align: center; } }
+@media (min-width: 420px) and (max-width: 425px) {
+  #btn-ul {
+    position: relative;
+    top: 73px; } }
+
+@media (min-width: 426px) and (max-width: 768px) {
+  nav.index {
+    height: 350px; }
+    nav.index .nav-jumbo {
+      position: relative;
+      bottom: 140px; }
+      nav.index .nav-jumbo i {
+        font-size: 2.2em; }
+      nav.index .nav-jumbo h2 {
+        font-size: 2.2em; }
+    nav.index .brand-logo h1 {
+      font-size: 1.8em;
+      position: relative;
+      bottom: 1px; }
+    nav.index .brand-logo .js-icon {
+      width: 90px;
+      height: 90px; }
+  nav.index.responsive {
+    height: 135px; }
+    nav.index.responsive .nav-jumbo {
+      display: none; }
+    nav.index.responsive .brand-logo h1 {
+      font-size: 1.7em;
+      position: relative;
+      top: 1px; }
+    nav.index.responsive .brand-logo .js-icon {
+      width: 85px;
+      height: 85px; }
+  nav.newpage {
+    height: 165px; }
+    nav.newpage .brand-logo {
+      position: relative;
+      bottom: 15px; }
+      nav.newpage .brand-logo h1 {
+        font-size: 1.7em;
+        position: relative;
+        top: 1px; }
+      nav.newpage .brand-logo .js-icon {
+        width: 85px;
+        height: 85px; }
+    nav.newpage #btn-ul {
+      position: relative;
+      top: 82px;
+      right: calc(50% - 105px);
+      margin-right: 0px;
+      margin-top: 2px; } }
+
+@media (min-width: 426px) and (max-width: 439px) {
+  nav.newpage #btn-ul {
+    position: relative;
+    top: -30px; } }
+
+@media (min-width: 769px) {
+  nav.newpage {
+    height: 140px; }
+    nav.newpage .nav-jumbo {
+      display: none; }
+    nav.newpage #btn-ul {
+      position: relative;
+      top: 36px; } }
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  nav.index {
+    height: 400px; }
+    nav.index .nav-jumbo {
+      position: relative;
+      bottom: 140px; }
+      nav.index .nav-jumbo i {
+        font-size: 2.5em; }
+      nav.index .nav-jumbo h2 {
+        font-size: 2.5em; }
+  nav.index.responsive {
+    height: 140px; }
+    nav.index.responsive .nav-jumbo {
+      display: none; } }
+
+@media (min-width: 1025px) and (max-width: 1366px) {
+  nav.index {
+    height: 430px; }
+    nav.index .nav-jumbo {
+      position: relative;
+      bottom: 120px; }
+      nav.index .nav-jumbo i {
+        font-size: 2.5em; }
+      nav.index .nav-jumbo h2 {
+        font-size: 2.5em; }
+  nav.index.responsive {
+    height: 140px; }
+    nav.index.responsive .nav-jumbo {
+      display: none; } }
+
+@media (min-width: 1367px) and (max-width: 1600px) {
+  nav.index {
+    height: 500px; }
+    nav.index .nav-jumbo {
+      position: relative;
+      bottom: 85px; }
+      nav.index .nav-jumbo i {
+        font-size: 2.7em; }
+      nav.index .nav-jumbo h2 {
+        font-size: 2.7em; }
+  nav.index.responsive {
+    height: 140px; }
+    nav.index.responsive .nav-jumbo {
+      display: none; } }
+
+@media (min-width: 1601px) {
+  nav.index {
+    height: 650px; }
+    nav.index .nav-jumbo {
+      position: relative;
+      bottom: 35px; }
+  nav.index.responsive {
+    height: 140px; }
+    nav.index.responsive .nav-jumbo {
+      display: none; } }

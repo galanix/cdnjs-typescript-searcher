@@ -30,6 +30,8 @@
 
 :host ::ng-deep #newDataHolder .github-collection .collection-header {
   text-align: center; }
+  :host ::ng-deep #newDataHolder .github-collection .collection-header div span {
+    cursor: default; }
 
 :host ::ng-deep #newDataHolder .alert-box {
   color: #555;
@@ -53,7 +55,8 @@
     font-style: italic; }
 
 :host ::ng-deep #newDataHolder .chip {
-  cursor: pointer; }
+  cursor: pointer;
+  color: white; }
 
 /*--------------------The hole modal popup--------------------*/
 :host ::ng-deep .the-modal {
@@ -96,12 +99,14 @@
     animation-duration: 0.8s; }
     :host ::ng-deep .the-modal .the-modal-content .the-modal-header {
       padding: 2px 16px;
-      background-color: #A6E4E7;
-      color: black;
+      background-color: dimgrey;
+      background-image: url(../../assets/images/js-jumbo.png);
+      background-size: cover;
+      color: white;
       text-align: center; }
     :host ::ng-deep .the-modal .the-modal-content .the-modal-body {
       padding: 2px 16px;
-      background-color: #F9F9F9; }
+      background-color: rgba(243, 237, 216, 0.3); }
       :host ::ng-deep .the-modal .the-modal-content .the-modal-body .collection-header {
         background-color: white; }
         :host ::ng-deep .the-modal .the-modal-content .the-modal-body .collection-header .quest-768px {
@@ -176,7 +181,7 @@
         :host ::ng-deep .the-modal .the-modal-content .the-modal-body .collection-item div {
           float: right; }
       :host ::ng-deep .the-modal .the-modal-content .the-modal-body .collection-item:hover {
-        background-color: #f2f2f2;
+        background-color: rgba(243, 237, 216, 0.3);
         cursor: default; }
       :host ::ng-deep .the-modal .the-modal-content .the-modal-body .btn-copy {
         width: 30px;
@@ -223,14 +228,14 @@
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
-    color: dimgrey; }
+    color: white; }
   :host ::ng-deep .the-modal #close:hover,
   :host ::ng-deep .the-modal #close:focus {
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
-    color: black;
+    text-shadow: 0 0 10px white;
     text-decoration: none;
     cursor: pointer; }
 

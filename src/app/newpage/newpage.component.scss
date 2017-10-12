@@ -1,4 +1,6 @@
-$mainColor: #F9F9F9;
+$mainColor: rgba(243, 237, 216, 0.3);
+$footerColor: #333333;
+$navigationColor: #A6E4E7;
 
 /*----------The main content of newpage.html----------*/
 :host ::ng-deep #newDataHolder{
@@ -48,6 +50,9 @@ $mainColor: #F9F9F9;
 	.github-collection{
 		.collection-header{
 			text-align: center;
+			div span{
+				cursor: default;
+			}
 		}
 	}
 	.alert-box {
@@ -77,6 +82,7 @@ $mainColor: #F9F9F9;
 
 	.chip{
 		cursor: pointer;
+		color: white;
 	}
 }
 
@@ -115,13 +121,15 @@ $mainColor: #F9F9F9;
 	    animation-duration: 0.8s;
 	    .the-modal-header{
 		    padding: 2px 16px;
-		    background-color: #A6E4E7;
-		    color: black;
+		    background-color: dimgrey;
+		    background-image: url(../../assets/images/js-jumbo.png);
+			background-size: cover;
+		    color: white;
 		    text-align: center;
 		}
 		.the-modal-body{
 			padding: 2px 16px;
-			background-color: #F9F9F9;
+			background-color: $mainColor;
 			.collection-header{
 				background-color: white;
 				.quest-768px{
@@ -200,7 +208,7 @@ $mainColor: #F9F9F9;
 				}
 			}
 			.collection-item:hover{
-				background-color: #f2f2f2;
+				background-color: $mainColor;
 				cursor: default;
 			}
 			.btn-copy{
@@ -255,7 +263,7 @@ $mainColor: #F9F9F9;
       	-moz-transition: all 0.5s ease;
       	-o-transition: all 0.5s ease;
       	transition: all 0.5s ease;
-      	color: dimgrey;
+      	color: white;
 	}
 
 	#close:hover,
@@ -264,7 +272,7 @@ $mainColor: #F9F9F9;
       	-moz-transition: all 0.5s ease;
       	-o-transition: all 0.5s ease;
       	transition: all 0.5s ease;
-	    color: black;
+	    text-shadow: 0 0 10px white;
 	    text-decoration: none;
 	    cursor: pointer;
 	}

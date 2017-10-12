@@ -251,7 +251,7 @@ export class NewpageComponent implements OnInit {
 
 		for (var i = 0; i < data.assets.length; i++) {
 			placeForAssets.innerHTML += `
-				<button class='chip' data-id="${versionLinkPrimary}${data.name}/${data.assets[i].version}/" 
+				<button class='chip grey darken-2' data-id="${versionLinkPrimary}${data.name}/${data.assets[i].version}/" 
 				id="modalTrigger">${data.assets[i].version}</button>
 			`;
 		}
@@ -281,7 +281,7 @@ export class NewpageComponent implements OnInit {
 									<span class="link">${baseUri + data.assets[j].files[k]}</span>
 									<div>
 										<span class="tooltiptext" data-tooltip="tooltip${k}">Copied!</span>
-										<a class="btn btn-floating btn-copy" data-link="${baseUri + data.assets[j].files[k]}" data-tooltip="tooltip${k}">
+										<a class="btn btn-floating btn-copy green darken-2" data-link="${baseUri + data.assets[j].files[k]}" data-tooltip="tooltip${k}">
 											<i class="material-icons">content_copy</i>
 										</a>
 									</div>
