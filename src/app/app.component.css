@@ -4,7 +4,8 @@ nav {
   background-image: url(../assets/images/js-jumbo.png);
   background-size: cover;
   background-position-y: 15%;
-  color: black; }
+  color: black;
+  z-index: 1; }
   nav .main-nav {
     height: 100px; }
     nav .main-nav .brand-logo {

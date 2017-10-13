@@ -66,7 +66,7 @@ export class NewpageComponent implements OnInit {
 			return;
 		}
 		/*-----------------------------------Start working with secondary request data-----------------------------------*/
-		//Verifications if there are such properties in data
+		//Verifications if there are such properties in secondary request data
 		if (data.author !== undefined) {
 			if (data.author.name === undefined) {
 				var author = data.author;
@@ -118,7 +118,14 @@ export class NewpageComponent implements OnInit {
 		/*------------------------------------Start working with GitHub request data-----------------------------------*/
 		if (gitHubData.message === "Not Found") {
 			placeForData.innerHTML = `
-				<div class="row">
+				<div class="tab">
+					<div class="tab-wrapper">
+						<button data-name="github" class="tablinks" id="defaultOpen">GitHub info</button>
+					  	<button data-name="general" class="tablinks" >General info</button>
+					</div>
+				</div>
+
+				<div class="row tabcontent" id="githubInfo">
 				  	<div class="col s12">
 				  	  	<div class="card">
 				  	  	  	<div class="card-image">
@@ -128,7 +135,7 @@ export class NewpageComponent implements OnInit {
 				  	</div>
 				</div>
 
-				<ul class="collection">
+				<ul class="collection tabcontent" id="generalInfo">
 					<li class="collection-item"><b>Name:</b> ${data.name}</li>
 					<li class="collection-item"><b>Description:</b> <span class="items">${description}</span></li>
 					<li class="collection-item"><b>Author:</b> <span class="items">${author}</span></li>
@@ -143,6 +150,7 @@ export class NewpageComponent implements OnInit {
 				</ul>
 			`;
 		} else {
+			//Verifications if there are such properties in GitHub request data
 			if (gitHubData.name !== undefined && gitHubData.name !== null) {
 				var name = gitHubData.name;
 			} else {
@@ -193,7 +201,14 @@ export class NewpageComponent implements OnInit {
 			var owner: any = `<a href="${ownerHtml}" target="_blank">${ownerLogin}</a>`
 
 			placeForData.innerHTML = `
-				<div class="row">
+				<div class="tab">
+					<div class="tab-wrapper">
+						<button data-name="github" class="tablinks" id="defaultOpen">GitHub info</button>
+					  	<button data-name="general" class="tablinks">General info</button>
+					</div>
+				</div>
+
+				<div class="row tabcontent" id="githubInfo">
 				  	<div class="col s12">
 				  	  	<div class="card">
 				  	  	  	<div class="card-image">
@@ -222,7 +237,7 @@ export class NewpageComponent implements OnInit {
 				  	</div>
 				</div>
 
-				<ul class="collection">
+				<ul class="collection tabcontent" id="generalInfo">
 					<li class="collection-item"><b>Name:</b> ${data.name}</li>
 					<li class="collection-item"><b>Description:</b> <span class="items">${description}</span></li>
 					<li class="collection-item"><b>Author:</b> <span class="items">${author}</span></li>
@@ -236,8 +251,25 @@ export class NewpageComponent implements OnInit {
 					</li>
 				</ul>
 			`;
-		}
+		}/*------------------------------------End working with GitHub request data-----------------------------------*/
 
+		//Manage tab buttons
+		var tabLinks: any = document.getElementsByClassName("tablinks");
+		for (var i = 0; i < tabLinks.length; i++) {
+			if (tabLinks[i].attributes[0].value === 'github') {
+				tabLinks[i].addEventListener('click', function() {
+					here.openInfo(event, 'githubInfo')
+				})
+			} else if (tabLinks[i].attributes[0].value === 'general') {
+				tabLinks[i].addEventListener('click', function() {
+					here.openInfo(event, 'generalInfo')
+				})
+			}
+		}
+		//Open default tab
+		document.getElementById("defaultOpen").click();
+
+		//Stylization 'not-specified' items
 		var items = document.getElementsByClassName("items");
 
 		for(var i = 0; i < items.length; i++) {
@@ -247,6 +279,7 @@ export class NewpageComponent implements OnInit {
 			}
 		}
 
+		//Insert assets (versions)
 		var placeForAssets = <HTMLInputElement>document.getElementById("list");
 
 		for (var i = 0; i < data.assets.length; i++) {
@@ -255,14 +288,13 @@ export class NewpageComponent implements OnInit {
 				id="modalTrigger">${data.assets[i].version}</button>
 			`;
 		}
-		/*----------Add versions chips----------*/
+		/*----------Start working with modal popup----------*/
 		var chips = document.getElementsByClassName('chip');
 		for(var i = 0; i < chips.length; i++) {
 			chips[i].addEventListener('click', function() {
 				var version = this.textContent;
 				var baseUri = this.attributes[1].value;
 
-				/*----------Working with modal popup----------*/
 				$('body').css('overflow-y', 'hidden');
 				$('.the-modal-header h3').text('Version: ' + version);
 				for (var j = 0; j < data.assets.length; j++) {
@@ -374,14 +406,38 @@ export class NewpageComponent implements OnInit {
 					$('.bounce').css('animation-name', 'bounce');
 				}, 100);
 			});
-		}
+		}/*----------End working with modal popup----------*/
 
 		here.data.setClickedFlag("false");
+	}
+
+	openInfo(event, infoType) {
+		var tabContent: any = document.getElementsByClassName("tabcontent");
+		var tabLinks: any = document.getElementsByClassName("tablinks");
+
+		for (let i = 0; i < tabContent.length; i++) {
+			tabContent[i].style.display = "none";
+		}
+
+		for (let i = 0; i < tabLinks.length; i++) {
+			tabLinks[i].className = tabLinks[i].className.replace(" active", "");
+		}
+
+		document.getElementById(infoType).style.display = "block";
+   		event.currentTarget.className += " active";
 	}
 
   	ngOnInit() {
   		var here = this;
   		var parameter: string;
+  		var modal = document.getElementById('myModal');
+		var span = document.getElementById("close");
+
+  		//Manage navigation classes for adaptability adding
+	    $('body').removeClass();
+		$('body').addClass(`newpage ${parameter}`);
+		$('nav').removeClass();
+		$('nav').addClass(`newpage`);
 
 		here.sub = here.route
 	      	.params
@@ -390,17 +446,7 @@ export class NewpageComponent implements OnInit {
 	      	  	parameter = params.name || 0;
 	      	});
 
-	    $('body').removeClass();
-		$('body').addClass(`newpage ${parameter}`);
-		$('nav').removeClass();
-		$('nav').addClass(`newpage`);
-
 		here.showPage(parameter);
-
-		var modal = document.getElementById('myModal');
-
-		// Get the <span> element that closes the modal
-		var span = document.getElementById("close");
 
 		// When the user clicks on <span> (x), close the modal
 		span.onclick = function() {

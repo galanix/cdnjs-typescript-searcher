@@ -14,8 +14,6 @@ export class IndexComponent implements OnInit {
   	filter: string;
   	tableData: any = [];
 
-  	ifToAddHeadersToTable: boolean = true;
-
   	sendForFiltering() {
   		var here = this;
 		var elem = <HTMLInputElement>document.getElementById("text");
@@ -76,23 +74,11 @@ export class IndexComponent implements OnInit {
 	    }
 	}
 
-	addTableHeaders() {
-		if (this.ifToAddHeadersToTable === true) {
-			$('#dataHolder').prepend(`
-				<tr id="tHeader">
-					<th>Name</th>
-					<th>Link</th>
-				</tr>
-			`)
-			this.ifToAddHeadersToTable = false;
-		}
-	}
-
 	showFilteredData(data: any, ifShow: boolean = true, isEmptyString: boolean = false, areThereAnyResults: boolean = true, recommended: any = []) {
 		var placeForMessage = <HTMLInputElement>document.getElementById("message");
 		var here = this;
-		this.ifToAddHeadersToTable = true;
 		here.tableData = data;
+
 
 		if (ifShow === true) {
 			if (areThereAnyResults === true) {
@@ -206,15 +192,10 @@ export class IndexComponent implements OnInit {
 		var label = <HTMLInputElement>document.getElementById("activate");
 		var input = <HTMLInputElement>document.getElementById("text");
 
+		//It will add first-request data to the page if the getIfToChangeFlag() === true
 		if (here.data.getIfToChangeFlag() === "true") {
 			input.value = here.data.getInputFilter();
 			here.tableData = data;
-			/*placeForData.innerHTML = `
-			<tr>
-				<th>Name</th>
-				<th>Link</th>
-			</tr>`;
-			*/
 
 			var copyButtons = document.getElementsByClassName('btn-copy');
 				for (var j = 0; j < copyButtons.length; j++) {
@@ -260,20 +241,19 @@ export class IndexComponent implements OnInit {
   		var elem = <HTMLInputElement>document.getElementById("text");
   		var here = this;
 
+  		//Manage navigation classes for adaptability adding
   		$('body').removeClass();
   		$('body').addClass("index");
   		$('nav').removeClass();
   		$('nav').addClass("index");
+
+  		/*-----Nav height toggling-----*/
   		if (here.data.getIfToChangeFlag() === 'true') {
   			$('nav').addClass('responsive');
   		}
 
   		$('#text').bind("click", function() {
   			if ($('#activate').hasClass('active')) {
-  				/*$('nav').animate({
-  					height: '140px'
-  				}, 300);
-  				$('.nav-jumbo').css('display', 'none');*/
   				$('nav').addClass('responsive');
   			}
   		});
@@ -281,10 +261,6 @@ export class IndexComponent implements OnInit {
   		$('#text').bind("blur", function() {
   			if ($('#activate').hasClass('active') === false) {
   				if (here.tableData.length == 0) {
-  					/*$('nav').animate({
-	  					height: '700px'
-	  				}, 300)
-	  				$('.nav-jumbo').css('display', 'block');*/
   					$('nav').removeClass('responsive');
   				}
   			}
