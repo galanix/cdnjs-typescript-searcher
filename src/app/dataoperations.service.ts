@@ -44,23 +44,26 @@ export class DataoperationsService {
 				    here.setSecondaryRequestData(JSON.stringify(result));
 
 				    var parameter = [];
-				    var repo = here.getSecondaryRequestData().repository.url;
-				    if (repo.indexOf('.git') === -1) {
-				    	if (repo.substr(repo.length - 1) !== '/') {
-				    		var repoSlice = repo.slice(repo.indexOf('github.com') + 11, );
-				    	} else {
-				    		var repoSlice = repo.slice(repo.indexOf('github.com') + 11, -1);
-				    	}
-				    } else {
-				    	var repoSlice = repo.slice(repo.indexOf('github.com') + 11, repo.indexOf('.git'))
+
+				    if ($.isEmptyObject(here.getSecondaryRequestData()) === false) {
+				    	var repo = here.getSecondaryRequestData().repository.url;
+					    if (repo.indexOf('.git') === -1) {
+					    	if (repo.substr(repo.length - 1) !== '/') {
+					    		var repoSlice = repo.slice(repo.indexOf('github.com') + 11, );
+					    	} else {
+					    		var repoSlice = repo.slice(repo.indexOf('github.com') + 11, -1);
+					    	}
+					    } else {
+					    	var repoSlice = repo.slice(repo.indexOf('github.com') + 11, repo.indexOf('.git'))
+					    }
+						parameter.push(repoSlice.slice(0, repoSlice.indexOf('/')));
+						parameter.push(repoSlice.slice(repoSlice.indexOf('/') + 1, ));
+						return here.makeRequest(parameter, true)
+							.then((result) => {
+								return result
+							})
+							.catch((error) => console.error(error));
 				    }
-					parameter.push(repoSlice.slice(0, repoSlice.indexOf('/')));
-					parameter.push(repoSlice.slice(repoSlice.indexOf('/') + 1, ));
-					return here.makeRequest(parameter, true)
-						.then((result) => {
-							return result
-						})
-						.catch((error) => console.error(error));
 		  		})
 		  		.catch((error) => console.error(error));
 			}
@@ -92,7 +95,12 @@ export class DataoperationsService {
 
 	getGitHubRequestData() {
 		var data = sessionStorage.getItem("gitHubRequestData");
-		return JSON.parse(data);
+
+		try {
+			return JSON.parse(data)
+		} catch (err) {
+			return undefined
+		}
 	}
 
 	getIfToChangeFlag() {
