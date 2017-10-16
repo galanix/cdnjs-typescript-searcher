@@ -1,5 +1,7 @@
 /*----------The main content of index.html----------*/
 :host ::ng-deep #main {
+  -webkit-box-flex: 1;
+  -ms-flex: 1 0 auto;
   flex: 1 0 auto; }
   :host ::ng-deep #main #message {
     cursor: pointer; }
@@ -13,6 +15,7 @@
     color: #388e3c; }
   :host ::ng-deep #main .input-field input[type=text]:focus {
     border-bottom: 1px solid #388e3c;
+    -webkit-box-shadow: 0 1px 0 0 #388e3c;
     box-shadow: 0 1px 0 0 #388e3c; }
   :host ::ng-deep #main ul.collection {
     border: 0px; }
@@ -28,11 +31,8 @@
       overflow-wrap: break-word;
       margin-bottom: 5px; }
     :host ::ng-deep #main ul.collection li:nth-of-type(even) {
-      background: -webkit-radial-gradient(#e8e8e8, #F9F9F9);
       /* Safari 5.1 to 6.0 */
-      background: -o-radial-gradient(#e8e8e8, #F9F9F9);
       /* For Opera 11.6 to 12.0 */
-      background: -moz-radial-gradient(#e8e8e8, #F9F9F9);
       /* For Firefox 3.6 to 15 */
       background: radial-gradient(#e8e8e8, #F9F9F9);
       /* Standard syntax (must be last) */ }
