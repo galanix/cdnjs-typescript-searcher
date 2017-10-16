@@ -50,6 +50,7 @@ export class IndexComponent implements OnInit {
 	    	if (filteredData.length !== 0) {
 	    		here.showFilteredData(filteredData);
 	    	} else {
+	    		//If there is necessity to recommend something (there are no items in result)
 	    		for (var i = 0; i < filter.length; i++) {
 					var slicedFilter = filter.slice(0, i+1);
 					var buffer = [];
@@ -67,8 +68,10 @@ export class IndexComponent implements OnInit {
 	    	}
 	    } else {
 	    	if (filter == "") {
+	    		//If input field is empty:
 	    		here.showFilteredData(filteredData, false, true)
 	    	} else {
+	    		//If there is only one letter:
 	    		here.showFilteredData(filteredData, false)
 	    	}
 	    }
@@ -81,6 +84,7 @@ export class IndexComponent implements OnInit {
 
 
 		if (ifShow === true) {
+			//If result consists of at least one item: 
 			if (areThereAnyResults === true) {
 				$('#progress').css('display', 'none');
 				placeForMessage.innerHTML = '';
@@ -88,6 +92,7 @@ export class IndexComponent implements OnInit {
 				var btnNum: number = 0;
 				var btnId: string;
 
+				//Adding events to and working on a copy buttons
 				var copyButtons = document.getElementsByClassName('btn-copy');
 				for (var j = 0; j < copyButtons.length; j++) {
 					copyButtons[j].addEventListener("click", function() {
@@ -111,6 +116,10 @@ export class IndexComponent implements OnInit {
 					});
 				};
 
+				/*
+					Sets the 'clicked' flag to true, which means that results will be saved
+					if user comes back here from a new page using 'back' button:
+				*/ 
 				$(document).ready(function(){
 					var buttons = document.getElementsByClassName('table-btn');
 					for (var i = 0; i < buttons.length; i++) {
@@ -120,6 +129,7 @@ export class IndexComponent implements OnInit {
 					}
 				});
 			} else {
+				//Recommending a random item:
 				if (recommended.length === 0) {
 					var recommendedItem = data.results[Math.floor(Math.random()*data.total)];
 
@@ -134,6 +144,7 @@ export class IndexComponent implements OnInit {
 						here.renderHTML(recommendedItem.name);
 					});
 				} else {
+					//Recomending an item which is similar to entered text:
 					var recommendedItem = recommended[Math.floor(Math.random()*recommended.length)];
 					here.tableData = [];
 					$('#progress').css('display', 'none');
@@ -151,11 +162,13 @@ export class IndexComponent implements OnInit {
 			
 		} else {
 			if (isEmptyString === true) {
+				//If input field is empty:
 				$('#progress').css('display', 'none');
 				placeForMessage.innerHTML = ``;
 				here.tableData = [];
 				return;
 			} else if (isEmptyString === false) {
+				//If there is only one letter:
 				$('#progress').css('display', 'none');
 				here.tableData = [];
 				placeForMessage.innerHTML = `Please, write MORE than just one letter`;
@@ -192,7 +205,7 @@ export class IndexComponent implements OnInit {
 		var label = <HTMLInputElement>document.getElementById("activate");
 		var input = <HTMLInputElement>document.getElementById("text");
 
-		//It will add first-request data to the page if the getIfToChangeFlag() === true
+		//It will add first-request data to the page if the getIfToChangeFlag() === true:
 		if (here.data.getIfToChangeFlag() === "true") {
 			input.value = here.data.getInputFilter();
 			here.tableData = data;

@@ -334,8 +334,11 @@ export class NewpageComponent implements OnInit {
 					$('.tooltip-quest-768px').slideUp("slow");
 				});
 
+				/*-----Add events for a copy buttons-----*/
 				var copyButtons = document.getElementsByClassName('btn-copy');
 				for (var j = 0; j < copyButtons.length; j++) {
+					
+					//Copy link:
 					copyButtons[j].addEventListener("click", function() {
 						var $temp = $("<input>");
 						$("body").append($temp);
@@ -355,6 +358,7 @@ export class NewpageComponent implements OnInit {
 						};
 					});
 
+					//Copy script tag:
 					copyButtons[j].addEventListener("dblclick", function() {
 						var $temp = $("<input>");
 						var value = `<script src="${this.attributes[1].value}"></script>`;
@@ -376,6 +380,7 @@ export class NewpageComponent implements OnInit {
 					});
 				};
 
+				//Add hover and pulse effects to modal:
 				var collItems = document.getElementsByClassName('modal-collection');
 				for (var j = 0; j < collItems.length; j++) {
 					collItems[j].addEventListener("mouseover", function () {
@@ -411,6 +416,7 @@ export class NewpageComponent implements OnInit {
 		here.data.setClickedFlag("false");
 	}
 
+	//Tab managing:
 	openInfo(event, infoType) {
 		var tabContent: any = document.getElementsByClassName("tabcontent");
 		var tabLinks: any = document.getElementsByClassName("tablinks");
@@ -448,14 +454,14 @@ export class NewpageComponent implements OnInit {
 
 		here.showPage(parameter);
 
-		// When the user clicks on <span> (x), close the modal
+		// When user clicks on <span> (x), close the modal
 		span.onclick = function() {
 		    $('#myModal').fadeOut('slow', function() {
 		    	$('body').css('overflow-y', 'auto');
 		    });
 		}
 
-		// When the user clicks anywhere outside of the modal, close it
+		// When user clicks anywhere outside of the modal, close it
 		window.onclick = function(event) {
 		    if (event.target == modal) {
 		        $('#myModal').fadeOut('slow', function() {
