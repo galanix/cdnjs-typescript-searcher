@@ -433,6 +433,31 @@ export class NewpageComponent implements OnInit {
    		event.currentTarget.className += " active";
 	}
 
+	animateFooter() {
+		var footerBrand = $('#footerBrand');
+		var footerLinks = $('#footerLinks');
+		var footerMotto = $('#footerMotto');
+		var scroll = $(window).scrollTop() + $(window).innerHeight();
+
+		if ($('body').height() > $(window).height()) {
+			if (scroll >= footerBrand.offset().top + footerBrand.height()) {
+				footerBrand.addClass('footer-brand-animated')
+			}
+
+			if (scroll >= footerLinks.offset().top + footerBrand.height()) {
+				footerLinks.addClass('footer-links-animated')
+			}
+
+			if (scroll >= footerMotto.offset().top + footerBrand.height()) {
+				footerMotto.addClass('footer-motto-animated')
+			}
+		} else {
+			footerBrand.addClass('footer-brand-animated');
+			footerLinks.addClass('footer-links-animated');
+			footerMotto.addClass('footer-motto-animated')
+		}
+	}	
+
   	ngOnInit() {
   		var here = this;
   		var parameter: string;
@@ -469,6 +494,17 @@ export class NewpageComponent implements OnInit {
 			    });
 		    }
 		}
+
+		$(document).ready(function() {
+  			/*-----Nav animation-----*/
+	  		$('.main-nav').addClass('animated-main-nav');
+	  		/*-----Footer animation-----*/
+	  		here.animateFooter();
+
+	  		$(window).scroll(function() {
+	  			here.animateFooter();
+	  		});
+  		});
   	}
 
   	ngOnDestroy() {
