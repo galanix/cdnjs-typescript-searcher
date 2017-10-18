@@ -13,6 +13,9 @@ export class IndexComponent implements OnInit {
 
   	filter: string;
   	tableData: any = [];
+  	isBrandReady: boolean = false;
+  	areLinksReady: boolean = false;
+  	isMottoReady: boolean = false;
 
   	sendForFiltering() {
   		var here = this;
@@ -205,6 +208,11 @@ export class IndexComponent implements OnInit {
 		var label = <HTMLInputElement>document.getElementById("activate");
 		var input = <HTMLInputElement>document.getElementById("text");
 
+		//If footer was not fully animated:
+		if (here.isMottoReady !== true) {
+			here.animateFooter();
+		} 
+
 		//It will add first-request data to the page if the getIfToChangeFlag() === true:
 		if (here.data.getIfToChangeFlag() === "true") {
 			input.value = here.data.getInputFilter();
@@ -251,28 +259,78 @@ export class IndexComponent implements OnInit {
 	};
 
 	animateFooter() {
+		var here = this;
 		var footerBrand = $('#footerBrand');
 		var footerLinks = $('#footerLinks');
 		var footerMotto = $('#footerMotto');
 		var scroll = $(window).scrollTop() + $(window).innerHeight();
 
 		if ($('body').height() > $(window).height()) {
-			if (scroll >= footerBrand.offset().top + footerBrand.height()) {
-				footerBrand.addClass('footer-brand-animated')
+		//If content can't be fully placed in window:
+
+			if (here.isBrandReady === false) {
+				if (scroll >= footerBrand.offset().top + footerBrand.height()) {
+					$('body').addClass('scroll-none');
+					$('.brand-move').addClass('brand-move-animated');
+					$('.brand-static').addClass('brand-static-animated');
+					setTimeout(function() {
+						$('.brand-move').css('opacity', 1);
+					}, 200);
+					here.isBrandReady = true;
+				}
 			}
 
-			if (scroll >= footerLinks.offset().top + footerBrand.height()) {
-				footerLinks.addClass('footer-links-animated')
+			if (here.areLinksReady === false) {
+				if (scroll >= footerLinks.offset().top + footerLinks.height()) {
+					$('body').addClass('scroll-none');
+					$('.links-move').addClass('links-move-animated');
+					$('.links-static').addClass('links-static-animated');
+					setTimeout(function() {
+						$('.links-move').css('opacity', 1);
+					}, 200);
+					here.areLinksReady = true;
+				}
 			}
 
-			if (scroll >= footerMotto.offset().top + footerBrand.height()) {
-				footerMotto.addClass('footer-motto-animated')
+			if (here.isMottoReady === false) {
+				if (scroll >= footerMotto.offset().top + footerMotto.height()) {
+					$('body').addClass('scroll-none');
+					$('.motto-move').addClass('motto-move-animated');
+					$('.motto-static').addClass('motto-static-animated');
+					setTimeout(function() {
+						$('.motto-move').css('opacity', 1);
+					}, 200);
+					$(document).unbind('scroll');
+					here.isMottoReady = true;
+				}
 			}
 		} else {
-			footerBrand.addClass('footer-brand-animated');
-			footerLinks.addClass('footer-links-animated');
-			footerMotto.addClass('footer-motto-animated')
+		//If content can be placed in window:
+
+			$('body').addClass('scroll-none');
+			$('.brand-move').addClass('brand-move-animated');
+			$('.brand-static').addClass('brand-static-animated');
+			setTimeout(function() {
+				$('.brand-move').css('opacity', 1);
+			}, 300);
+			here.isBrandReady = true;
+			$('.links-move').addClass('links-move-animated');
+			$('.links-static').addClass('links-static-animated');
+			setTimeout(function() {
+				$('.links-move').css('opacity', 1);
+			}, 300);
+			here.areLinksReady = true;
+			$('.motto-move').addClass('motto-move-animated');
+			$('.motto-static').addClass('motto-static-animated');
+			setTimeout(function() {
+				$('.motto-move').css('opacity', 1);
+			}, 300);
+			here.isMottoReady = true;
+			$(document).unbind('scroll');
 		}
+		setTimeout(function() {
+			$('body').removeClass('scroll-none');
+		}, 500);
 	}
 
   	ngOnInit() {
@@ -304,16 +362,19 @@ export class IndexComponent implements OnInit {
   			}
   		})
 
-  		$(document).ready(function() {
-  			/*-----Nav animation-----*/
+  		window.onload = function() {
+			/*-----Nav animation-----*/
 	  		$('.main-nav').addClass('animated-main-nav');
+	  		setTimeout(function() {
+	  			$('.main-nav').css('opacity', 1);
+	  		}, 200);
 	  		/*-----Footer animation-----*/
-	  		here.animateFooter();
-
-	  		$(window).scroll(function() {
+	  		$(document).scroll(function() {
 	  			here.animateFooter();
 	  		});
-  		});
+
+	  		here.animateFooter();
+		}
 		
 		here.inputManipulation();
   	}

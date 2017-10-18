@@ -1,6 +1,9 @@
 body{
 	font-family: 'Coda', cursive;
 }
+.scroll-none{
+	overflow: hidden;
+}
 .loader {
 	position: absolute;
 	top :0;

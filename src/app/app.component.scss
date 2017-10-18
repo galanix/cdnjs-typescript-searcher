@@ -12,7 +12,7 @@ nav {
 	color: black;
 	z-index: 1;
 	.main-nav{
-		display: none;
+		opacity: 0;
 		height: 100px;
 		.brand-logo{
 			width: 230px;
@@ -29,9 +29,8 @@ nav {
 		}
 	}
 	.animated-main-nav{
-		display: block;
 		animation-name: bounceInDown;
-		animation-duration: 0.5s;
+		animation-duration: 0.7s;
 		animation-delay: 0.1s;
 	}
 	@keyframes bounceInDown {
@@ -93,9 +92,6 @@ nav {
 }
 
 nav.index{
-	-webkit-transition: height 1s ease;
-    -moz-transition: height 1s ease;
-    -o-transition: height 1s ease;
     transition: height 1s ease;
 	#btn-ul{
 		display: none;
@@ -103,9 +99,6 @@ nav.index{
 }
 
 nav.newpage{
-	-webkit-transition: height 1s ease;
-    -moz-transition: height 1s ease;
-    -o-transition:  height12s east;
     transition: height 1s ease;
 	.nav-jumbo{
 		display: none;
@@ -148,22 +141,55 @@ a{
 		position: relative;
 		right: 7px;
 	}
-	.footer-brand-animated{
-		animation-name: bounceInLeft;
-		animation-duration: 0.5s;
-		animation-delay: 0.1s;
+
+	.brand-move{
+		opacity: 0;
 	}
-	.footer-links-animated{
-		animation-name: bounceInRight;
-		animation-duration: 0.5s;
-		animation-delay: 0.1s;
+	.brand-move-animated{
+		display: inline-block;
+		animation-name: bounceInLeftMove;
+		animation-duration: 0.7s;
+		animation-delay: 0.1s;	
 	}
-	.footer-motto-animated{
-		animation-name: bounceInLeft;
-		animation-duration: 0.5s;
-		animation-delay: 0.1s;
+	.brand-static-animated{
+		display: inline-block;
+		animation-name: bounceInLeftStatic;
+		animation-duration: 0.7s;
+		animation-delay: 0.1s;	
 	}
-	@keyframes bounceInLeft {
+
+	.links-move{
+		opacity: 0;
+	}
+	.links-move-animated{
+		display: inline-block;
+		animation-name: bounceInRightMove;
+		animation-duration: 0.7s;
+		animation-delay: 0.1s;	
+	}
+	.links-static-animated{
+		display: inline-block;
+		animation-name: bounceInRightStatic;
+		animation-duration: 0.7s;
+		animation-delay: 0.1s;	
+	}
+
+	.motto-move{
+		opacity: 0;
+	}
+	.motto-move-animated{
+		display: inline-block;
+		animation-name: bounceInLeftMove;
+		animation-duration: 0.7s;
+		animation-delay: 0.1s;	
+	}
+	.motto-static-animated{
+		display: inline-block;
+		animation-name: bounceInLeftStatic;
+		animation-duration: 0.7s;
+		animation-delay: 0.1s;	
+	}
+	@keyframes bounceInLeftMove {
 	  from, 60%, 75%, 90%, to {
 	    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
 	  }
@@ -190,7 +216,35 @@ a{
 	    transform: none;
 	  }
 	}
-	@keyframes bounceInRight {
+	@keyframes bounceInLeftStatic {
+	  from, 51%, 60%, 75%, 90%, to {
+	    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+	  }
+	  0% {
+	  	transform: translate3d(0px, 0, 0);
+	  }
+
+	  51% {
+	  	transform: translate3d(0px, 0, 0);
+	  }
+
+	  60% {
+	    transform: translate3d(25px, 0, 0);
+	  }
+
+	  75% {
+	    transform: translate3d(-10px, 0, 0);
+	  }
+
+	  90% {
+	    transform: translate3d(5px, 0, 0);
+	  }
+
+	  to {
+	    transform: none;
+	  }
+	}
+	@keyframes bounceInRightMove {
 	  from, 60%, 75%, 90%, to {
 	    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
 	  }
@@ -202,6 +256,35 @@ a{
 
 	  60% {
 	    opacity: 1;
+	    transform: translate3d(-25px, 0, 0);
+	  }
+
+	  75% {
+	    transform: translate3d(10px, 0, 0);
+	  }
+
+	  90% {
+	    transform: translate3d(-5px, 0, 0);
+	  }
+
+	  to {
+	    transform: none;
+	  }
+	}
+	@keyframes bounceInRightStatic {
+	  from, 60%, 75%, 90%, to {
+	    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+	  }
+
+	  0% {
+	  	transform: translate3d(0px, 0, 0);
+	  }
+
+	  51% {
+	  	transform: translate3d(0px, 0, 0);
+	  }
+
+	  60% {
 	    transform: translate3d(-25px, 0, 0);
 	  }
 
