@@ -260,11 +260,11 @@ export class NewpageComponent implements OnInit {
 		var tabLinks: any = document.getElementsByClassName("tablinks");
 		for (var i = 0; i < tabLinks.length; i++) {
 			if (tabLinks[i].attributes[0].value === 'github') {
-				tabLinks[i].addEventListener('click', function() {
+				tabLinks[i].addEventListener('click', function(event) {
 					here.openInfo(event, 'githubInfo')
 				})
 			} else if (tabLinks[i].attributes[0].value === 'general') {
-				tabLinks[i].addEventListener('click', function() {
+				tabLinks[i].addEventListener('click', function(event) {
 					here.openInfo(event, 'generalInfo')
 				})
 			}
@@ -421,6 +421,7 @@ export class NewpageComponent implements OnInit {
 
 	//Tab managing:
 	openInfo(event, infoType) {
+
 		var tabContent: any = document.getElementsByClassName("tabcontent");
 		var tabLinks: any = document.getElementsByClassName("tablinks");
 
