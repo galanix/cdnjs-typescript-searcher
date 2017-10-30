@@ -1,0 +1,530 @@
+$navigationColor: #A6E4E7;
+$mainColor: #F9F9F9;
+$footerColor: #EBCBAE;
+
+
+body{
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    background-color: $mainColor;
+}
+/*----------Navigation----------*/
+nav {
+	background-color: $navigationColor;
+	color: black;
+	#btn-ul{
+		margin-right: 10px;
+	}
+	.nav-wrapper{
+		a{
+			color: black;
+		}
+		a:active{
+			font-size: 2em;
+		}
+		#backBtn{
+			width: 210px;
+			padding-left: 15px;
+			padding-right: 15px;
+			overflow: hidden;
+    		white-space: nowrap;
+    		text-overflow: ellipsis;
+		}
+	}
+}
+
+/*----------The main content of index.html----------*/
+#main{
+    flex: 1 0 auto;
+    #message{
+    	cursor: pointer;
+    }
+
+    #progress{
+    	display: none;
+    }
+
+    input[type="text"] + label {
+	    pointer-events: none;
+
+	    * {
+	        pointer-events: all;
+	    }
+	}
+
+    table{
+    	tr{
+    		width: 100%;
+    		td{
+    			padding-top: 5px;
+    		}
+    		td.btnCol{
+    			margin-top: 5px;
+    			text-align: center;
+    			padding-top: 20px;
+    			padding-bottom: 10px;
+    		}
+    		td.content{
+    			padding-bottom: 5px;
+    			margin-bottom: 5px;
+    			font-size: 0.8em;
+	    	}
+	    	.tooltiptext{
+	    		z-index: 1;
+				opacity: 0;
+				cursor: default;
+			    position: relative;
+			    bottom: 3px;
+			    background-color: dimgrey;
+			    color: #fff;
+			    text-align: center;
+			    border-radius: 6px;
+			    padding: 3px 6px 3px 6px;
+			    margin-right: 3px;
+			}
+			.tooltiptext::after {
+			    content: " ";
+			    position: absolute;
+			    top: 50%;
+			    left: 100%; /* To the right of the tooltip */
+			    margin-top: -5px;
+			    border-width: 5px;
+			    border-style: solid;
+			    border-color: transparent transparent transparent dimgrey;
+			}
+			.btn-copy {
+				align: right;
+			}
+    	}
+    	.table-btn{
+    		width: 230px;
+			padding-right: 20px;
+			padding-left: 20px;
+	    	text-overflow: ellipsis;
+	    	margin-right: 50px;
+	    	text-transform: none;
+    	}
+    }
+}
+
+/*----------The main content of newpage.html----------*/
+#newDataHolder{
+	.card-title{
+		font-size: 2.3em;
+		text-shadow: 1px 1px 1px white;
+	}
+	.preloader-wrapper{
+		width: 100px;
+	    height: 100px;
+	    position: absolute;
+	    top:0;
+	    bottom: 0;
+	    left: 0;
+	    right: 0;
+
+	    margin: auto;
+	}
+	.card-image{
+		.btn-floating{
+			.halfway-fab{
+				.waves-effect{
+					.waves-light{
+						z-index: 1
+					}
+				}
+			}
+		}
+	}
+	.card-content{
+		.collection-header{
+			div{
+				display: flex;
+				justify-content: space-between;
+				i{
+					position: relative;
+					top: 5px;
+				}
+			}
+		}
+	}
+	.github-collection{
+		.collection-header{
+			text-align: center;
+		}
+	}
+	.alert-box {
+		color:#555;
+		border-radius:10px;
+		padding:10px 36px;
+		margin:10px;
+	}
+	.alert-box span {
+		font-weight: bold;
+		text-transform: uppercase;
+	}
+	.error {
+		background:#ffecec url('../images/error.png') no-repeat 5px 7px;
+		background-size: 27px 27px;
+		border:1px solid #f5aca6;
+	}
+	ul{
+		li.collection-item{
+			word-wrap: break-word;
+			.not-specified{
+				color: grey;
+				font-style: italic;
+			}
+		}
+	}
+
+	.chip{
+		cursor: pointer;
+	}
+}
+
+/*--------------------The hole modal popup--------------------*/
+.the-modal{
+    display: none;
+    position: fixed;
+    z-index: 2;
+    overflow: auto;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+
+    @-webkit-keyframes #{animatetop} {
+	    from {top:-300px; opacity:0} 
+	    to {top:0; opacity:1}
+	}
+
+	@keyframes #{animatetop} {
+	    from {top:-300px; opacity:0}
+	    to {top:0; opacity:1}
+	}
+	   
+	.the-modal-content{
+	    background-color: #fefefe;
+	    margin: 15% auto;
+	    border: 1px solid #888;
+	    width: 80%;
+	    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+	    -webkit-animation-name: #{animatetop};
+	    -webkit-animation-duration: 0.8s;
+	    animation-name: #{animatetop};
+	    animation-duration: 0.8s;
+	    .the-modal-header{
+		    padding: 2px 16px;
+		    background-color: #A6E4E7;
+		    color: black;
+		    text-align: center;
+		}
+		.the-modal-body{
+			padding: 2px 16px;
+			background-color: #F9F9F9;
+			.collection-header{
+				background-color: white;
+				.quest-768px{
+					display: none;
+				}
+				div{
+					display: flex;
+					text-align: right;
+					float: right;
+				}
+				.tooltip-quest-768px{
+					display: none;
+					background-color: dimgrey;
+					border-radius: 6px;
+					text-align: center;
+					color: #fff;
+				}
+				h5{
+					display: inline-block;
+				}
+				.tooltip-question{
+					text-align: right;
+					opacity: 0;
+					cursor: default;
+				    position: relative;
+				    top: 9px;
+				    right: 2px;
+				    background-color: dimgrey;
+				    color: #fff;
+				    text-align: center;
+				    border-radius: 6px;
+				    padding: 3px 6px 3px 6px;
+				    margin-right: 3px;
+				}
+				.tooltip-question::after {
+				    content: " ";
+				    position: absolute;
+				    top: 50%;
+				    left: 100%; /* To the right of the tooltip */
+				    margin-top: -5px;
+				    border-width: 5px;
+				    border-style: solid;
+				    border-color: transparent transparent transparent dimgrey;
+				}
+				.question{
+					float: right;
+					width: 30px;
+					height: 30px;
+					background: url(../images/question.png) no-repeat;
+					background-size: 25px 25px;
+					position: relative;
+					top: 11px;
+					-webkit-animation-duration: 0.7s;
+		            animation-duration: 0.7s; 
+		            -webkit-animation-fill-mode: both; 
+		            animation-fill-mode: both;
+		            cursor: pointer;
+				}
+				@-webkit-keyframes bounce { 
+		            0%, 20%, 50%, 80%, 100% {-webkit-transform: translateY(0);} 
+		            40% {-webkit-transform: translateY(-30px);} 
+		            60% {-webkit-transform: translateY(-15px);} 
+		        } 
+		         
+		        @keyframes bounce { 
+		            0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 
+		            40% {transform: translateY(-30px);} 
+		            60% {transform: translateY(-15px);} 
+		        }
+			}
+			.collection-item{
+				background-color: white;
+				word-wrap: break-word;
+				div{
+					float: right;
+				}
+			}
+			.collection-item:hover{
+				background-color: #f2f2f2;
+				cursor: default;
+			}
+			.btn-copy{
+				width: 30px;
+				height: 30px;
+				position: relative;
+				display: inline-block;
+				bottom: 4px;
+				-moz-user-select: none;
+			    -webkit-user-select: none;
+			    -ms-user-select: none;
+			    user-select: none;
+				i{
+					width: 25px;
+					height: 25px;
+					font-size: 1.1em;
+					position: relative;
+					bottom: 3px;
+				}
+			}
+			.tooltiptext{
+				opacity: 0;
+				cursor: default;
+			    position: relative;
+			    bottom: 3px;
+			    background-color: dimgrey;
+			    color: #fff;
+			    text-align: center;
+			    border-radius: 6px;
+			    padding: 3px 6px 3px 6px;
+			    margin-right: 3px;
+			}
+			.tooltiptext::after {
+			    content: " ";
+			    position: absolute;
+			    top: 50%;
+			    left: 100%; /* To the right of the tooltip */
+			    margin-top: -5px;
+			    border-width: 5px;
+			    border-style: solid;
+			    border-color: transparent transparent transparent dimgrey;
+			}
+		}
+	}
+
+	/* The Close Button */
+	#close{
+	    float: right;
+	    font-size: 28px;
+	    font-weight: bold;
+	    -webkit-transition: all 0.5s ease;
+      	-moz-transition: all 0.5s ease;
+      	-o-transition: all 0.5s ease;
+      	transition: all 0.5s ease;
+      	color: dimgrey;
+	}
+
+	#close:hover,
+	#close:focus{
+		-webkit-transition: all 0.5s ease;
+      	-moz-transition: all 0.5s ease;
+      	-o-transition: all 0.5s ease;
+      	transition: all 0.5s ease;
+	    color: black;
+	    text-decoration: none;
+	    cursor: pointer;
+	}
+}
+
+/*--------------------The footer--------------------*/
+footer.page-footer{
+	background-color: $footerColor;
+}
+
+.explanation{
+	color: black;
+}
+
+.copyright{
+	width: 300px;
+	margin: auto;
+	text-align: center;
+	color: black;
+}
+
+.footer-brand{
+	color: black;
+}
+
+/*--------------------Adaptability--------------------*/
+@media (max-width: 320px) {
+	.the-modal{
+		.the-modal-content{
+			.the-modal-body{
+				.collection-header{
+					overflow: visible;
+					div{
+						display: none;
+					}
+					.question{
+						position: relative;
+						bottom: 50px;
+					}
+				}
+			}
+		}
+	}
+}
+
+@media (max-width: 767px) {
+	nav{
+		height: 100px;
+		#btn-ul{
+			position: relative;
+			top: 40px;
+			right: calc(50% - 105px);
+			margin-right: 0px;
+			margin-top: 2px;
+		}
+	}
+	.the-modal{
+		.the-modal-content{
+			.the-modal-body{
+				.collection-header{
+					.quest-768px{
+						display: inline-block;
+					}
+					div{
+						display: none;
+					}
+				}
+			}
+		}
+	}
+}
+
+@media (max-width: 992px) {
+	#main{
+	    table{
+	    	tr{
+	    		border-bottom: 1px solid #bfbfbf;
+	    	}
+	    	td{
+	    		div{
+	    			width: 100px;
+	    			margin: auto;
+	    			text-align: center;	
+	    			margin-bottom: 5px;
+	    			.btn-copy, .tooltiptext{
+	    				position: relative;
+	    				right: 32px;
+	    			}
+	    		}
+	    	}
+	    	th{
+	    		text-align: center;
+	    	}
+	    	.table-btn{
+	    		margin-right: 0px;
+	    	}
+	    }
+	}
+	.the-modal{
+		.the-modal-content{
+			.the-modal-body{
+				.collection-item{
+					.link{
+						margin-bottom: 5px;
+					}
+					.tooltiptext{
+						position: relative;
+						top: 4px;
+					}
+					div{
+						padding-top: 2px;
+						float: none;
+						width: 150px;
+						margin: auto;
+					}
+				}
+				.btn-copy{
+					width: 27px;
+					height: 27px;
+					position: relative;
+					top: 3px;
+					display: inline-block;
+					i{
+						width: 20px;
+						height: 20px;
+						font-size: 1em;
+						position: relative;
+						bottom: 6px;
+					}
+				}
+			}
+		}
+	}
+	.page-footer{
+		.footer-col{
+			text-align: center;
+		}
+	}
+}
+
+@media (min-width: 993px) and (max-width: 1366px) {
+	#main{
+		.table-container{
+			overflow: auto;
+		}
+	}
+}
+
+@media (min-width: 1025px) {
+	#newDataHolder{
+		.card-content{
+			.collection-header{
+				div{
+					padding-left: 50px;
+					padding-right: 50px;
+				}
+			}
+		}
+	}
+}
