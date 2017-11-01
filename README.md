@@ -1,6 +1,6 @@
 # Cdnjs
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.4.4.
+[This project](http://galanix.github.io/cdnjs-typescript-searcher) was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.4.4.
 
 ## Development server
 
